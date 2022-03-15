@@ -1,1 +1,1 @@
-// The main file
+// Main file
