@@ -1,6 +1,6 @@
 const express = require('express');
 const fetch = require('node-fetch');
-const filter = require('./utils/scan')
+const filterData = require('./utils/getData')
 
 const app = express();
 
@@ -18,9 +18,9 @@ app.post("/", async (req, res) => {
     let response = await fetch(url);
     let data = await response.json();
 
-    let filterData = filter(data);
+    let filteredData = filterData(data);
 
-    console.log(filterData);
+    console.log(filteredData);
 
     res.sendStatus(200);
 
