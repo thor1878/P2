@@ -6,6 +6,7 @@ const PORT = 3000;
 
 app.post("/", (req, res) => {
     console.log(req.body);
+    res.send(200);
 })
 
 
