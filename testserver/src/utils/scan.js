@@ -1,11 +1,21 @@
+//filter in file structure
+function filter(data) {
+    let filtArray = [];
+    for (let file of data.tree) {
+        if (file.path.slice(-3) == ".js") {
+            filtArray.push(file);
+        }
+    }
+    return filtArray;
+}
 
-// GitHub Action triggered
+module.exports = filter;
 
 
-// Make API call to GitHub with parameters received from GitHub Actions
 
 
-// Fetch all the files with '.js' extension and save them as strings
+
+
 
 
 // Search the strings to extract the functions defined with the function keyword
