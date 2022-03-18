@@ -9,7 +9,6 @@ app.set('views', 'src/public/views');
 app.use('/static', express.static('src/public/static'));
 
 app.get('/', (req, res) => {
-    console.log(dummyData.functions);
     res.render('index', {functions: dummyData.functions});
 })
 
