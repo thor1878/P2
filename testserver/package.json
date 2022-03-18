@@ -1,0 +1,27 @@
+{
+  "name": "testserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thor1878/P2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thor1878/P2/issues"
+  },
+  "homepage": "https://github.com/thor1878/P2#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "jest": "^27.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
