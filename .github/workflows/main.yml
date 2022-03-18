@@ -3,6 +3,8 @@ name: pull-request-trigger
 on:
   pull_request:
     branches: [ $default-branch ]
+  push:
+    branches: [ $default-branch ]
     
 jobs:
   build:
