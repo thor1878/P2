@@ -14,3 +14,12 @@ const sum3 = function(a, b) {
 const sum4 = async function(a, b) {
   return a + b;
 }
+
+
+function sum5(a, b) {
+  if (a > b) {
+    return a + b;
+  } else {
+    return b + a;
+  }
+}
