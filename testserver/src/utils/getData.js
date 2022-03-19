@@ -1,3 +1,6 @@
+const fetch = require('node-fetch');
+
+
 // Return an array containing only the objects with a path having the '.js' extension (not including '.test.js')
 function filterData(data) {
     // let filteredData = [];
