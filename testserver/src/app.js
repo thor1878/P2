@@ -1,6 +1,6 @@
 const express = require('express');
 const fetch = require('node-fetch');
-const filterData = require('./utils/getData')
+const { filterData, getFileData } = require('./utils/getData')
 
 const app = express();
 
@@ -20,7 +20,9 @@ app.post("/", async (req, res) => {
 
     let filteredData = filterData(data);
 
-    console.log(filteredData);
+    let fileData = await getFileData(filteredData);
+
+    console.log(fileData);
 
     res.sendStatus(200);
 

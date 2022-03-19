@@ -40,17 +40,7 @@ async function getFileData(filteredData, url) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-module.exports = filterData;
+module.exports = { filterData, getFileData };
 
 
 
