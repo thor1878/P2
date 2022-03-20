@@ -5,7 +5,7 @@ async function getRepoData(repository, branch) {
 
     let response = await fetch(url, {
         headers: {
-            'Authorization': 'token ' + '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'
+            'Authorization': 'token ' + 'git_hub_token'
         }
     });
     let data = await response.json();
@@ -33,7 +33,7 @@ async function getFileData(filteredData) {
 
         let response = await fetch(file.url, {
             headers: {
-                'Authorization': 'token ' + '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'
+                'Authorization': 'token ' + 'git_hub_token'
             }
         });
         let data = await response.json();
