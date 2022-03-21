@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
+
+    each func, index in functions   
+        <div id="func-#{index}" data-numofargs="#{func.args.length}" data-funcname="#{func.name}" data-funcstatus="#{func.status}">
+            li= func.name
+            <input type="text" class="description" id="description-#{index}" value="#{func.description}">
+            each arg, argdex in func.args
+                <input type="text" class="input" id="input-#{index}-#{argdex}" value="#{arg}">
+            
+            <input type="text" class="output" id="output-#{index}" value="#{func.output}">
+            
+            <select id="chooseMatcher-#{index}">
+                each matcher in matcherOptions 
+                    if matcher === func.matcher 
+                        <option value="#{matcher}" selected>#{matcher}</option>
+                    else 
+                        <option value="#{matcher}">#{matcher}</option>
+            </select>
+        </div>
+
+    <button type="submit" value="Submit" onclick="submitTests()">Submit</button>
+
+    <script src="../static/js/index.js"></script>
+</body>
+</html>
