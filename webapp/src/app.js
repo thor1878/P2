@@ -25,6 +25,14 @@ app.post('/submit', (req, res) => {
 })
 
 
+app.get('/testing', (req, res) => {
+    res.render('testing');
+})
+
+app.get('/logs', (req, res) => {
+    res.render('logs');
+})
+
 app.listen(PORT, () => {
     console.log(`Server running on Port ${PORT}`);
 });
