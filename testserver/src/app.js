@@ -1,4 +1,5 @@
 const express = require('express');
+const { json } = require('stream/consumers');
 const { getRepoData, filterData, getFileData } = require('./utils/getData');
 const { runTests } = require('./utils/runTests');
 
@@ -23,6 +24,19 @@ app.post('/', async (req, res) => {
 
     // Get data for each file (path, function strings, etc...)
     let fileData = await getFileData(filteredData);
+
+
+    //Send fileData to Webapp
+    const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({ data: fileData }),
+        //...
+    });
+
+    //Handle response
+    const responseJSON = await response.json();
+    //... Error handle
+
 
     // (Log data)
     console.log(JSON.stringify(fileData, null, 4));
