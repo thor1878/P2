@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/submit', (req, res) => {
-    res.render("submit");
+    res.render('submit', {functions: dummyData.functions});
 })
 
 app.post('/submit', (req, res) => {

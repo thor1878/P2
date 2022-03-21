@@ -6,9 +6,17 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
     body 
-        form(action="/submit", method="post" id="inputForm") 
-            <div name="yeet">
-                <input type="text" class= "input" name="input1" placeholder="Input 1">
-                <input type="text" class= "input" name="input2" placeholder="Input 2">
-            </div>
-        <button type="submit" form="inputForm" value="Submit">Submit</button>
+        <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
+            each val, index in functions
+                <div id="func-#{index}" data-numofargs="#{val.args.length}" data-funcname="#{val.name}" data-funcstatus="#{val.status}">
+                    li= val.name
+                    each arg, argdex in val.args
+                        <input type="text" class="input" id="input#{index}-#{argdex}" value="#{arg}">
+                    <input type="text" class="output" id="output#{index}" value="#{val.output}">
+                    <select>
+                    <option></option>
+                    </select>
+                </div>
+        <button type="submit" value="Submit" onclick="submitTests()">Submit</button>
+
+        <script src="../static/js/index.js"></script>
