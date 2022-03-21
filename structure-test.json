@@ -13,17 +13,46 @@
                     "async": "bool",
                     "status": "status",
                     "functionString": "...",
-                    "testcases": [
+                    "testCases": [
                         {
-                            "description": "description",
+                            "description": "description af test",
                             "arguments": [
-                                "arg1",
-                                "arg2",
-                                "arg3"
+                                1,
+                                "Hej",
+                                {"x": 3, "y": 4}
                             ],
                             "status": "status",
                             "expected": "expected",
                             "matcher": "matcher"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "file2.js",
+            "functions": [
+                {
+                    "name": "functionhaha",
+                    "params": [
+                        "param1",
+                        "param2",
+                        "param3"
+                    ],
+                    "async": "bool",
+                    "status": "status",
+                    "functionString": "...",
+                    "testCases": [
+                        {
+                            "description": "description af fak",
+                            "arguments": [
+                                "testset",
+                                "123456",
+                                {"k": 3, "o": 4}
+                            ],
+                            "status": "status",
+                            "expected": 34,
+                            "matcher": "toBe"
                         }
                     ]
                 }
