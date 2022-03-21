@@ -90,5 +90,4 @@ function getFunctionStrings(fileString) {
 }
 
 
-
 module.exports = { getRepoData, filterData, getFileData };
