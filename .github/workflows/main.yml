@@ -11,6 +11,6 @@ jobs:
     - name: Send request to server
       uses: fjogeleit/http-request-action@v1
       with:
-        url: 'https://bd4c-192-38-10-18.ngrok.io'
+        url: 'https://1f91-192-38-10-18.ngrok.io'
         method: 'POST'
         data: '{ "repository": "${{ github.repository }}", "branch": "${{ github.head_ref }}" }'
