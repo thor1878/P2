@@ -1,1 +1,53 @@
+ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+ul li {
+  padding: 20px;
+}
 
+.tab a {
+  color: white;
+  text-decoration: none;
+}
+
+.btnLogin_a {
+  padding: 20px;
+}
+
+#btnLogin {
+  background-color: #2d4064;
+  border-radius: 25px;
+  text-decoration: none;
+  border: none;
+  padding: 10px;
+  color: white;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#btnLogin:hover {
+  background-color: #2d4064;
+  transform: scale(1.05);
+}
+
+.tab:hover {
+  background-color: #2d4064;
+}
+
+nav {
+  background-color: #46639a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+* {
+  font-family: "raleway", sans-serif;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
