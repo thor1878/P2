@@ -33,7 +33,7 @@ router.get('/repos', async (req, res) => {
       
     }
   }
-  res.render('index', {repoNames: repoNames});
+  res.render('repos', {repoNamesYeet: repoNames});
 })
 
 module.exports = router;

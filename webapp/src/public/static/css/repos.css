@@ -1,7 +1,3 @@
-h1 {
-    padding: 10px;
-}
-
 .card {
     background-color: white;
     width: 50%;
@@ -22,13 +18,13 @@ h1 {
     transform: scale(1.01);
 }
 
+/* .card:active {
+    background-color: red;
+} */
+
 .repo_holder {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-}
-
-body {
-    background-color: rgb(240, 240, 240);
 }

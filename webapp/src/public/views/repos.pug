@@ -1,0 +1,17 @@
+extends base.pug
+
+block style
+    <link rel="stylesheet" href="../static/css/repos.css">
+
+block content
+    <h1>Choose repository</h1>
+
+    <div class="cardlist">
+        <ul class="repo_holder">
+
+            each repo, index in repoNamesYeet 
+                <button  class="card">
+                    <li>#{repo}</li>
+                </button>
+        </ul>
+    </div>

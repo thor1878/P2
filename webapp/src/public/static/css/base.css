@@ -1,62 +1,70 @@
+body {
+    background-color: rgb(240, 240, 240);
+}
+
 ul {
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  height: 100%;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .tab {
-  display: flex;
-  height: 100%;
+    display: flex;
+    height: 100%;
 }
 
 .tab a {
-  color: white;
-  text-decoration: none;
-  display: inline-block;
-  height: 100%;
-  line-height: 70px;
-  padding: 0 10px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    height: 100%;
+    line-height: 70px;
+    padding: 0 10px;
 }
 
 #btnLogin {
-  background-color: #2d4064;
-  border-radius: 25px;
-  text-decoration: none;
-  border: none;
-  padding: 10px;
-  margin: 10px;
-  color: white;
-  font-size: 0.7rem;
-  cursor: pointer;
-  transition: transform 0.2s;
+    background-color: #2d4064;
+    border-radius: 25px;
+    text-decoration: none;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
 #btnLogin:hover {
-  background-color: #2d4064;
-  transform: scale(1.05);
+    background-color: #2d4064;
+    transform: scale(1.05);
 }
 
 .tab:hover {
-  background-color: #2d4064;
+    background-color: #2d4064;
 }
 
 .tab.active {
-  background-color: #2d4064;
+    background-color: #334a74;
 }
 
 nav {
-  background-color: #46639a;
-  display: flex;
-  height: 70px;
-  align-items: center;
-  justify-content: space-between;
-  list-style-type: none;
+    background-color: #46639a;
+    display: flex;
+    height: 70px;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
 }
 
 * {
-  font-family: "raleway", sans-serif;
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
+    font-family: "raleway", sans-serif;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+h1 {
+    margin: 10px;
 }
