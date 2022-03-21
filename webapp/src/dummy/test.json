@@ -1,8 +1,7 @@
 {
     "functions": [
-        { "name": "multiply", "args": [3,4], "matcher": "toBe", "output": 12, "status": 1 },
-        { "name": "divide", "args": [12,4], "matcher": "toEqual", "output": 3, "status": 1 },
-        { "name": "addition", "args": ["",""], "matcher": "", "output": "", "status": "" }
-
+        { "name": "multiply", "description": "Description", "args": [3,4], "matcher": "toBe", "output": 12, "status": 1 },
+        { "name": "divide", "description": "Description", "args": [12,4], "matcher": "toEqual", "output": 3, "status": 1 },
+        { "name": "addition", "description": "Description", "args": ["",""], "matcher": "", "output": "", "status": "" }
     ]
 }
