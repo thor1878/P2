@@ -16,15 +16,7 @@ async function getRepoData(repository, branch) {
 
 // Return an array containing only the objects with a path having the '.js' extension (not including '.test.js')
 function filterData(data) {
-    // let filteredData = [];
-    // for (let file of data.tree) {
-    //     if (file.path.slice(-3) === '.js' && file.path.slice(-7) !== '.test.js') {
-    //         filteredData.push(file);
-    //     }
-    // }
-    // return filteredData;
-
-    return data.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-7) !== '.test.js');
+    return data.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-8) !== '.test.js');
 }
 
 async function getFileData(filteredData) {

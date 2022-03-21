@@ -24,6 +24,19 @@ app.post('/', async (req, res) => {
     // Get data for each file (path, function strings, etc...)
     let fileData = await getFileData(filteredData);
 
+
+    //Send fileData to Webapp
+    const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({ data: fileData }),
+        //...
+    });
+
+    //Handle response
+    const responseJSON = await response.json();
+    //... Error handle
+
+
     // (Log data)
     console.log(JSON.stringify(fileData, null, 4));
 
@@ -33,7 +46,6 @@ app.post('/', async (req, res) => {
     // Run new tests
 
     // Update functionInfo.json
-
 
     // Send response back to GitHub Actions
     res.sendStatus(200);
