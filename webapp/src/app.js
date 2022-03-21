@@ -2,14 +2,17 @@ const matchers = ["toBe", "toEqual"];
 
 const express = require('express');
 const dummyData = require('./dummy/test.json');
+const repos = require('./routes/repos.js');
 const PORT = 3000;
 
 const app = express();
+
 
 app.set('view engine', 'pug');
 app.set('views', 'src/public/views');
 app.use(express.json());
 app.use('/static', express.static('src/public/static'));
+app.use(repos);
 
 app.get('/', (req, res) => {
     res.render('index', {functions: dummyData.functions});

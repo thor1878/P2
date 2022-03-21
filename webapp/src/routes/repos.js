@@ -1,4 +1,7 @@
 const fetch = require('node-fetch');
+const express = require('express');
+
+const router = express.Router();
 
 async function getRepos(url = 'https://api.github.com/users/thor1878/repos?type=all', data = {}) {
   // Default options are marked with *
@@ -18,17 +21,21 @@ async function getRepos(url = 'https://api.github.com/users/thor1878/repos?type=
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-mainhaha();
-
-async function mainhaha()
-{
-
+router.get('/repos', async (req, res) => {
   const content = await getRepos();
+  const repoNames = [];
 
   for (const item of content) {
-    console.log(item);
+    
+    if (item.language === "JavaScript") {
+    
+      repoNames.push(item.name);
+      
+    }
   }
-  
-}
+  res.render('index', {repoNames: repoNames});
+})
+
+module.exports = router;
 
 
