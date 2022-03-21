@@ -34,7 +34,6 @@ app.post('/', async (req, res) => {
 
     // Update functionInfo.json
 
-
     // Send response back to GitHub Actions
     res.sendStatus(200);
 })
