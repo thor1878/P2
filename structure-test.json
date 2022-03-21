@@ -1,0 +1,33 @@
+{
+    "files": [
+        {
+            "path": "file1.js",
+            "functions": [
+                {
+                    "name": "function1",
+                    "params": [
+                        "param1",
+                        "param2",
+                        "param3"
+                    ],
+                    "async": "bool",
+                    "status": "status",
+                    "functionString": "...",
+                    "testcases": [
+                        {
+                            "description": "description",
+                            "arguments": [
+                                "arg1",
+                                "arg2",
+                                "arg3"
+                            ],
+                            "status": "status",
+                            "expected": "expected",
+                            "matcher": "matcher"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
