@@ -1,0 +1,27 @@
+h1 {
+  padding: 10px;
+}
+
+.card {
+  background-color: white;
+  width: 90%;
+  padding: 10px;
+  margin: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 10px;
+}
+
+.repo_holder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+body {
+  background-color: rgb(240, 240, 240);
+}

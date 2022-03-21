@@ -2,18 +2,21 @@ ul {
   list-style-type: none;
   display: flex;
   align-items: center;
+  height: 100%;
 }
-ul li {
-  padding: 20px;
+
+.tab {
+  display: flex;
+  height: 100%;
 }
 
 .tab a {
   color: white;
   text-decoration: none;
-}
-
-.btnLogin_a {
-  padding: 20px;
+  display: inline-block;
+  height: 100%;
+  line-height: 70px;
+  padding: 0 10px;
 }
 
 #btnLogin {
@@ -22,6 +25,7 @@ ul li {
   text-decoration: none;
   border: none;
   padding: 10px;
+  margin: 10px;
   color: white;
   font-size: 0.7rem;
   cursor: pointer;
@@ -37,9 +41,14 @@ ul li {
   background-color: #2d4064;
 }
 
+.tab.active {
+  background-color: #2d4064;
+}
+
 nav {
   background-color: #46639a;
   display: flex;
+  height: 70px;
   align-items: center;
   justify-content: space-between;
   list-style-type: none;
