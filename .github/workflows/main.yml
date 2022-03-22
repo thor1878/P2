@@ -13,4 +13,4 @@ jobs:
       with:
         url: 'https://00da-192-38-10-18.ngrok.io'
         method: 'POST'
-        data: '{ "repository": "${{ github.repository }}", "branch": "${{ github.head_ref }}" }'
+        data: '{ "repository": "${{ github.repository }}", "branch": "${{ github.head_ref }}", "actor": "${{ github.actor }}" }'
