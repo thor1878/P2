@@ -28,3 +28,7 @@
     align-items: flex-start;
     width: 100%;
 }
+
+.card2 {
+    background-color: green;
+}
