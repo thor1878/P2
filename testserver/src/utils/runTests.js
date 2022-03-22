@@ -19,9 +19,5 @@ async function getRepoTests(repository, branch) {
 
 }
 
-async function getTestData(filteredData) {
-    const response = await fetch()
-}
 
-
-module.exports = { runTests };
+module.exports = { runTests, getRepoTests };

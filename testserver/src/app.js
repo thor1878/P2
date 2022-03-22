@@ -1,16 +1,23 @@
+const fetch = require('node-fetch');
 const express = require('express');
 const { getRepoData, filterData, getFileData } = require('./utils/getData');
-const { runTests } = require('./utils/runTests');
+const { runTests, getRepoTests } = require('./utils/runTests');
+
 
 const app = express();
 
 const PORT = 3000;
+
+require('dotenv').config();
 
 // Enable the request object to handle json
 app.use(express.json())
 
 // Endpoint to handle post request from GitHub Actions when workflow is triggered
 app.post('/', async (req, res) => {
+
+    // Get test folder from repository
+    getRepoTests(req.body.repository, req.body.branch);
 
     // Run existing tests
 
@@ -26,14 +33,14 @@ app.post('/', async (req, res) => {
 
 
     //Send fileData to Webapp
-    const response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify({ data: fileData }),
-        //...
-    });
+    // const response = await fetch(url, {
+    //     method: "POST",
+    //     body: JSON.stringify({ data: fileData }),
+
+    // });
 
     //Handle response
-    const responseJSON = await response.json();
+    // const responseJSON = await response.json();
     //... Error handle
 
 

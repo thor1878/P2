@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/thor1878/P2#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jest": "^27.5.1",
     "node-fetch": "^2.6.7"
