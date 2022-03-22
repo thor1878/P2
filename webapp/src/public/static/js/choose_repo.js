@@ -1,18 +1,21 @@
 let buttons = document.querySelectorAll('.card');
-let selected = -1;
-console.log(buttons);
+let selected = localStorage.getItem("activeCard");
 
 for (const button of buttons) {
+
+    if(button.id === selected)
+    {
+        button.classList.add('active');
+    }
+
     button.addEventListener("click", () => {
         
         for (const button of buttons) {
             button.classList.remove('active');
         }
-
         button.classList.add('active');
-      
         selected = button.id;
-        console.log(selected);
+        localStorage.setItem("activeCard",selected);
     });
 
 }
