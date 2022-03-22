@@ -21,7 +21,22 @@ async function createTestFolder(repository, branch, actor) {
 
     const filteredData = filterData(data, ".test.js");
 
-    console.log(data);
+    for (let file of filteredData) {
+        const response = await fetch(file.url);
+        const data = await response.json();
+
+        const fileString = new Buffer.from(data.content, 'base64').toString('utf-8');
+
+        console.log(fileString);
+
+        fs.mkdirSync(`src/test-folders/${file.path.replace(/\/[^\/]*?$/, '')}`, { recursive: true }, err => {
+            console.log(err);
+        })
+
+        fs.appendFileSync(`src/test-folders/${file.path}`, fileString, err => {
+            console.log(err);
+        })
+    }
 }
 
 
