@@ -9,23 +9,25 @@
 <body>
     <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
 
-    each func, index in functions   
-        <div id="func-#{index}" data-numofargs="#{func.args.length}" data-funcname="#{func.name}" data-funcstatus="#{func.status}">
-            li= func.name
-            <input type="text" class="description" id="description-#{index}" value="#{func.description}">
-            each arg, argdex in func.args
-                <input type="text" class="input" id="input-#{index}-#{argdex}" value="#{arg}">
-            
-            <input type="text" class="output" id="output-#{index}" value="#{func.output}">
-            
-            <select id="chooseMatcher-#{index}">
-                each matcher in matcherOptions 
-                    if matcher === func.matcher 
-                        <option value="#{matcher}" selected>#{matcher}</option>
-                    else 
-                        <option value="#{matcher}">#{matcher}</option>
-            </select>
-        </div>
+    each func, index in functions
+        <p>Showing <a id="func-#{index}" data-numoftc="#{func.testCases.length}">#{func.testCases.length}</a> testcases</p>
+        each tc, tdex in func.testCases
+            <div id="tc-#{index}-#{tdex}" data-numofargs="#{tc.arguments.length}" data-funcname="#{func.name}" data-funcstatus="#{tc.status}">
+                li= func.name
+                <input type="text" class="description" id="description-#{index}-#{tdex}" value="#{tc.description}">
+                each arg, argdex in tc.arguments
+                    <input type="text" class="input" id="input-#{index}-#{tdex}-#{argdex}" value="#{arg}">
+
+                <input type="text" class="output" id="output-#{index}-#{tdex}" value="#{tc.expected}">
+
+                <select id="chooseMatcher-#{index}-#{tdex}">
+                    each matcher in matcherOptions 
+                        if matcher === tc.matcher 
+                            <option value="#{matcher}" selected>#{matcher}</option>
+                        else 
+                            <option value="#{matcher}">#{matcher}</option>
+                </select>
+            </div>
 
     <button type="submit" value="Submit" onclick="submitTests()">Submit</button>
 

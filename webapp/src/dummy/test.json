@@ -1,7 +1,62 @@
 {
-    "functions": [
-        { "name": "multiply", "description": "Description", "args": [3,4], "matcher": "toBe", "output": 12, "status": 1 },
-        { "name": "divide", "description": "Description", "args": [12,4], "matcher": "toEqual", "output": 3, "status": 1 },
-        { "name": "addition", "description": "Description", "args": ["",""], "matcher": "", "output": "", "status": "" }
+    "files": [
+        {
+            "path": "file1.js",
+            "functions": [
+                {
+                    "name": "function1",
+                    "params": [
+                        "param1",
+                        "param2",
+                        "param3"
+                    ],
+                    "async": "bool",
+                    "status": "status",
+                    "functionString": "...",
+                    "testCases": [
+                        {
+                            "description": "description af test",
+                            "arguments": [
+                                1,
+                                "Hej",
+                                {"x": 3, "y": 4}
+                            ],
+                            "status": "status",
+                            "expected": "expected",
+                            "matcher": "matcher"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "file2.js",
+            "functions": [
+                {
+                    "name": "functionhaha",
+                    "params": [
+                        "param1",
+                        "param2",
+                        "param3"
+                    ],
+                    "async": "bool",
+                    "status": "status",
+                    "functionString": "...",
+                    "testCases": [
+                        {
+                            "description": "description af fak",
+                            "arguments": [
+                                "testset",
+                                "123456",
+                                {"k": 3, "o": 4}
+                            ],
+                            "status": "status",
+                            "expected": 34,
+                            "matcher": "toBe"
+                        }
+                    ]
+                }
+            ]
+        }
     ]
 }

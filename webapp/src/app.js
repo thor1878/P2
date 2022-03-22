@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/submit', (req, res) => {
-    res.render('submit', {functions: dummyData.functions, matcherOptions: matchers});
+    res.render('submit', {functions: dummyData.files[0].functions, matcherOptions: matchers});
 })
 
 app.post('/submit', (req, res) => {

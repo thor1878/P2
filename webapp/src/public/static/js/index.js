@@ -1,21 +1,25 @@
 async function submitTests() {
     const submitData = [];
     const numOfFunc = document.querySelector("#numberOfFunctions").textContent;
+    let numOfTc = document.querySelector(`#func-0`).dataset.numoftc;
     
     for (let i = 0; i < numOfFunc; i++) {
-        const currentFunc = document.querySelector(`#func-${i}`);
-        const testObject = { 
-            name: currentFunc.dataset.funcname,
-            description: document.querySelector(`#description-${i}`).value,
-            args: [], 
-            matcher: document.querySelector(`#chooseMatcher-${i}`).value, 
-            output: document.querySelector(`#output-${i}`).value, 
-            status: currentFunc.dataset.funcstatus 
-        };
-        for (let j = 0; j < currentFunc.dataset.numofargs; j++) {
-            testObject.args.push(document.querySelector(`#input-${i}-${j}`).value);
+        numOfTc = document.querySelector(`#func-${i}`).dataset.numoftc;
+        for (let j = 0; j < numOfTc; j++) {
+            const currentTc = document.querySelector(`#tc-${i}-${j}`);
+            const testObject = { 
+                name: currentTc.dataset.funcname,
+                description: document.querySelector(`#description-${i}-${j}`).value,
+                args: [], 
+                matcher: document.querySelector(`#chooseMatcher-${i}-${j}`).value, 
+                output: document.querySelector(`#output-${i}-${j}`).value, 
+                status: currentTc.dataset.funcstatus 
+            };
+            for (let k = 0; k < currentTc.dataset.numofargs; k++) {
+                testObject.args.push(document.querySelector(`#input-${i}-${j}-${k}`).value);
+            }
+            submitData.push(testObject);
         }
-        submitData.push(testObject);
     }
     console.log(submitData);
 
