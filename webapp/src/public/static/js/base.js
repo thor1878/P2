@@ -1,4 +1,3 @@
-//Main file
 let path = window.location.pathname;
 let navlinks = document.querySelectorAll("#navbar li");
 

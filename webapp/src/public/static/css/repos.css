@@ -1,3 +1,10 @@
+.card-list ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
 .card {
     background-color: white;
     width: 50%;
@@ -10,7 +17,7 @@
     border-radius: 10px;
 
     border-style: none;
-    transition: transform 0.2s;
+    transition: 0.2s;
     cursor: pointer;
 }
 
@@ -18,17 +25,6 @@
     transform: scale(1.01);
 }
 
-/* .card:active {
-    background-color: red;
-} */
-
-.repo_holder {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-}
-
-.card2 {
-    background-color: green;
+.card.active {
+    background-color: lightgreen;
 }

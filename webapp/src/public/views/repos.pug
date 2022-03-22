@@ -4,14 +4,16 @@ block style
     <link rel="stylesheet" href="../static/css/repos.css">
 
 block content
-    <h1>Choose repository</h1>
+    <main>
+        <h1>Choose repository</h1>
 
-    <div class="cardlist">
-        <ul class="repo_holder">
-
-            each repo, index in repoNamesYeet 
-                <button  class="card">
-                    <li>#{repo}</li>
-                </button>
-        </ul>
-    </div>
+        <div class="card-list">
+            <ul>
+                each repo, index in repoNames
+                    <button id="#{index}" class="card">#{repo}</button>
+            </ul>
+        </div>
+    </main>
+    
+block script
+    <script src="../static/js/choose_repo.js"></script>
