@@ -1,29 +1,8 @@
 extends base.pug
 
 
-block style
-    <link rel="stylesheet" href="../static/css/index.css">
-    
+block style 
+   <link rel="stylesheet" href="../static/css/index.css">
 
-block content
-    <h1>Choose repository</h1>
-
-    <div class="cardlist">
-        <ul class="repo_holder">
-            <li class="card">card 1
-            <input type="radio" id="card" name="repo_choose" value="" class="repo_radio">
-            </li>
-            <li class="card">card 1
-            <input type="radio" id="card" name="repo_choose" value="" class="repo_radio">
-            </li>
-        </ul>
-    </div>
-
-        
-
-    ul
-        each repo in repoNames
-            li= repo
-
-
-    
+block content 
+    <h1>Home</h1>
