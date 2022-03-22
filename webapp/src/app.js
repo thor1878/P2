@@ -19,7 +19,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('/submit', (req, res) => {
-    res.render('submit', {functions: dummyData.files[0].functions, matcherOptions: matchers});
+    res.render('submit', {functions: dummyData.files[0].functions, files: dummyData.files, matcherOptions: matchers});
+})
+
+app.get('/submit/:fileName', (req, res) => {
+    const file = dummyData.files.find(element => element.path === req.params.fileName);
+    if(file === undefined) {
+        console.log("File Not Found")
+        //res.render('fileNotFound');
+        res.render('submit', {path: dummyData.files[0].path, functions: dummyData.files[0].functions, files: dummyData.files, matcherOptions: matchers});
+    }
+    else {
+        res.render('submit', {path: file.path, functions: file.functions, files: dummyData.files, matcherOptions: matchers})
+    }
 })
 
 app.post('/submit', (req, res) => {

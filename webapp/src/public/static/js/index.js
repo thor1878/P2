@@ -1,24 +1,39 @@
 async function submitTests() {
-    const submitData = [];
+    const submitData = { files: [] };
     const numOfFunc = document.querySelector("#numberOfFunctions").textContent;
     let numOfTc = document.querySelector(`#func-0`).dataset.numoftc;
+    const filePath = document.querySelector(`#selectedFile`).textContent;
     
+    const fileObject = { path: filePath, functions: [] };
+
     for (let i = 0; i < numOfFunc; i++) {
-        numOfTc = document.querySelector(`#func-${i}`).dataset.numoftc;
+        const func = document.querySelector(`#func-${i}`);
+        
+        fileObject.functions.push({
+            name: func.dataset.funcname,
+            params: func.dataset.funcparams,
+            async: func.dataset.funcasync,
+            status: func.dataset.funcstatus,
+            functionString: func.dataset.funcstring,
+            testCases: []
+        });
+
+        numOfTc = func.dataset.numoftc;
+
         for (let j = 0; j < numOfTc; j++) {
             const currentTc = document.querySelector(`#tc-${i}-${j}`);
-            const testObject = { 
-                name: currentTc.dataset.funcname,
+            const testObject = {
                 description: document.querySelector(`#description-${i}-${j}`).value,
-                args: [], 
+                arguments: [], 
                 matcher: document.querySelector(`#chooseMatcher-${i}-${j}`).value, 
-                output: document.querySelector(`#output-${i}-${j}`).value, 
-                status: currentTc.dataset.funcstatus 
+                expected: document.querySelector(`#output-${i}-${j}`).value, 
+                status: currentTc.dataset.tcstatus 
             };
             for (let k = 0; k < currentTc.dataset.numofargs; k++) {
-                testObject.args.push(document.querySelector(`#input-${i}-${j}-${k}`).value);
+                testObject.arguments.push(document.querySelector(`#input-${i}-${j}-${k}`).value);
             }
-            submitData.push(testObject);
+            fileObject.functions[i].testCases.push(testObject);
+            submitData.files.push(fileObject);
         }
     }
     console.log(submitData);

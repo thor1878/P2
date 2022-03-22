@@ -7,12 +7,18 @@
     <title>Document</title>
 </head>
 <body>
+    each file in files
+        if file.path === path
+            <a href="/submit/#{file.path}" id="selectedFile"><button>#{file.path}</button></a>
+        else
+            <a href="/submit/#{file.path}"><button>#{file.path}</button></a>
+
     <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
 
     each func, index in functions
-        <p>Showing <a id="func-#{index}" data-numoftc="#{func.testCases.length}">#{func.testCases.length}</a> testcases</p>
+        <p>Showing <a id="func-#{index}" data-funcname="#{func.name}" data-funcparams="#{func.params}" data-funcasync="#{func.async}" data-funcstring="#{func.functionString}" data-numoftc="#{func.testCases.length}" data-funcstatus="#{func.status}">#{func.testCases.length}</a> testcases</p>
         each tc, tdex in func.testCases
-            <div id="tc-#{index}-#{tdex}" data-numofargs="#{tc.arguments.length}" data-funcname="#{func.name}" data-funcstatus="#{tc.status}">
+            <div id="tc-#{index}-#{tdex}" data-numofargs="#{tc.arguments.length}" data-tcstatus="#{tc.status}">
                 li= func.name
                 <input type="text" class="description" id="description-#{index}-#{tdex}" value="#{tc.description}">
                 each arg, argdex in tc.arguments
