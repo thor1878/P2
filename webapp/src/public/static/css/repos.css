@@ -2,12 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: 50vw;
 }
 
 .card {
     background-color: white;
-    width: 50%;
+    width: 100%;
     padding: 10px;
     margin: 10px;
     display: flex;

@@ -1,22 +1,29 @@
 * {
-    font-family: "raleway", sans-serif;
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
 
 body {
+    font-family: "raleway", sans-serif;
     background-color: rgb(240, 240, 240);
+    display: flex;
+    overflow: hidden;
 }
 
 main {
+    margin-top: 70px;
     padding: 10px;
 }
 
 #navbar {
     background-color: #46639a;
     display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 70px;
+    width: 100vw;
     align-items: center;
     justify-content: space-between;
     list-style-type: none;
@@ -61,7 +68,7 @@ main {
     color: white;
     font-size: 0.7rem;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: 0.2s;
 }
 
 #btnLogin:hover {

@@ -1,0 +1,13 @@
+aside {
+    width: 200px;
+    height: calc(100vh - 70px);
+    margin-top: 70px;
+    padding: 10px;
+    background-color: lightgrey;
+    color: white;
+    overflow-y: scroll;
+}
+
+main {
+    display: inline-block;
+}
