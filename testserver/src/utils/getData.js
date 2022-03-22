@@ -1,22 +1,26 @@
 const fetch = require('node-fetch');
 
 async function getRepoData(repository, branch) {
-    let url = `http://api.github.com/repos/${repository}/git/trees/${branch}?recursive=1`;
+    const url = `http://api.github.com/repos/${repository}/git/trees/${branch}?recursive=1`;
 
-    let response = await fetch(url, {
+    const response = await fetch(url, {
         headers: {
             'Authorization': 'token ' + 'git_hub_token'
         }
     });
-    let data = await response.json();
+    const data = await response.json();
 
     return data;
 }
 
 
 // Return an array containing only the objects with a path having the '.js' extension (not including '.test.js')
-function filterData(data) {
-    return data.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-8) !== '.test.js');
+function filterData(data, extention) {
+    if (extention === ".js") {
+        return data.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-8) !== '.test.js');
+    } else if (extention === ".test.js") {
+        return data.tree.filter(file => file.path.slice(-8) === '.test.js');
+    }
 }
 
 async function getFileData(filteredData) {
@@ -75,7 +79,7 @@ function getFunctionStrings(fileString) {
         // Extract info about the current function string
         let functionString = fileString.slice(start, end);
         let params = functionString.match(/function\s*\w*\s*\((.*?)\)/)[1].split(/\s*,\s*/);
-        let name = ( func.match(/[^\r\n]*?\s+(\w+)\s*\=\s*(async\s*)?function/) || func.match(/function\s*(\w*)\s*\(.*?\)/) )[1];
+        let name = (func.match(/[^\r\n]*?\s+(\w+)\s*\=\s*(async\s*)?function/) || func.match(/function\s*(\w*)\s*\(.*?\)/))[1];
         let async = func.match(/async\s*function/) ? true : false;
 
         functionStrings.push({

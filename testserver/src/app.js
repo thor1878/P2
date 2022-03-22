@@ -19,7 +19,7 @@ app.post('/', async (req, res) => {
     let data = await getRepoData(req.body.repository, req.body.branch);
 
     // Filter data to only include '.js' files (not '.test.js')
-    let filteredData = filterData(data);
+    let filteredData = filterData(data, ".js");
 
     // Get data for each file (path, function strings, etc...)
     let fileData = await getFileData(filteredData);

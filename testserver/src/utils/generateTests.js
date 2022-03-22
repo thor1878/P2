@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function generateTests(){
+function generateTests() {
     let data = fs.readFileSync("../../../structure-test.json");
     let generatedTests = [];
     let files = JSON.parse(data).files;
