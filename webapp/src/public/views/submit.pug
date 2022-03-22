@@ -4,30 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/scrollbars.css">
+    <link rel="stylesheet" href="../static/css/submit.css">
+    <title>Submit test</title>
 </head>
 <body>
-    <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
+    <header> 
+        <nav id="navbar">
+            <ul>
+                <li name="/" class="navlink"><a href="/">Home</a></li> 
+                <li name="/repos" class="navlink"><a href="/repos">Choose repository</a></li> 
+                <li name="/testing" class="navlink"><a href="/testing">Testing</a></li> 
+                <li name="/logs" class="navlink"><a href="/logs">Logs</a></li> 
+                <li name="/submit" class="navlink"><a href="/submit">Submit Test</a></li> 
+            </ul>
+            <button id="btnLogin">Login with GitHub</button>
+        </nav>
+    </header>
 
-    each func, index in functions   
-        <div id="func-#{index}" data-numofargs="#{func.args.length}" data-funcname="#{func.name}" data-funcstatus="#{func.status}">
-            li= func.name
-            <input type="text" class="description" id="description-#{index}" value="#{func.description}">
-            each arg, argdex in func.args
-                <input type="text" class="input" id="input-#{index}-#{argdex}" value="#{arg}">
-            
-            <input type="text" class="output" id="output-#{index}" value="#{func.output}">
-            
-            <select id="chooseMatcher-#{index}">
-                each matcher in matcherOptions 
-                    if matcher === func.matcher 
-                        <option value="#{matcher}" selected>#{matcher}</option>
-                    else 
-                        <option value="#{matcher}">#{matcher}</option>
-            </select>
-        </div>
+    <main>
+        <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
 
-    <button type="submit" value="Submit" onclick="submitTests()">Submit</button>
+        each func, index in functions   
+            <div id="func-#{index}" class="func-div" data-numofargs="#{func.args.length}" data-funcname="#{func.name}" data-funcstatus="#{func.status}">
+                <section class="func-name-description">
+                    h3= func.name
+                    <label for="description-#{index}">Description</label>
+                    <input type="text" class="description" id="description-#{index}" value="#{func.description}">
+                </section>
+
+                <pre>
+                | function multiply(a, b) {
+                |     return a * b;
+                | }
+                |
+                | module.exports = multiply;
+                </pre>
+
+                <section class="func-arguments">
+                    each arg, argdex in func.args
+                        <label for="input-#{index}-#{argdex}">Argument #{argdex}</label>
+                        <input type="text" class="input" id="input-#{index}-#{argdex}" value="#{arg}">
+                </section>
+
+                <section class="func-matcher">
+                    <label for="chooseMatcher-#{index}">Choose matcher</label>
+                    <select id="chooseMatcher-#{index}">
+                        each matcher in matcherOptions 
+                            if matcher === func.matcher 
+                                <option value="#{matcher}" selected>#{matcher}</option>
+                            else 
+                                <option value="#{matcher}">#{matcher}</option>
+                    </select>
+                </section>
+
+                <section>
+                    <label for="output-#{index}">Expected output</label>
+                    <input type="text" class="output" id="output-#{index}" value="#{func.output}">
+                </section>
+                
+                
+            </div>
+
+        <button type="submit" value="Submit" onclick="submitTests()">Submit</button>
+    </main>
 
     <script src="../static/js/index.js"></script>
 </body>

@@ -1,11 +1,29 @@
-aside {
+#sidebar {
     width: 200px;
     height: calc(100vh - 70px);
     margin-top: 70px;
-    padding: 10px;
-    background-color: lightgrey;
-    color: white;
+    padding: 20px;
+    background-color: var(--sidebar-bg-color);
+    color: var(--sidebar-text-color);
     overflow-y: scroll;
+}
+
+#sidebar li {
+    margin-bottom: 10px;
+    list-style: none;
+    cursor: pointer;
+}
+
+#sidebar a {
+    outline: none;
+    text-decoration: none;
+    padding: 2px 1px 0;
+}
+
+#sidebar a:hover {
+    color: var(--sidebar-a-color-hover);
+    border-bottom: 2px solid;
+    transition: 0.1s;
 }
 
 main {

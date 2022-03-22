@@ -1,3 +1,19 @@
+:root {
+    --body-bg-color: #f0f0f0;
+    --body-text-color: #000000;
+    --navbar-text-color: #ffffff;
+    --navbar-bg-color: #46639a;
+    --navbar-bg-color-hover: #2d4064;
+    --navbar-bg-color-active: #334a74;
+    --navbar-button-color: var(--navbar-bg-color-active);
+    --navbar-button-color-hover: var(--navbar-bg-color-hover);
+    --sidebar-bg-color: #dadada;
+    --sidebar-text-color: #202020;
+    --sidebar-a-color-hover: #0840a7;
+    --repo-card-bg-color: #ffffff;
+    --repo-card-bg-color-active: #5cdb5c;
+}
+
 * {
     margin: 0px;
     padding: 0px;
@@ -6,9 +22,14 @@
 
 body {
     font-family: "raleway", sans-serif;
-    background-color: rgb(240, 240, 240);
+    color: var(--body-text-color);
+    background-color: var(--body-bg-color);
     display: flex;
-    overflow: hidden;
+    overflow: overlay;
+}
+
+body h1, h2, h3 {
+    margin-bottom: 10px;
 }
 
 main {
@@ -17,7 +38,7 @@ main {
 }
 
 #navbar {
-    background-color: #46639a;
+    background-color: var(--navbar-bg-color);
     display: flex;
     position: absolute;
     top: 0;
@@ -42,36 +63,36 @@ main {
 }
 
 .navlink a {
-    color: white;
+    color: var(--navbar-text-color);
     text-decoration: none;
     display: inline-block;
     height: 100%;
     line-height: 70px;
-    padding: 0 10px;
-}
-
-.navlink:hover {
-    background-color: #2d4064;
+    padding: 0 20px;
 }
 
 .navlink.active {
-    background-color: #334a74;
+    background-color: var(--navbar-bg-color-active);
+}
+
+.navlink:hover {
+    background-color: var(--navbar-bg-color-hover);
 }
 
 #btnLogin {
-    background-color: #2d4064;
+    background-color: var(--navbar-button-color);
     border-radius: 25px;
     text-decoration: none;
     border: none;
-    padding: 10px;
+    padding: 15px;
     margin: 10px;
-    color: white;
+    color: var(--navbar-text-color);
     font-size: 0.7rem;
     cursor: pointer;
     transition: 0.2s;
 }
 
 #btnLogin:hover {
-    background-color: #2d4064;
+    background-color: var(--navbar-button-color-hover);
     transform: scale(1.05);
 }

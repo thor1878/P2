@@ -6,19 +6,18 @@
 }
 
 .card {
-    background-color: white;
+    background-color: var(--repo-card-bg-color);
     width: 100%;
     padding: 10px;
     margin: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     border-radius: 10px;
-
     border-style: none;
     transition: 0.2s;
     cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .card:hover {
@@ -26,5 +25,5 @@
 }
 
 .card.active {
-    background-color: lightgreen;
+    background-color: var(--repo-card-bg-color-active);
 }
