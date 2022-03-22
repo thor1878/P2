@@ -1,5 +1,8 @@
 const fetch = require("node-fetch");
+const fs = require('fs');
+
 const { filterData } = require("./getData");
+
 function runTests() {
     // If tests fail
     // Generate test report and store it in test folder in GitHub repository
@@ -11,13 +14,15 @@ function runTests() {
     // Open pull request
 }
 
-async function getRepoTests(repository, branch) {
+async function createTestFolder(repository, branch, actor) {
     const url = `http://api.github.com/repos/${repository}/git/trees/${branch}?recursive=1`;
     const response = await fetch(url);
     const data = await response.json();
+
     const filteredData = filterData(data, ".test.js");
 
+    console.log(data);
 }
 
 
-module.exports = { runTests, getRepoTests };
+module.exports = { runTests, createTestFolder };

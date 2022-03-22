@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const express = require('express');
 const { getRepoData, filterData, getFileData } = require('./utils/getData');
-const { runTests, getRepoTests } = require('./utils/runTests');
+const { runTests, createTestFolder } = require('./utils/runTests');
 
 
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.json())
 app.post('/', async (req, res) => {
 
     // Get test folder from repository
-    getRepoTests(req.body.repository, req.body.branch);
+    createTestFolder(req.body.repository, req.body.branch, req.body.actor);
 
     // Run existing tests
 
@@ -45,7 +45,7 @@ app.post('/', async (req, res) => {
 
 
     // (Log data)
-    console.log(JSON.stringify(fileData, null, 4));
+    // console.log(JSON.stringify(fileData, null, 4));
 
 
     // Generate new test cases
