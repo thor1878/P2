@@ -1,5 +1,4 @@
-const matchers = ["toBe", "toEqual"];
-
+require('dotenv').config();
 const express = require('express');
 const dummyData = require('./dummy/test.json');
 const repos = require('./routes/repos.js');
@@ -7,6 +6,8 @@ const PORT = 3000;
 
 const app = express();
 
+// Array of matchers
+const matchers = ["toBe", "toEqual"];
 
 app.set('view engine', 'pug');
 app.set('views', 'src/public/views');

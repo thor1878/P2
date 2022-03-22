@@ -11,8 +11,9 @@ async function getRepos(url = 'https://api.github.com/users/thor1878/repos?type=
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
     credentials: 'same-origin', // include, *same-origin, omit
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
       // 'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': `token ${process.env.GITHUB_TOKEN}`
     },
     redirect: 'follow', // manual, *follow, error
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
@@ -24,6 +25,8 @@ async function getRepos(url = 'https://api.github.com/users/thor1878/repos?type=
 router.get('/repos', async (req, res) => {
   const content = await getRepos();
   const repoNames = [];
+
+  console.log(content);
 
   for (const item of content) {
     
