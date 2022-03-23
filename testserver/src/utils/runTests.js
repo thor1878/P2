@@ -1,17 +1,17 @@
 const fetch = require("node-fetch");
+const jest = require('jest');
 const fs = require('fs');
 
 const { filterData } = require("./getData");
 
-function runTests() {
-    // If tests fail
-    // Generate test report and store it in test folder in GitHub repository
-    // Update functionInfo.json
-    // Close pull request
-    // Send response back to GitHub Actions 
+async function runTests(testFolder) {
+    console.log(testFolder);
 
-    // If tests pass
-    // Open pull request
+    const options = { root: [testFolder] }
+
+    const testResults = await jest.runCLI(options, options.root);
+
+    return testResults;
 }
 
 async function createTestFolder(repository, branch, actor) {
@@ -21,22 +21,25 @@ async function createTestFolder(repository, branch, actor) {
 
     const filteredData = filterData(data, ".test.js");
 
+    const testFolder = `src/test-folders/${actor}-${branch}`;
+
     for (let file of filteredData) {
         const response = await fetch(file.url);
         const data = await response.json();
 
         const fileString = new Buffer.from(data.content, 'base64').toString('utf-8');
 
-        console.log(fileString);
-
-        fs.mkdirSync(`src/test-folders/${file.path.replace(/\/[^\/]*?$/, '')}`, { recursive: true }, err => {
+        fs.mkdirSync(`${testFolder}/${file.path.replace(/\/[^\/]*?$/, '')}`, { recursive: true }, err => {
             console.log(err);
         })
 
-        fs.appendFileSync(`src/test-folders/${file.path}`, fileString, err => {
+        fs.appendFileSync(`${testFolder}/${file.path}`, fileString, err => {
             console.log(err);
         })
     }
+
+    // Return path to test folder
+    return testFolder;
 }
 
 

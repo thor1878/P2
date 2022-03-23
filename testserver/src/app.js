@@ -17,9 +17,13 @@ app.use(express.json())
 app.post('/', async (req, res) => {
 
     // Get test folder from repository
-    createTestFolder(req.body.repository, req.body.branch, req.body.actor);
+    const testFolder = await createTestFolder(req.body.repository, req.body.branch, req.body.actor);
 
     // Run existing tests
+    const testResults = await runTests(testFolder);
+
+    console.log(testResults);
+
 
 
     // Get data from GitHub repository
