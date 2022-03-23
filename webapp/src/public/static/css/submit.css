@@ -7,6 +7,12 @@
 
 .func-div section {
     margin-bottom: 20px;
+    display: flex;
+}
+
+.input-div {
+    display: flex;
+    flex-direction: column;
 }
 
 .func-div pre {

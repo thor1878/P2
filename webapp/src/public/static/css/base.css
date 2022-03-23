@@ -18,10 +18,10 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    font-family: "raleway", sans-serif;
 }
 
 body {
-    font-family: "raleway", sans-serif;
     color: var(--body-text-color);
     background-color: var(--body-bg-color);
     display: flex;

@@ -29,9 +29,11 @@
         each func, index in functions   
             <div id="func-#{index}" class="func-div" data-numofargs="#{func.args.length}" data-funcname="#{func.name}" data-funcstatus="#{func.status}">
                 <section class="func-name-description">
-                    h3= func.name
-                    <label for="description-#{index}">Description</label>
-                    <input type="text" class="description" id="description-#{index}" value="#{func.description}">
+                    <div class="input-div">
+                        h3= func.name
+                        <label for="description-#{index}">Description</label>
+                        <input type="text" class="description" id="description-#{index}" value="#{func.description}">
+                    </div>
                 </section>
 
                 <pre>
@@ -44,24 +46,30 @@
 
                 <section class="func-arguments">
                     each arg, argdex in func.args
-                        <label for="input-#{index}-#{argdex}">Argument #{argdex}</label>
-                        <input type="text" class="input" id="input-#{index}-#{argdex}" value="#{arg}">
+                        <div class="input-div">
+                            <label for="input-#{index}-#{argdex}">Argument #{argdex+1}</label>
+                            <input type="text" class="input" id="input-#{index}-#{argdex}" value="#{arg}">
+                        </div>
                 </section>
 
                 <section class="func-matcher">
-                    <label for="chooseMatcher-#{index}">Choose matcher</label>
-                    <select id="chooseMatcher-#{index}">
-                        each matcher in matcherOptions 
-                            if matcher === func.matcher 
-                                <option value="#{matcher}" selected>#{matcher}</option>
-                            else 
-                                <option value="#{matcher}">#{matcher}</option>
-                    </select>
+                    <div class="input-div">
+                        <label for="chooseMatcher-#{index}">Choose matcher</label>
+                        <select id="chooseMatcher-#{index}">
+                            each matcher in matcherOptions 
+                                if matcher === func.matcher 
+                                    <option value="#{matcher}" selected>#{matcher}</option>
+                                else 
+                                    <option value="#{matcher}">#{matcher}</option>
+                        </select>
+                    </div>
                 </section>
 
                 <section>
-                    <label for="output-#{index}">Expected output</label>
-                    <input type="text" class="output" id="output-#{index}" value="#{func.output}">
+                    <div class="input-div">
+                        <label for="output-#{index}">Expected output</label>
+                        <input type="text" class="output" id="output-#{index}" value="#{func.output}">
+                    </div>
                 </section>
                 
                 
