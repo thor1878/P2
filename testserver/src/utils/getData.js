@@ -15,11 +15,11 @@ async function getRepoData(repository, branch) {
 
 
 // Return an array containing only the objects with a path having the '.js' extension (not including '.test.js')
-function filterData(data, extention) {
+function filterRepoData(repoData, extention) {
     if (extention === ".js") {
-        return data.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-8) !== '.test.js');
+        return repoData.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-8) !== '.test.js');
     } else if (extention === ".test.js") {
-        return data.tree.filter(file => file.path.slice(-8) === '.test.js');
+        return repoData.tree.filter(file => file.path.slice(-8) === '.test.js');
     }
 }
 
@@ -93,5 +93,23 @@ function getFunctionStrings(fileString) {
     return functionStrings;
 }
 
+async function getTestInfo(repoData) {
+    const testInfoFile = repoData.tree.find(file => file.path === 'test/testInfo.json');
 
-module.exports = { getRepoData, filterData, getFileData };
+    const response = await fetch(testInfoFile.url, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'token ' + process.env.GITHUB_TOKEN,
+            'Accept': 'application/vnd.github.v3+json',
+        },
+    });
+    
+    const data = await response.json();
+
+    const testInfo = new Buffer.from(data.content, 'base64').toString('utf-8');
+
+    return testInfo;
+}
+
+
+module.exports = { getRepoData, filterRepoData, getFileData, getTestInfo };

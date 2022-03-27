@@ -17,13 +17,3 @@ function generateTests() {
         }
     }
 }
-
-
-generateTests();
-
-
-
-
-
-
-

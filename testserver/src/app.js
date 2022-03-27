@@ -1,71 +1,74 @@
 const fetch = require('node-fetch');
+const fs = require('fs');
 const express = require('express');
-const { getRepoData, filterData, getFileData } = require('./utils/getData');
-const { runTests, createTestFolder } = require('./utils/runTests');
 
+const { getRepoData, filterRepoData, getFileData, getTestInfo } = require('./utils/getData');
+const { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef } = require('./utils/updateTests');
 
 const app = express();
 
 const PORT = 3000;
 
+// Setup environment variables from .env folder
 require('dotenv').config();
 
 // Enable the request object to handle json
 app.use(express.json())
 
-// Endpoint to handle post request from GitHub Actions when workflow is triggered
-app.post('/', async (req, res) => {
-
-    // Get test folder from repository
-    const testFolder = await createTestFolder(req.body.repository, req.body.branch, req.body.actor);
-
-    // Run existing tests
-    const testResults = await runTests(testFolder);
-
-    console.log(testResults);
-
-
-
-    // Get data from GitHub repository
-    let data = await getRepoData(req.body.repository, req.body.branch);
-
+// Web app requests an updated test info object.
+// The server responds with the updated test info matching {user}/{repository} and {branch} from the request
+app.get('/test-info', async (req, res) => {
+    console.log(req.query);
+    
+    // Get data from GitHub repository branch
+    const repoData = await getRepoData(req.query.repository, req.query.branch);
+    
     // Filter data to only include '.js' files (not '.test.js')
-    let filteredData = filterData(data, ".js");
+    const filteredData = filterRepoData(repoData, ".js");
 
     // Get data for each file (path, function strings, etc...)
-    let fileData = await getFileData(filteredData);
+    const fileData = await getFileData(filteredData);
+
+    // Get test info file from branch
+    const testInfo = await getTestInfo(repoData);
 
 
-    //Send fileData to Webapp
-    // const response = await fetch(url, {
-    //     method: "POST",
-    //     body: JSON.stringify({ data: fileData }),
 
-    // });
-
-    //Handle response
-    // const responseJSON = await response.json();
-    //... Error handle
+    // Update test info (add all functions that are not in test info. Nothing else should be necessary yet)
 
 
-    // (Log data)
-    // console.log(JSON.stringify(fileData, null, 4));
 
 
-    // Generate new test cases
-
-    // Run new tests
-
-    // Update functionInfo.json
-
-    // Send response back to GitHub Actions
-    res.sendStatus(200);
+    // Send updated test info back to webapp
+    res.send(testInfo);
 })
 
+// Web app posts updated test info that contains the most recent modified test cases.
+// This test info is used to generate the actual test cases, which are then tested.
+app.post('/generate-tests', async (req, res) => {
+    const branch = 'main';
+    const testInfo = JSON.parse(fs.readFileSync('structure-test.json'));
+
+    // Get SHA of latest commit on branch
+    const latestCommitSHA = await getLatestCommitSHA(branch);
+
+    // Get SHA of the base tree (root)
+    const baseTreeSHA = await getBaseTreeSHA(latestCommitSHA);
+
+    // Create new tree based on testInfo file
+    const newTreeSHA = await createTree(baseTreeSHA, testInfo);
+
+    // Commit tree
+    const newCommitSHA = await commitTree(latestCommitSHA, newTreeSHA);
+
+    // Update branch ref
+    const response = await updateRef(newCommitSHA, branch);
+
+    console.log(response);
 
 
-// Endpoint to run tests. Should run existing or modified tests depending if the request is send from the test-server og the web-app
-
+    res.send('test');
+})
 
 
 

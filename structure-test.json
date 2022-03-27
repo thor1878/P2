@@ -1,57 +1,53 @@
 {
     "files": [
         {
-            "path": "file1.js",
+            "path": "src/sum.js",
             "functions": [
                 {
-                    "name": "function1",
+                    "name": "sum",
                     "params": [
-                        "param1",
-                        "param2",
-                        "param3"
+                        "a",
+                        "b"
                     ],
-                    "async": "bool",
-                    "status": "status",
-                    "functionString": "...",
+                    "async": "false",
+                    "status": "0",
+                    "functionString": "function sum(a, b) { return a + b }",
                     "testCases": [
                         {
-                            "description": "description af test",
+                            "description": "Sum two numbers",
                             "arguments": [
-                                1,
-                                "Hej",
-                                {"x": 3, "y": 4}
+                                "3",
+                                "4"
                             ],
-                            "status": "status",
-                            "expected": "expected",
-                            "matcher": "matcher"
+                            "status": "0",
+                            "expected": "7",
+                            "matcher": "toBe"
                         }
                     ]
                 }
             ]
         },
         {
-            "path": "file2.js",
+            "path": "src/multiply.js",
             "functions": [
                 {
-                    "name": "functionhaha",
+                    "name": "multiply",
                     "params": [
-                        "param1",
-                        "param2",
-                        "param3"
+                        "a",
+                        "b"
                     ],
-                    "async": "bool",
-                    "status": "status",
-                    "functionString": "...",
+                    "async": "false",
+                    "status": "0",
+                    "functionString": "function sum(a, b) {return a * b}",
                     "testCases": [
                         {
-                            "description": "description af fak",
+                            "description": "Multiply two numbers",
                             "arguments": [
-                                "testset",
-                                "123456",
-                                {"k": 3, "o": 4}
+                                "2",
+                                "3"
                             ],
-                            "status": "status",
-                            "expected": 34,
+                            "status": "0",
+                            "expected": "6",
                             "matcher": "toBe"
                         }
                     ]
