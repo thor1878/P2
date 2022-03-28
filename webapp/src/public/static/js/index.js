@@ -2,9 +2,10 @@ async function submitTests() {
     const submitData = { files: [] };
     const numOfFunc = document.querySelector("#numberOfFunctions").textContent;
     let numOfTc = document.querySelector(`#func-0`).dataset.numoftc;
-    const filePath = document.querySelector(`#selectedFile`).textContent;
+    // const filePath = document.querySelector(`#selectedFile`).textContent;
     
-    const fileObject = { path: filePath, functions: [] };
+    // const fileObject = { path: filePath, functions: [] };
+    const fileObject = { path: "src/sum.js", functions: [] };
 
     for (let i = 0; i < numOfFunc; i++) {
         const func = document.querySelector(`#func-${i}`);
@@ -38,7 +39,17 @@ async function submitTests() {
     }
     console.log(submitData);
 
-    const submitResponse = await fetch("http://localhost:3000/submit", {
+    // const submitResponse = await fetch("http://localhost:3000/submit", {
+    //     headers: {
+    //         "Accept": "application/json",
+    //         "Content-Type": "application/json"
+    //     },
+    //     method: "POST",
+    //     body: JSON.stringify(submitData)
+    // })
+
+
+    const submitResponse = await fetch("https://f8e2-130-225-198-165.ngrok.io/generate-tests", {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"

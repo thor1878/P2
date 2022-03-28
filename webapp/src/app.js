@@ -1,6 +1,7 @@
 const matchers = ["toBe", "toEqual"];
 
 const express = require('express');
+const fetch = require('node-fetch');
 const dummyData = require('./dummy/test.json');
 const repos = require('./routes/repos.js');
 const PORT = 3000;
@@ -18,9 +19,21 @@ app.get('/', (req, res) => {
     res.render('index', {functions: dummyData.functions});
 })
 
-app.get('/submit', (req, res) => {
-    res.render('submit', {functions: dummyData.files[0].functions, files: dummyData.files, matcherOptions: matchers});
+
+//haha - made new stuff  ;P
+app.get('/submit', async (req, res) => {
+    let url = "https://f8e2-130-225-198-165.ngrok.io/test-info?repository=thor1878%2FGithub-Actions-test&branch=main"
+    const response = await fetch(url, {
+        method: "GET"
+    })
+    const data = JSON.parse(await response.json());
+    res.render('submit', {functions: data.files[0].functions, files: data.files, matcherOptions: matchers});
 })
+
+
+// app.get('/submit', (req, res) => {
+//     res.render('submit', {functions: dummyData.files[0].functions, files: dummyData.files, matcherOptions: matchers});
+// })
 
 app.get('/submit/:fileName', (req, res) => {
     const file = dummyData.files.find(element => element.path === req.params.fileName);
