@@ -37,10 +37,8 @@ app.get('/test-info', async (req, res) => {
     // Update test info (add all functions that are not in test info. Nothing else should be necessary yet)
 
 
-
-
     // Send updated test info back to webapp
-    res.send(testInfo);
+    res.send(JSON.stringify(testInfo));
 })
 
 // Web app posts updated test info that contains the most recent modified test cases.
