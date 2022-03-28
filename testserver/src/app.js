@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
 const express = require('express');
+const cors = require('cors');
 
 const { getRepoData, filterRepoData, getFileData, getTestInfo } = require('./utils/getData');
 const { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef } = require('./utils/updateTests');
@@ -14,6 +15,8 @@ require('dotenv').config();
 
 // Enable the request object to handle json
 app.use(express.json())
+
+app.use(cors());
 
 // Web app requests an updated test info object.
 // The server responds with the updated test info matching {user}/{repository} and {branch} from the request
@@ -44,8 +47,11 @@ app.get('/test-info', async (req, res) => {
 // Web app posts updated test info that contains the most recent modified test cases.
 // This test info is used to generate the actual test cases, which are then tested.
 app.post('/generate-tests', async (req, res) => {
+
+    console.log(JSON.stringify(req.body, null, 4));
+
     const branch = 'main';
-    const testInfo = JSON.parse(fs.readFileSync('structure-test.json'));
+    const testInfo = req.body;
 
     // Get SHA of latest commit on branch
     const latestCommitSHA = await getLatestCommitSHA(branch);
