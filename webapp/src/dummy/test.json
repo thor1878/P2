@@ -1,7 +1,1 @@
-{
-    "functions": [
-        { "name": "multiply", "description": "Write description here", "args": [3,4], "matcher": "toBe", "output": 12, "status": 1 },
-        { "name": "divide", "description": "Write description here", "args": [12,4], "matcher": "toEqual", "output": 3, "status": 1 },
-        { "name": "addition", "description": "Write description here", "args": ["",""], "matcher": "", "output": "", "status": "" }
-    ]
-}
+fuk u
