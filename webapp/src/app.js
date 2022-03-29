@@ -1,8 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const fetch = require('node-fetch');
-const dummyData = require('./dummy/test.json');
-const filesData = require('./dummy/filesData.json');
+const dummyData = require('./dummy/filesData.json');
 const repos = require('./routes/repos.js');
 const PORT = 3000;
 
@@ -23,19 +22,19 @@ app.get('/', (req, res) => {
 
 
 //haha - made new stuff  ;P
-app.get('/submit', async (req, res) => {
-    let url = "https://f8e2-130-225-198-165.ngrok.io/test-info?repository=thor1878%2FGithub-Actions-test&branch=main"
-    const response = await fetch(url, {
-        method: "GET"
-    })
-    const data = JSON.parse(await response.json());
-    res.render('submit', {functions: data.files[0].functions, files: data.files, matcherOptions: matchers});
-})
-
-
-// app.get('/submit', (req, res) => {
-//     res.render('submit', {functions: dummyData.files[0].functions, files: dummyData.files, matcherOptions: matchers});
+// app.get('/submit', async (req, res) => {
+//     let url = "https://f8e2-130-225-198-165.ngrok.io/test-info?repository=thor1878%2FGithub-Actions-test&branch=main"
+//     const response = await fetch(url, {
+//         method: "GET"
+//     })
+//     const data = JSON.parse(await response.json());
+//     res.render('submit', {functions: data.files[0].functions, files: data.files, matcherOptions: matchers});
 // })
+
+
+app.get('/submit', (req, res) => {
+    res.render('submit', {functions: dummyData.files[0].functions, files: dummyData.files, matcherOptions: matchers});
+})
 
 app.get('/submit/:fileName', (req, res) => {
     const file = dummyData.files.find(element => element.path === req.params.fileName);
@@ -56,7 +55,7 @@ app.post('/submit', (req, res) => {
 
 
 app.get('/testing', (req, res) => {
-    res.render('testing', {files: filesData.files});
+    res.render('testing', {files: dummyData.files});
 })
 
 app.get('/logs', (req, res) => {
