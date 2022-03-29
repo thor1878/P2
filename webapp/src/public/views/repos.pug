@@ -1,0 +1,22 @@
+extends base.pug
+
+block style
+    <link rel="stylesheet" href="../static/css/repos.css">
+
+block title
+    <title>Choose repository</title>
+
+block content
+    <main>
+        <h1>Choose repository</h1>
+
+        <div class="card-list">
+            <ul>
+                each repo, index in repoNames
+                    <button id="#{index}" class="card">#{repo}</button>
+            </ul>
+        </div>
+    </main>
+    
+block script
+    <script src="../static/js/choose_repo.js"></script>
