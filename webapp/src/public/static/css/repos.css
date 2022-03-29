@@ -1,0 +1,29 @@
+.card-list ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50vw;
+}
+
+.card {
+    background-color: var(--repo-card-bg-color);
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    border-style: none;
+    transition: 0.2s;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.card:hover {
+    transform: scale(1.01);
+}
+
+.card.active {
+    background-color: var(--repo-card-bg-color-active);
+}

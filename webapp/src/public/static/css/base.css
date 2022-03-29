@@ -1,62 +1,98 @@
-ul {
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.tab {
-  display: flex;
-  height: 100%;
-}
-
-.tab a {
-  color: white;
-  text-decoration: none;
-  display: inline-block;
-  height: 100%;
-  line-height: 70px;
-  padding: 0 10px;
-}
-
-#btnLogin {
-  background-color: #2d4064;
-  border-radius: 25px;
-  text-decoration: none;
-  border: none;
-  padding: 10px;
-  margin: 10px;
-  color: white;
-  font-size: 0.7rem;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-#btnLogin:hover {
-  background-color: #2d4064;
-  transform: scale(1.05);
-}
-
-.tab:hover {
-  background-color: #2d4064;
-}
-
-.tab.active {
-  background-color: #2d4064;
-}
-
-nav {
-  background-color: #46639a;
-  display: flex;
-  height: 70px;
-  align-items: center;
-  justify-content: space-between;
-  list-style-type: none;
+:root {
+    --body-bg-color: #f0f0f0;
+    --body-text-color: #000000;
+    --navbar-text-color: #ffffff;
+    --navbar-bg-color: #46639a;
+    --navbar-bg-color-hover: #2d4064;
+    --navbar-bg-color-active: #334a74;
+    --navbar-button-color: var(--navbar-bg-color-active);
+    --navbar-button-color-hover: var(--navbar-bg-color-hover);
+    --sidebar-bg-color: #dadada;
+    --sidebar-text-color: #202020;
+    --sidebar-a-color-hover: #0840a7;
+    --repo-card-bg-color: #ffffff;
+    --repo-card-bg-color-active: #5cdb5c;
 }
 
 * {
-  font-family: "raleway", sans-serif;
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "raleway", sans-serif;
+}
+
+body {
+    color: var(--body-text-color);
+    background-color: var(--body-bg-color);
+    display: flex;
+    overflow: overlay;
+}
+
+body h1, h2, h3 {
+    margin-bottom: 10px;
+}
+
+main {
+    margin-top: 70px;
+    padding: 10px;
+}
+
+#navbar {
+    background-color: var(--navbar-bg-color);
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 100vw;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+#navbar ul{
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.navlink {
+    display: flex;
+    height: 100%;
+}
+
+.navlink a {
+    color: var(--navbar-text-color);
+    text-decoration: none;
+    display: inline-block;
+    height: 100%;
+    line-height: 70px;
+    padding: 0 20px;
+}
+
+.navlink.active {
+    background-color: var(--navbar-bg-color-active);
+}
+
+.navlink:hover {
+    background-color: var(--navbar-bg-color-hover);
+}
+
+#btnLogin {
+    background-color: var(--navbar-button-color);
+    border-radius: 25px;
+    text-decoration: none;
+    border: none;
+    padding: 15px;
+    margin: 10px;
+    color: var(--navbar-text-color);
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#btnLogin:hover {
+    background-color: var(--navbar-button-color-hover);
+    transform: scale(1.05);
 }

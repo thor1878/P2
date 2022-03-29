@@ -1,12 +1,14 @@
-const matchers = ["toBe", "toEqual"];
-
+require('dotenv').config();
 const express = require('express');
 const dummyData = require('./dummy/test.json');
+const filesData = require('./dummy/filesData.json');
 const repos = require('./routes/repos.js');
 const PORT = 3000;
 
 const app = express();
 
+// Array of matchers
+const matchers = ["toBe", "toEqual"];
 
 app.set('view engine', 'pug');
 app.set('views', 'src/public/views');
@@ -29,7 +31,7 @@ app.post('/submit', (req, res) => {
 
 
 app.get('/testing', (req, res) => {
-    res.render('testing');
+    res.render('testing', {files: filesData.files});
 })
 
 app.get('/logs', (req, res) => {

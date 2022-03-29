@@ -5,23 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/scrollbar.css">
     block style
     block title 
-
 </head>
+
 <body>
     <header> 
         <nav id="navbar">
-            <ul class="list">
-                <li name="/" class="tab"><a href="/">Choose repository</a></li> 
-                <li name="/testing" class="tab"><a href="/testing">Testing</a></li> 
-                <li name="/logs" class="tab"><a href="/logs">Logs</a></li> 
+            <ul>
+                <li name="/" class="navlink"><a href="/">Home</a></li> 
+                <li name="/repos" class="navlink"><a href="/repos">Choose repository</a></li> 
+                <li name="/testing" class="navlink"><a href="/testing">Testing</a></li> 
+                <li name="/logs" class="navlink"><a href="/logs">Logs</a></li> 
+                <li name="/submit" class="navlink"><a href="/submit">Submit Test</a></li> 
             </ul>
-            <li><button class="btnLogin_a" id="btnLogin">Login with GitHub</button></li>
+            <button id="btnLogin">Login with GitHub</button>
         </nav>
     </header> 
 
     block content
+
     <script src="../static/js/base.js"></script>
     block script
 

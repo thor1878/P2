@@ -1,5 +1,54 @@
 extends base.pug
 
+block style 
+    <link rel="stylesheet" href="../static/css/testing.css">
+
+block title
+    <title>Testing</title>
+
 block content 
 
-    h1 testing
+    <aside id="sidebar">
+        <h2>Files</h2>
+        <ul>
+            each file in files
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+                <li><a>#{file.path}</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <h1>Testing</h1>
+        <p>Repository: </p>
+        <p>File: </p>
+        
+        <form id="functions" action="">
+            <fieldset>
+                
+            </fieldset>
+        </form>
+
+    </main>
