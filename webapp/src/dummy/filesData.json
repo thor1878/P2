@@ -10,8 +10,9 @@
                         "param2",
                         "param3"
                     ],
-                    "async": "bool",
+                    "async": true,
                     "status": "status",
+                    "reason": "Write your reason here",
                     "functionString": "...",
                     "testCases": [
                         {
@@ -21,7 +22,7 @@
                                 "Hej",
                                 {"x": 3, "y": 4}
                             ],
-                            "status": "status",
+                            "passed": false,
                             "expected": "expected",
                             "matcher": "matcher"
                         }
@@ -39,8 +40,9 @@
                         "param2",
                         "param3"
                     ],
-                    "async": "bool",
+                    "async": true,
                     "status": "status",
+                    "reason": "Write your reason here",
                     "functionString": "...",
                     "testCases": [
                         {
@@ -50,7 +52,7 @@
                                 "123456",
                                 {"k": 3, "o": 4}
                             ],
-                            "status": "status",
+                            "passed": true,
                             "expected": 34,
                             "matcher": "toBe"
                         }
