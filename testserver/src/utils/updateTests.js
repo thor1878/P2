@@ -108,7 +108,7 @@ function generateTestTree(testInfo) {
         }
 
         tree.push({
-            path: 'test/' + file.path,
+            path: 'test/' + file.path.replace(/\.js$/, '.test.js'),
             mode: '100644',
             type: 'blob',
             content: testString

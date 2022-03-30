@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 
@@ -27,7 +25,7 @@ app.get('/test-info', async (req, res) => {
     const repoData = await getRepoData(req.query.repository, req.query.branch);
     
     // Filter data to only include '.js' files (not '.test.js')
-    const filteredData = filterRepoData(repoData, ".js");
+    const filteredData = filterRepoData(repoData);
 
     // Get data for each file (path, function strings, etc...)
     const fileData = await getFileData(filteredData);

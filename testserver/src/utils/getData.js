@@ -15,12 +15,8 @@ async function getRepoData(repository, branch) {
 
 
 // Return an array containing only the objects with a path having the '.js' extension (not including '.test.js')
-function filterRepoData(repoData, extention) {
-    if (extention === ".js") {
-        return repoData.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-8) !== '.test.js');
-    } else if (extention === ".test.js") {
-        return repoData.tree.filter(file => file.path.slice(-8) === '.test.js');
-    }
+function filterRepoData(repoData) {
+    return repoData.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-8) !== '.test.js');
 }
 
 async function getFileData(filteredData) {
