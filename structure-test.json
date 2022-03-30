@@ -1,0 +1,58 @@
+{
+    "files": [
+        {
+            "path": "src/sum.js",
+            "functions": [
+                {
+                    "name": "sum",
+                    "params": [
+                        "a",
+                        "b"
+                    ],
+                    "async": "false",
+                    "status": "0",
+                    "functionString": "function sum(a, b) { return a + b }",
+                    "testCases": [
+                        {
+                            "description": "Sum two numbers",
+                            "arguments": [
+                                "3",
+                                "4"
+                            ],
+                            "status": "0",
+                            "expected": "7",
+                            "matcher": "toBe"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "src/multiply.js",
+            "functions": [
+                {
+                    "name": "multiply",
+                    "params": [
+                        "a",
+                        "b"
+                    ],
+                    "async": "false",
+                    "status": "0",
+                    "functionString": "function sum(a, b) {return a * b}",
+                    "testCases": [
+                        {
+                            "description": "Multiply two numbers",
+                            "arguments": [
+                                "2",
+                                "3"
+                            ],
+                            "status": "0",
+                            "expected": "6",
+                            "matcher": "toBe"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
