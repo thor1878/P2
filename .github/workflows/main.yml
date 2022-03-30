@@ -4,13 +4,13 @@ on:
   pull_request:
     branches: [ main, master ]
     
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Send request to server
-      uses: fjogeleit/http-request-action@v1
-      with:
-        url: 'https://fbaf-130-225-198-131.ngrok.io'
-        method: 'POST'
-        data: '{ "repository": "${{ github.repository }}", "branch": "${{ github.head_ref }}", "actor": "${{ github.actor }}" }'
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: Send request to server
+#      uses: fjogeleit/http-request-action@v1
+#      with:
+#        url: 'https://fbaf-130-225-198-131.ngrok.io'
+#        method: 'POST'
+#        data: '{ "repository": "${{ github.repository }}", "branch": "${{ github.head_ref }}", "actor": "${{ github.actor }}" }'
