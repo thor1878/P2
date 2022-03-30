@@ -26,7 +26,7 @@ async function getBaseTreeSHA(latestCommitSHA) {
     return data.tree.sha;
 }
 
-async function createTree(baseTreeSHA, testInfo) {
+async function createTree(baseTreeSHA, userTestInfo) {
     const response = await fetch('https://api.github.com/repos/thor1878/GitHub-Actions-test/git/trees', {
         method: 'POST',
         headers: {
@@ -34,7 +34,7 @@ async function createTree(baseTreeSHA, testInfo) {
             'Accept': 'application/vnd.github.v3+json',
         },
         body: JSON.stringify({
-            tree: generateTestTree(testInfo),
+            tree: generateTestTree(userTestInfo),
             base_tree: baseTreeSHA
         })
     })
@@ -79,9 +79,10 @@ async function updateRef(newCommitSHA, branch) {
     return data;
 }
 
-function generateTestTree(testInfo) {
+function generateTestTree(userTestInfo) {
+
     
-    const files = testInfo.files;
+    const files = userTestInfo.files;
 
     let tree = [];
 
@@ -89,7 +90,18 @@ function generateTestTree(testInfo) {
         let testString = '';
 
         for (const func of file.functions) {
-            testString += `const ${func.name} = require('${file.path}');\n\n`
+
+            let filePathDepth = (file.path.match(/\//g) || []).length;
+            let filePath = '';
+
+            for (let i = 0; i <= filePathDepth; i++) {
+                filePath += '../';
+            }
+
+            filePath += file.path;
+
+
+            testString += `const ${func.name} = require('${filePath}');\n\n`
         }
 
 

@@ -19,8 +19,8 @@ function filterRepoData(repoData) {
     return repoData.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-8) !== '.test.js');
 }
 
-async function getFileData(filteredData) {
-    let fileData = [];
+async function getFilesData(filteredData) {
+    let filesData = [];
     for (let file of filteredData) {
 
         let response = await fetch(file.url, {
@@ -34,13 +34,13 @@ async function getFileData(filteredData) {
 
         let functionStrings = getFunctionStrings(fileString);
 
-        fileData.push({
+        filesData.push({
             path: file.path,
             functionStrings: functionStrings
         })
     }
 
-    return fileData;
+    return filesData;
 }
 
 // Return the function strings from a file string - including additional info about each file string
@@ -104,8 +104,8 @@ async function getTestInfo(repoData) {
 
     const testInfo = new Buffer.from(data.content, 'base64').toString('utf-8');
 
-    return testInfo;
+    return JSON.parse(testInfo);
 }
 
 
-module.exports = { getRepoData, filterRepoData, getFileData, getTestInfo };
+module.exports = { getRepoData, filterRepoData, getFilesData, getTestInfo };
