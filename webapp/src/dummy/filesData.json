@@ -12,7 +12,7 @@
                     ],
                     "async": true,
                     "status": "status",
-                    "reason": "Write your reason here",
+                    "comment": "Write your comment here",
                     "functionString": "...",
                     "testCases": [
                         {
@@ -42,7 +42,7 @@
                     ],
                     "async": true,
                     "status": "status",
-                    "reason": "Write your reason here",
+                    "comment": "Write your comment here",
                     "functionString": "...",
                     "testCases": [
                         {
