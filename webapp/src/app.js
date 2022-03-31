@@ -1,9 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const fetch = require('node-fetch');
-const dummyData = require('./dummy/filesData.json');
+const dummyData = require('./dummy/testInfo.json');
 const repos = require('./routes/repos.js');
 const config = require('../config.json');
+const { formatFunctionStrings } = require("./utils/test-server");
 const { getGitHub } = require('./utils/GitHub');
 const PORT = 3000;
 
@@ -50,7 +51,8 @@ app.get('/:repoOwner/:repoName/:pullrequest/testing', async (req, res) => {
         // });
         // const data = JSON.parse( await response.json());
         // res.render('testing', {files: data.files, matcherOptions: matchers});
-        res.render('testing', {files: dummyData.files, matcherOptions: matchers});
+        const formattedData = formatFunctionStrings(dummyData);
+        res.render('testing', {files: formattedData.files, matcherOptions: matchers});
     }
 })
 
