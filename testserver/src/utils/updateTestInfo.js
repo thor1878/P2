@@ -23,7 +23,7 @@ function updateTestInfo(testInfo, filesData) {
 
                     newFile.functions.push(existingFunction);
 
-                } else {  //if new function in file, push update into newfil
+                } else {  //if new function in file, push update into newfile
                     newFile.functions.push({
                         name: func.name,
                         params: func.params,
