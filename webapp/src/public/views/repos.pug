@@ -14,15 +14,16 @@ block content
             <ul>
                 each repo, index in repos
                     <div class="card-wrapper">
-                        <button id="#{index}" class="card">#{repo.full_name}</button>
+                        <div id="#{index}" class="card">#{repo.full_name}</div>
+                        
                         if repo.pullRequests.length === 0
                             <div class="content">
-                                <button id="#{index}" class="subcard" disabled>No open pull requests found</button>
+                                <div id="#{index}" class="sub-card-disabled">No open pull requests found</div>
                             </div>
                         else
                             each pull, pulldex in repo.pullRequests
                                 <div class="content">
-                                    <button id="#{index}-#{pulldex}" class="subcard" onclick="location.href='/#{repo.full_name}/#{pull.number}/testing'">#{pull.title} (##{pull.number})</button>
+                                    <div id="#{index}-#{pulldex}" class="sub-card" onclick="location.href='/#{repo.full_name}/#{pull.number}/testing'">#{pull.title} (##{pull.number})</div>
                                 </div>
                     </div>
             </ul>
