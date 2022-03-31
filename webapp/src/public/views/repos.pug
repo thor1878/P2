@@ -22,7 +22,7 @@ block content
                         else
                             each pull, pulldex in repo.pullRequests
                                 <div class="content">
-                                    <button id="#{index}-#{pulldex}" class="subcard">#{pull.title} (##{pull.number})</button>
+                                    <button id="#{index}-#{pulldex}" class="subcard" onclick="location.href='/#{repo.full_name}/#{pull.number}/testing'">#{pull.title} (##{pull.number})</button>
                                 </div>
                     </div>
             </ul>
