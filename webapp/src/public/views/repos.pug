@@ -13,7 +13,12 @@ block content
         <div class="card-list">
             <ul>
                 each repo, index in repos
-                    <button id="#{index}" class="card">#{repo.full_name}</button>
+                    <div class="card-wrapper">
+                        <button id="#{index}" class="card">#{repo}</button>
+                        <div class="content">
+                            <button id="#{index}" class="subcard">#{repo}</button>
+                        </div>
+                    </div>
             </ul>
         </div>
     </main>
