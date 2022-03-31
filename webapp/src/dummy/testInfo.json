@@ -11,7 +11,7 @@
                     ],
                     "async": "false",
                     "status": "0",
-                    "functionString": "ZnVuY3Rpb24gc3VtKGEsIGIpIHsgCiAgICByZXR1cm4gYSArIGIgCn0=",
+                    "functionString": "function sum(a, b) {\n\treturn a + b\n}\n",
                     "testCases": [
                         {
                             "description": "Sum two numbers",
@@ -39,7 +39,7 @@
                     ],
                     "async": "false",
                     "status": "0",
-                    "functionString": "ZnVuY3Rpb24gY3JlYXRlVmVjdG9yKHgsIHksIHopIHsKICAgIHJldHVybiB7IHg6IHgsIHk6IHksIHo6IHogfQp9",
+                    "functionString": "function createVector(x, y, z) {\n\treturn { x: x, y: y, z: z }\n}\n",
                     "testCases": [
                         {
                             "description": "Create 3D vector",

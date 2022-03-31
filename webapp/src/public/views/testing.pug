@@ -1,13 +1,12 @@
 extends base.pug
 
 block style 
-    <link rel="stylesheet" href="../static/css/testing.css">
+    <link rel="stylesheet" href="/static/css/testing.css">
 
 block title
     <title>Testing</title>
 
 block content 
-
     <aside id="sidebar">
         <h2>Files</h2>
         <ul>
@@ -26,7 +25,7 @@ block content
         each file, filedex in files 
             <h2 id="#{file.path}">#{file.path}</h2>
         
-            each func, funcdex in functions
+            each func, funcdex in file.functions
                 <div class="func-div" id="func-#{filedex}-#{funcdex}" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-num-of-tc="#{func.testCases.length}" data-func-status="#{func.status}">
                     <div class="func-name-description">
                         <section class="func-status">
@@ -48,16 +47,7 @@ block content
                             </div>
                         </section>
 
-                        <pre>
-                            #{func.functionString}
-                        </pre>
-                        //- <pre>
-                        //-     | function multiply(a, b) {
-                        //-     |     return a * b;
-                        //-     | }
-                        //-     |
-                        //-     | module.exports = multiply;
-                        //- </pre>
+                        pre #{func.functionString}
                     </div>
                     
                     if func.status !== 1
@@ -110,4 +100,4 @@ block content
     </main>
 
 block script
-    <script src="../static/js/testing.js"></script>
+    <script src="/static/js/testing.js"></script>
