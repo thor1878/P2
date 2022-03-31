@@ -15,9 +15,13 @@ for (const button of repobuttons) {
 
 //add click event to all subcards
 for (const item of globalallsubs) {
-    if(item.id === selectedsub)
-    {
-        item.classList.add("active");
+    if(item.id === selectedsub){
+        item.classList.add("active");   
+        let daddy = item.parentElement; 
+        let btnminknap = daddy.parentElement.querySelector(".card");
+        btnminknap.classList.add('active');
+        activate_dropdown(btnminknap, "add");
+
     }
     item.addEventListener("click",()=>{
         //remove all subtag on all subcards
@@ -27,19 +31,21 @@ for (const item of globalallsubs) {
 
         selected = item.id;
         item.classList.add("active");
-        localStorage.setItem("activesubCard",selected);
+        localStorage.setItem("activesubCard",selectedsub);
      
     })
-    
+   
+
 }
     
+    
+    // if(button.id === selected)
+    // {
 
-    if(button.id === selectedsub)
-    {
-        button.classList.add('active');
-        activate_dropdown(button, "add");
+    //     button.classList.add('active');
+    //     activate_dropdown(button, "add");
         
-    }
+    // }
     
     
 
