@@ -100,13 +100,13 @@ app.post('/check-status', (req, res) => {
     let obj;
 
     if (origin === "TS") {
-        const action = activeActions.find(obj => obj.id === id);
+        const action = activeActions.find(o => o.id === id);
         action.ready = true;
         action.userTestInfo = req.body.userTestInfo;
 
         res.sendStatus(200);
     }
-    else if (obj = activeActions.find(obj => obj.id === id)) {
+    else if (obj = activeActions.find(o => o.id === id)) {
 
         if (obj.ready) {
             // Send userTestInfo to GA ...

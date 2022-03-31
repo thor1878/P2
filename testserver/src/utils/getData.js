@@ -46,12 +46,12 @@ async function getFilesData(filteredData) {
 // Return the function strings from a file string - including additional info about each file string
 function getFunctionStrings(fileString) {
     let functionStrings = [];
-    let functionDefinitions = fileString.match(/([^\r\n]*?\=\s*)?(async\s*)?function\s*\w*\s*\(.*?\)\s*\{/g);
+    let functionSignatures = fileString.match(/([^\r\n]*?\=\s*)?(async\s*)?function\s*\w*\s*\(.*?\)\s*\{/g);
 
-    if (!functionDefinitions) return '';
+    if (!functionSignatures) return '';
 
     // Loop through all function definitions to find their corresponding body
-    for (let func of functionDefinitions) {
+    for (let func of functionSignatures) {
         let start = fileString.indexOf(func);
         let fileIndex = start + func.length;
 
