@@ -8,7 +8,7 @@ function updateTestInfo(testInfo, filesData) {
             functions: []
         }
 
-        // If file is in testInfo
+        // If file is in testInfo (file exist with same path)
         let existingFile;
         if (existingFile = testInfo.files.find(f => f.path === file.path)) {
 
@@ -23,7 +23,7 @@ function updateTestInfo(testInfo, filesData) {
 
                     newFile.functions.push(existingFunction);
 
-                } else {
+                } else {  //if new function in file, push update into newfil
                     newFile.functions.push({
                         name: func.name,
                         params: func.params,
@@ -34,8 +34,8 @@ function updateTestInfo(testInfo, filesData) {
                     })
                 }
             }
-        } 
-        // If file is NOT in testInfo
+        }
+        // If file is NOT in testInfo, (New file)...push/update all func
         else {
             for (const func of file.functionStrings) {
                 newFile.functions.push({
