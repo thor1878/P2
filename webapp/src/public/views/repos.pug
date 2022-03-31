@@ -14,10 +14,16 @@ block content
             <ul>
                 each repo, index in repos
                     <div class="card-wrapper">
-                        <button id="#{index}" class="card">#{repo}</button>
-                        <div class="content">
-                            <button id="#{index}" class="subcard">#{repo}</button>
-                        </div>
+                        <button id="#{index}" class="card">#{repo.full_name}</button>
+                        if repo.pullRequests.length === 0
+                            <div class="content">
+                                <button id="#{index}" class="subcard">No open pull requests found</button>
+                            </div>
+                        else
+                            each pull, pulldex in repo.pullRequests
+                                <div class="content">
+                                    <button id="#{index}-#{pulldex}" class="subcard">#{pull.title} (##{pull.number})</button>
+                                </div>
                     </div>
             </ul>
         </div>
