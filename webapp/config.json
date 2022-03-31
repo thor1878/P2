@@ -2,5 +2,6 @@
     "user": "https://api.github.com/users/",
     "userOptions": "/repos?type=all",
     "repo": "https://api.github.com/repos/",
-    "repoOption": "/pulls?state=open"
+    "repoPulls": "/pulls",
+    "repoState": "?state=open"
 }
