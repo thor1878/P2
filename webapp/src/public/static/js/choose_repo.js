@@ -1,32 +1,59 @@
 
-let buttons = document.querySelectorAll('.card');
-
+let repobuttons = document.querySelectorAll('.card');
 
 let selected = localStorage.getItem("activeCard");
+let selectedsub = localStorage.getItem("activesubCard");
 
+let globalallsubs = document.querySelectorAll(".subcard");
 
-
-for (const button of buttons) {
+//Loop through all buttons in html doc with tag .card
+for (const button of repobuttons) {
    
+    console.log();
    
-    if(button.id === selected)
+    
+
+//add click event to all subcards
+for (const item of globalallsubs) {
+    if(item.id === selectedsub)
+    {
+        item.classList.add("active");
+    }
+    item.addEventListener("click",()=>{
+        //remove all subtag on all subcards
+        for (const sub of globalallsubs) {
+            sub.classList.remove("active");
+        }
+
+        selected = item.id;
+        item.classList.add("active");
+        localStorage.setItem("activesubCard",selected);
+     
+    })
+    
+}
+    
+
+    if(button.id === selectedsub)
     {
         button.classList.add('active');
+        activate_dropdown(button, "add");
+        
     }
+    
+    
 
     button.addEventListener("click", () => {
         
-        for (const button of buttons) {
+        for (const button of repobuttons) {
             button.classList.remove('active');
-           
-            //det er det samme som dropdown lol
-            button.nextElementSibling.classList.remove("show");
+            activate_dropdown(button,"remove");
                    
         }
 
+        
+        activate_dropdown(button,"add");
         button.classList.add('active');
-        activate_dropdown(button);
-
         selected = button.id;
         localStorage.setItem("activeCard",selected);
     });
@@ -35,21 +62,36 @@ for (const button of buttons) {
 
 }
 
-function activate_dropdown(btn){
+//Remove or add show class to sub cards
+function activate_dropdown(btn, state){
+    
+    let parent = btn.parentElement;
+    let all_contents = parent.querySelectorAll(".content");
+    console.log(all_contents);
 
 
-    let dropdown = btn.nextElementSibling;
-
-    if(btn.className == "card active")
-    {
-        dropdown.classList.add("show");
-        console.log("diller haha")
+if(state === "remove")
+{
+    for (const item of all_contents) {
+        item.classList.remove("show");
     }
-    else
-    {
-        dropdown.classList.remove("show");
+}
+else if(state === "add")
+{
+    for (const item of all_contents) {
+        
+        item.classList.add("show");
     }
+   
+}
+    
+
+   
     
    
 
 }
+
+
+
+
