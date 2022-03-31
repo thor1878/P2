@@ -11,76 +11,99 @@ block content
     <aside id="sidebar">
         <h2>Files</h2>
         <ul>
+            <li><a href="#top">-- Go to top</a></li>
             each file in files
-                if file.path === path
-                    <li><a href="/testing/#{file.path}" id="selected-file">#{file.path}</a></li>
-                else
-                    <li><a href="/testing/#{file.path}">#{file.path}</a></li>
+                <li><a href="##{file.path}">#{file.path}</a></li>
         </ul>
     </aside>
 
     <main>
-        <h1>Testing</h1>
-        <p>Repository: </p>
-        <p>File: #{path}</p>
+        <h1 id="top">Modify test cases</h1>
+        <p>Enter values for each testcase and remember to add a description.</p>
+        <p>Repository: ???</p>
+        //- <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
+
+        each file, filedex in files 
+            <h2 id="#{file.path}">#{file.path}</h2>
         
-        //- <form id="functions" action="">
-        //-     <fieldset>
-                
-        //-     </fieldset>
-        //- </form>
-
-
-        <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
-
-        each func, index in functions
-            <p>Showing <a id="func-#{index}" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-num-of-tc="#{func.testCases.length}" data-func-status="#{func.status}">#{func.testCases.length}</a> testcases</p>
-            
-            each tc, tdex in func.testCases
-                <div id="tc-#{index}-#{tdex}" class="func-div" data-num-of-args="#{tc.arguments.length}" data-tc-status="#{tc.status}">
-                    <section class="func-name-description">
-                        <div class="input-div">    
-                            h3= func.name
-                            <label for="description-#{index}-#{tdex}">Description</label>
-                            <input type="text" class="description" id="description-#{index}-#{tdex}" value="#{tc.description}">
-                        </div>
-                    </section>
-
-                    <pre>
-                    | function multiply(a, b) {
-                    |     return a * b;
-                    | }
-                    |
-                    | module.exports = multiply;
-                    </pre>
-
-                    <section class="func-arguments">
-                        each arg, argdex in tc.arguments
-                            <div class="input-div">
-                                <label for="input-#{index}-#{tdex}-#{argdex}">Argument #{argdex+1}</label>
-                                <input type="text" class="input" id="input-#{index}-#{tdex}-#{argdex}" value="#{arg}">
-                            </div>
-                    </section>
-                    
-                    <section class="func-matcher">
-                        <div class="input-div">
-                            <label for="chooseMatcher-#{index}-#{tdex}">Choose matcher</label>
-                            <select id="chooseMatcher-#{index}-#{tdex}">
-                                each matcher in matcherOptions 
-                                    if matcher === tc.matcher 
-                                        <option value="#{matcher}" selected>#{matcher}</option>
+            each func, funcdex in functions
+                <div class="func-div" id="func-#{filedex}-#{funcdex}" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-num-of-tc="#{func.testCases.length}" data-func-status="#{func.status}">
+                    <div class="func-name-description">
+                        <section class="func-status">
+                            <div class="input-fields">    
+                                <h3>#{func.name}</h3>
+                                if func.status !== 1 
+                                    <button id="btn-exclude-#{filedex}-#{funcdex}" class="btn-exclude">Exclude</button>
+                                else 
+                                    <button id="btn-include-#{filedex}-#{funcdex}" class="btn-include">Include</button>
+                                
+                                //- <button class="btn-exclude" onclick="switchFunctionStatus(#{filedex}-#{funcdex}, 0)">Exclude</button>
+                                
+                                <label for="comment-#{filedex}-#{funcdex}">Status: #{func.status}</label>
+                                if func.status === 1
+                                    if func.comment === ""
+                                        <input type="text" class="comment" id="comment-#{filedex}-#{funcdex}" placeholder="Write comment here">
                                     else 
-                                        <option value="#{matcher}">#{matcher}</option>
-                            </select>
-                        </div>
-                    </section>
+                                        <input type="text" class="comment" id="comment-#{filedex}-#{funcdex}" value="#{func.comment}">
+                            </div>
+                        </section>
+
+                        <pre>
+                            #{func.functionString}
+                        </pre>
+                        //- <pre>
+                        //-     | function multiply(a, b) {
+                        //-     |     return a * b;
+                        //-     | }
+                        //-     |
+                        //-     | module.exports = multiply;
+                        //- </pre>
+                    </div>
                     
-                    <section>
-                        <div class="input-div">
-                            <label for="output-#{index}">Expected output</label>
-                            <input type="text" class="output" id="output-#{index}-#{tdex}" value="#{tc.expected}">
-                        </div>
-                    </section>
+                    if func.status !== 1
+                        each tc, tcdex in func.testCases
+                            <div class="tc-div" id="tc-#{filedex}-#{funcdex}-#{tcdex}" data-num-of-args="#{tc.arguments.length}" data-tc-status="#{tc.status}">
+                                <h4>Testcase #{tcdex + 1} (#{func.name})</h4>
+                                <section class="tc-description">
+                                    <div class="input-fields">
+                                        <label for="description-#{filedex}-#{funcdex}-#{tcdex}">Description</label>
+                                        if tc.description === ""
+                                            <input type="text" class="description" id="description-#{filedex}-#{funcdex}-#{tcdex}" placeholder="Description for testcase">
+                                        else
+                                            <input type="text" class="description" id="description-#{filedex}-#{funcdex}-#{tcdex}" value="#{tc.description}">
+                                    </div>
+                                </section>
+
+                                <section class="tc-arguments">
+                                    each arg, argdex in tc.arguments
+                                        <div class="input-fields">
+                                            <label for="input-#{filedex}-#{funcdex}-#{tcdex}-#{argdex}">Argument #{argdex+1}</label>
+                                            <input type="text" class="input" id="input-#{filedex}-#{funcdex}-#{tcdex}-#{argdex}" value="#{arg}">
+                                        </div>
+                                </section>
+                                
+                                <section class="tc-matcher">
+                                    <div class="input-fields">
+                                        <label for="chooseMatcher-#{filedex}-#{funcdex}-#{tcdex}">Choose matcher</label>
+                                        <select id="chooseMatcher-#{filedex}-#{funcdex}-#{tcdex}">
+                                            each matcher in matcherOptions 
+                                                if matcher === tc.matcher 
+                                                    <option value="#{matcher}" selected>#{matcher}</option>
+                                                else 
+                                                    <option value="#{matcher}">#{matcher}</option>
+                                        </select>
+                                    </div>
+                                </section>
+                                
+                                <section class="tc-output">
+                                    <div class="input-fields">
+                                        <label for="output-#{filedex}-#{funcdex}-#{tcdex}">Expected output</label>
+                                        <input type="text" class="output" id="output-#{filedex}-#{funcdex}-#{tcdex}" value="#{tc.expected}">
+                                    </div>
+                                </section>
+                            </div>
+                        <button>+ Add new test case</button>
+                        //- <button" onclick="addNewTestCase()">+ Add new test case</button>
                 </div>
 
         <button type="submit" onclick="submitTests()">Submit</button>

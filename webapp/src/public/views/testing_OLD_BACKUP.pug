@@ -1,0 +1,81 @@
+//- extends base.pug
+
+//- block style 
+//-     <link rel="stylesheet" href="../static/css/testing.css">
+
+//- block title
+//-     <title>Testing</title>
+
+//- block content 
+
+//-     <aside id="sidebar">
+//-         <h2>Files</h2>
+//-         <ul>
+//-             each file in files
+//-                 if file.path === path
+//-                     <li><a href="/testing/#{file.path}" id="selected-file">#{file.path}</a></li>
+//-                 else
+//-                     <li><a href="/testing/#{file.path}">#{file.path}</a></li>
+//-         </ul>
+//-     </aside>
+
+//-     <main>
+//-         <h1>Testing</h1>
+//-         <p>Repository: ???</p>
+//-         <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
+
+//-         each func, index in functions
+//-             <p>Showing <a id="func-#{index}" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-num-of-tc="#{func.testCases.length}" data-func-status="#{func.status}">#{func.testCases.length}</a> testcases</p>
+            
+//-             each tc, tdex in func.testCases
+//-                 <div id="tc-#{index}-#{tdex}" class="func-div" data-num-of-args="#{tc.arguments.length}" data-tc-status="#{tc.status}">
+//-                     <section class="func-name-description">
+//-                         <div class="input-div">    
+//-                             h3= func.name
+//-                             <label for="description-#{index}-#{tdex}">Description</label>
+//-                             <input type="text" class="description" id="description-#{index}-#{tdex}" value="#{tc.description}">
+//-                         </div>
+//-                     </section>
+
+//-                     <pre>
+//-                     | function multiply(a, b) {
+//-                     |     return a * b;
+//-                     | }
+//-                     |
+//-                     | module.exports = multiply;
+//-                     </pre>
+
+//-                     <section class="func-arguments">
+//-                         each arg, argdex in tc.arguments
+//-                             <div class="input-div">
+//-                                 <label for="input-#{index}-#{tdex}-#{argdex}">Argument #{argdex+1}</label>
+//-                                 <input type="text" class="input" id="input-#{index}-#{tdex}-#{argdex}" value="#{arg}">
+//-                             </div>
+//-                     </section>
+                    
+//-                     <section class="func-matcher">
+//-                         <div class="input-div">
+//-                             <label for="chooseMatcher-#{index}-#{tdex}">Choose matcher</label>
+//-                             <select id="chooseMatcher-#{index}-#{tdex}">
+//-                                 each matcher in matcherOptions 
+//-                                     if matcher === tc.matcher 
+//-                                         <option value="#{matcher}" selected>#{matcher}</option>
+//-                                     else 
+//-                                         <option value="#{matcher}">#{matcher}</option>
+//-                             </select>
+//-                         </div>
+//-                     </section>
+                    
+//-                     <section>
+//-                         <div class="input-div">
+//-                             <label for="output-#{index}">Expected output</label>
+//-                             <input type="text" class="output" id="output-#{index}-#{tdex}" value="#{tc.expected}">
+//-                         </div>
+//-                     </section>
+//-                 </div>
+
+//-         <button type="submit" onclick="submitTests()">Submit</button>
+//-     </main>
+
+//- block script
+//-     <script src="../static/js/testing.js"></script>
