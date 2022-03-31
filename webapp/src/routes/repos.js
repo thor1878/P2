@@ -1,30 +1,31 @@
 const fetch = require('node-fetch');
 const express = require('express');
+const config = require('../../config.json');
+const { getGitHub } = require('../utils/GitHub');
 
 const router = express.Router();
 
-async function getRepos(url = 'https://api.github.com/users/thor1878/repos?type=all', data = {}) {
-    const response = await fetch(url, {
-        method: 'GET', 
-        // cache: 'no-cache',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `token ${process.env.GITHUB_TOKEN}`
-        }
-    });
-    return response.json();
-}
-
 router.get('/repos', async (req, res) => {
-    const content = await getRepos();
+    const content = await getGitHub(config.user + "thor1878" + config.userOptions);
+    const pullsObject = [];
     const repos = [];
     
     for (const item of content) {
-        if (item.language === "JavaScript") {
-            repos.push(item.name);
+        const pulls = await getGitHub(config.repo + item.full_name + config.repoPulls + config.repoState);
+        for (const pullRequest of pulls) {
+            pullsObject.push({
+                url: pullRequest.url,
+                number: pullRequest.number,
+                title: pullRequest.title
+            });
         }
+
+        repos.push({
+            full_name: item.full_name,
+            pullRequests: pulls, 
+        });
     }
-    res.render('repos', {repoNames: repos});
+    res.render('repos', {repos: repos});
 })
 
 module.exports = router;

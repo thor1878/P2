@@ -11,7 +11,43 @@
                         "param3"
                     ],
                     "async": true,
-                    "status": "status",
+                    "status": 1,
+                    "comment": "",
+                    "functionString": "...",
+                    "testCases": [
+                        {
+                            "description": "",
+                            "arguments": [
+                                1,
+                                "Hej",
+                                {"x": 3, "y": 4}
+                            ],
+                            "passed": false,
+                            "expected": "expected",
+                            "matcher": "matcher"
+                        },
+                        {
+                            "description": "description af test",
+                            "arguments": [
+                                1,
+                                "Hej",
+                                {"x": 3, "y": 4}
+                            ],
+                            "passed": false,
+                            "expected": "expected",
+                            "matcher": "matcher"
+                        }
+                    ]
+                },
+                {
+                    "name": "function1",
+                    "params": [
+                        "param1",
+                        "param2",
+                        "param3"
+                    ],
+                    "async": true,
+                    "status": 0,
                     "comment": "Write your comment here",
                     "functionString": "...",
                     "testCases": [
@@ -41,7 +77,7 @@
                         "param3"
                     ],
                     "async": true,
-                    "status": "status",
+                    "status": -1,
                     "comment": "Write your comment here",
                     "functionString": "...",
                     "testCases": [

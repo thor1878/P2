@@ -22,7 +22,7 @@ async function submitTests() {
 
         for (let j = 0; j < numOfTc; j++) {
             const currentTc = document.querySelector(`#tc-${i}-${j}`);
-            const testObject = {
+            const tcObject = {
                 description: document.querySelector(`#description-${i}-${j}`).value,
                 arguments: [], 
                 matcher: document.querySelector(`#chooseMatcher-${i}-${j}`).value, 
@@ -30,11 +30,11 @@ async function submitTests() {
                 status: currentTc.dataset.tcStatus 
             };
             for (let k = 0; k < currentTc.dataset.numOfArgs; k++) {
-                testObject.arguments.push(document.querySelector(`#input-${i}-${j}-${k}`).value);
+                tcObject.arguments.push(document.querySelector(`#input-${i}-${j}-${k}`).value);
             }
-            fileObject.functions[i].testCases.push(testObject);
-            submitData.files.push(fileObject);
+            fileObject.functions[i].testCases.push(tcObject);
         }
+        submitData.files.push(fileObject);
     }
     console.log(submitData);
 

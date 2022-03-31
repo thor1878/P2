@@ -9,32 +9,37 @@
     --navbar-button-color-hover: var(--navbar-bg-color-hover);
     --sidebar-bg-color: #dadada;
     --sidebar-text-color: #202020;
-    --sidebar-a-color-hover: #0840a7;
+    --sidebar-a-color: var(--navbar-bg-color);
+    --sidebar-a-color-hover: var(--navbar-bg-color-hover);
     --repo-card-bg-color: #ffffff;
     --repo-card-bg-color-active: #5cdb5c;
+    --input-fields-bg-color: #dadada7d;
 }
 
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: "raleway", sans-serif;
+    font-family: "Montserrat", sans-serif;
+    scroll-margin: 20px;
+    scroll-behavior: smooth;
 }
 
 body {
+    width: 100vw;
     color: var(--body-text-color);
     background-color: var(--body-bg-color);
     display: flex;
     overflow: overlay;
 }
 
-body h1, h2, h3 {
+body h1, h2, h3, h4{
     margin-bottom: 10px;
 }
 
 main {
     margin-top: 70px;
-    padding: 10px;
+    padding: 20px;
 }
 
 #navbar {
@@ -50,7 +55,7 @@ main {
     list-style-type: none;
 }
 
-#navbar ul{
+#navbar ul {
     list-style-type: none;
     display: flex;
     align-items: center;
@@ -77,6 +82,23 @@ main {
 
 .navlink:hover {
     background-color: var(--navbar-bg-color-hover);
+}
+
+button {
+    color: white;
+    font-weight: 500;
+    padding: 10px 15px;
+    border: 1px solid var(--navbar-bg-color);
+    background-color: var(--navbar-bg-color);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+button:hover {
+    border: 1px solid var(--navbar-button-color);
+    background-color: var(--navbar-button-color);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 #btnLogin {

@@ -1,0 +1,7 @@
+{
+    "user": "https://api.github.com/users/",
+    "userOptions": "/repos?type=all",
+    "repo": "https://api.github.com/repos/",
+    "repoPulls": "/pulls",
+    "repoState": "?state=open"
+}

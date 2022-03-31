@@ -12,8 +12,19 @@ block content
 
         <div class="card-list">
             <ul>
-                each repo, index in repoNames
-                    <button id="#{index}" class="card">#{repo}</button>
+                each repo, index in repos
+                    <div class="card-wrapper">
+                        <button id="#{index}" class="card">#{repo.full_name}</button>
+                        if repo.pullRequests.length === 0
+                            <div class="content">
+                                <button id="#{index}" class="subcard" disabled>No open pull requests found</button>
+                            </div>
+                        else
+                            each pull, pulldex in repo.pullRequests
+                                <div class="content">
+                                    <button id="#{index}-#{pulldex}" class="subcard" onclick="location.href='/#{repo.full_name}/#{pull.number}/testing'">#{pull.title} (##{pull.number})</button>
+                                </div>
+                    </div>
             </ul>
         </div>
     </main>

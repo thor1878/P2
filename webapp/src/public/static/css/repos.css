@@ -9,7 +9,7 @@
     background-color: var(--repo-card-bg-color);
     width: 100%;
     padding: 10px;
-    margin: 10px;
+    height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,4 +26,43 @@
 
 .card.active {
     background-color: var(--repo-card-bg-color-active);
+}
+
+.subcard.active {
+    background-color: green;
+}
+
+.subcard {
+    background-color: var(--repo-card-bg-color);
+    width: 80%;
+    padding: 10px;
+
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    border-style: none;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.subcard:hover {
+    background-color: rgb(0, 73, 0);
+}
+
+.content {
+    height: 0;
+    overflow: hidden;
+    transition: 0.2s;
+    margin: 10px;
+}
+
+.content.show {
+    height: 40px;
+}
+
+.card-wrapper {
+    width: 100%;
+    margin: 2px;
 }
