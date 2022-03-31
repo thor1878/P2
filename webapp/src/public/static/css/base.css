@@ -55,7 +55,7 @@ main {
     list-style-type: none;
 }
 
-#navbar ul{
+#navbar ul {
     list-style-type: none;
     display: flex;
     align-items: center;
