@@ -12,8 +12,8 @@ block content
 
         <div class="card-list">
             <ul>
-                each repo, index in repoNames
-                    <button id="#{index}" class="card">#{repo}</button>
+                each repo, index in repos
+                    <button id="#{index}" class="card">#{repo.full_name}</button>
             </ul>
         </div>
     </main>
