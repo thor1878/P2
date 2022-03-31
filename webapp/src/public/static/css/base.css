@@ -11,8 +11,11 @@
     --sidebar-text-color: #202020;
     --sidebar-a-color: var(--navbar-bg-color);
     --sidebar-a-color-hover: var(--navbar-bg-color-hover);
+    --repo-card-text-color: var(--body-text-color);
+    --repo-card-text-color-active: #ffffff;
     --repo-card-bg-color: #ffffff;
-    --repo-card-bg-color-active: #5cdb5c;
+    --repo-card-bg-color-hover: var(--navbar-bg-color);
+    --repo-card-bg-color-active: #007000;
     --input-fields-bg-color: #dadada7d;
 }
 

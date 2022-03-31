@@ -6,6 +6,7 @@
 }
 
 .card {
+    color: var(--repo-card-text-color);
     background-color: var(--repo-card-bg-color);
     width: 100%;
     padding: 10px;
@@ -21,22 +22,20 @@
 }
 
 .card:hover {
-    transform: scale(1.01);
+    /* transform: scale(1.01); */
+    color: var(--repo-card-text-color-active);
+    background-color: var(--repo-card-bg-color-hover);
 }
 
 .card.active {
+    color: var(--repo-card-text-color-active);
     background-color: var(--repo-card-bg-color-active);
 }
 
-.subcard.active {
-    background-color: green;
-}
-
-.subcard {
+.sub-card {
     background-color: var(--repo-card-bg-color);
     width: 80%;
     padding: 10px;
-
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -47,19 +46,45 @@
     cursor: pointer;
 }
 
-.subcard:hover {
-    background-color: rgb(0, 73, 0);
+.sub-card:hover {
+    color: var(--repo-card-text-color-active);
+    background-color: var(--repo-card-bg-color-hover);
+}
+
+.sub-card.active {
+    color: var(--repo-card-text-color-active);
+    background-color: var(--repo-card-bg-color-active);
+}
+
+.sub-card-disabled {
+    background-color: var(--repo-card-bg-color);
+    width: 80%;
+    padding: 10px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    border-style: none;
+    transition: 0.2s;
+    cursor: auto;
+}
+
+.sub-card-disabled:hover {
+    color: var(--repo-card-text-color);
+    background-color: var(--repo-card-bg-color);
 }
 
 .content {
     height: 0;
     overflow: hidden;
     transition: 0.2s;
-    margin: 10px;
+    margin: 5px;
 }
 
 .content.show {
     height: 40px;
+    margin: 10px;
 }
 
 .card-wrapper {
