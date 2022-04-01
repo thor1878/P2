@@ -53,7 +53,7 @@
 
 .sub-card.active {
     color: var(--repo-card-text-color-active);
-    background-color: var(--repo-card-bg-color-active);
+    background-color: var(--repo-sub-card-bg-color-active);
 }
 
 .sub-card-disabled {

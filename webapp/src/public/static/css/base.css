@@ -15,7 +15,8 @@
     --repo-card-text-color-active: #ffffff;
     --repo-card-bg-color: #ffffff;
     --repo-card-bg-color-hover: var(--navbar-bg-color);
-    --repo-card-bg-color-active: #007000;
+    --repo-card-bg-color-active: #007000ba;
+    --repo-sub-card-bg-color-active: #007000;
     --input-fields-bg-color: #dadada7d;
 }
 
@@ -36,13 +37,18 @@ body {
     overflow: overlay;
 }
 
-body h1, h2, h3, h4{
+body h1, h2, h3, h4 {
     margin-bottom: 10px;
 }
 
 main {
     margin-top: 70px;
     padding: 20px;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 #navbar {
@@ -91,7 +97,7 @@ button {
     color: white;
     font-weight: 500;
     padding: 10px 15px;
-    border: 1px solid var(--navbar-bg-color);
+    border: 2px solid var(--navbar-bg-color);
     background-color: var(--navbar-bg-color);
     border-radius: 20px;
     cursor: pointer;
@@ -99,7 +105,7 @@ button {
 }
 
 button:hover {
-    border: 1px solid var(--navbar-button-color);
+    border: 2px solid var(--navbar-button-color);
     background-color: var(--navbar-button-color);
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const fetch = require('node-fetch');
-const dummyData = require('./dummy/testInfo.json');
+const dummyData = require('./dummy/filesData.json');
 const repos = require('./routes/repos.js');
 const config = require('../config.json');
 const { getGitHub } = require('./utils/GitHub');
