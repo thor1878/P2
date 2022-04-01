@@ -20,11 +20,14 @@ block content
         <h1 id="top">Modify test cases</h1>
         <p>Enter values for each testcase and remember to add a description.</p>
         <p>Repository: ???</p>
-        //- <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
+
+        <a id="numberOfFiles" hidden>#{files.length}</a>
 
         each file, filedex in files 
-            <h2 id="#{file.path}">#{file.path}</h2>
+            <h2 id="#{file.path}" class="filepath-#{filedex}">#{file.path}</h2>
         
+            <a id="numberOfFunctions" hidden>#{file.functions.length}</a>
+
             each func, funcdex in file.functions
                 <div class="func-div" id="func-#{filedex}-#{funcdex}" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-num-of-tc="#{func.testCases.length}" data-func-status="#{func.status}">
                     <div class="func-name-description">

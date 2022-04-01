@@ -4,7 +4,9 @@ const fetch = require('node-fetch');
 const dummyData = require('./dummy/testInfo.json');
 const repos = require('./routes/repos.js');
 const config = require('../config.json');
+const urls = require('../../config.json');
 const { getGitHub } = require('./utils/GitHub');
+const {contactTS} = require('./utils/TestServer');
 const PORT = 3000;
 
 const app = express();
@@ -22,45 +24,33 @@ app.get('/', (req, res) => {
     res.render('index', {functions: dummyData.functions});
 })
 
-//haha - made new stuff  ;P
-// app.get('/testing', async (req, res) => {
-//     let url = "https://f8e2-130-225-198-165.ngrok.io/test-info?repository=thor1878%2FGithub-Actions-test&branch=main"
-//     const response = await fetch(url, {
-//         method: "GET"
-//     })
-//     const data = JSON.parse(await response.json());
-//     res.render('testing', {functions: data.files[0].functions, files: data.files, matcherOptions: matchers});
-// })
-
-app.get('/:repoOwner/:repoName/:pullrequest/testing', async (req, res) => {
+app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
     const content = await getGitHub(config.repo + req.params.repoOwner + "/" + req.params.repoName + config.repoPulls + "/" + req.params.pullrequest);
-    if (content.message === "Not Found") {
+    if (content.message === "Not Found" || content.head.ref !== req.params.branch) {
         res.send("404 - Not Found");
     }
     else {
-        // const response = await fetch('testServerUrl/test-info', {
-        //     method: "GET",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         repoName: req.params.repoOwner + "/" + req.params.repoName,
-        //         pullRequest: req.params.pullrequest
-        //     })
-        // });
-        // const data = JSON.parse( await response.json());
+        // const data = await contactTS(urls['test-server-url'], "GET", {
+        //     repoName: req.params.repoOwner + "/" + req.params.repoName,
+        //     pullRequest: req.params.pullrequest
+        // })
         // res.render('testing', {files: data.files, matcherOptions: matchers});
         res.render('testing', {files: dummyData.files, matcherOptions: matchers});
     }
 })
 
 app.get('/testing', (req, res) => {
-    res.redirect('/thor1878/GitHub-Actions-Test/5/testing');
+    res.redirect('/thor1878/GitHub-Actions-Test/Test2/5/testing');
 })
 
-app.post('/testing', (req, res) => {
-    console.log(req.body);
-    res.send({message: "Done"});
+app.post('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
+    const data = await contactTS(urls['test-server-url'], 'POST', {
+        repo: req.params.repoOwner + "/" + req.params.repoName,
+        branch: req.params.branch,
+        userTestInfo: req.body
+    })
+
+    res.send(data);
 })
 
 app.get('/logs', (req, res) => {
