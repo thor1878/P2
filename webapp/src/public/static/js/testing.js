@@ -1,44 +1,47 @@
 async function submitTests() {
     const submitData = { files: [] };
-    const numOfFunc = document.querySelector("#numberOfFunctions").textContent;
-    let numOfTc = document.querySelector(`#func-0`).dataset.numOfTc;
-    const filePath = document.querySelector(`#selected-file`).textContent;
+    const numOfFiles = document.querySelector("#numberOfFiles").textContent;
+    let numOfTc = document.querySelector(`#func-0-0`).dataset.numOfTc;
     
-    const fileObject = { path: filePath, functions: [] };
-
-    for (let i = 0; i < numOfFunc; i++) {
-        const func = document.querySelector(`#func-${i}`);
-        
-        fileObject.functions.push({
-            name: func.dataset.funcName,
-            params: func.dataset.funcParams,
-            async: func.dataset.funcAsync,
-            status: func.dataset.funcStatus,
-            functionString: func.dataset.funcString,
-            testCases: []
-        });
-
-        numOfTc = func.dataset.numOfTc;
-
-        for (let j = 0; j < numOfTc; j++) {
-            const currentTc = document.querySelector(`#tc-${i}-${j}`);
-            const tcObject = {
-                description: document.querySelector(`#description-${i}-${j}`).value,
-                arguments: [], 
-                matcher: document.querySelector(`#chooseMatcher-${i}-${j}`).value, 
-                expected: document.querySelector(`#output-${i}-${j}`).value, 
-                status: currentTc.dataset.tcStatus 
-            };
-            for (let k = 0; k < currentTc.dataset.numOfArgs; k++) {
-                tcObject.arguments.push(document.querySelector(`#input-${i}-${j}-${k}`).value);
+    
+    for (let i = 0; i < numOfFiles; i++) {
+        const filePath = document.querySelector(`.filepath-${i}`).textContent;
+        const fileObject = { path: filePath, functions: [] };
+        const numOfFunc = document.querySelector("#numberOfFunctions").textContent;
+        for (let j = 0; j < numOfFunc; j++) {
+            const func = document.querySelector(`#func-${i}-${j}`);
+            
+            fileObject.functions.push({
+                name: func.dataset.funcName,
+                params: func.dataset.funcParams,
+                async: func.dataset.funcAsync,
+                status: func.dataset.funcStatus,
+                functionString: func.dataset.funcString,
+                testCases: []
+            });
+    
+            numOfTc = func.dataset.numOfTc;
+    
+            for (let k = 0; k < numOfTc; k++) {
+                const currentTc = document.querySelector(`#tc-${i}-${j}-${k}`);
+                const tcObject = {
+                    description: document.querySelector(`#description-${i}-${j}-${k}`).value,
+                    arguments: [], 
+                    matcher: document.querySelector(`#chooseMatcher-${i}-${j}-${k}`).value, 
+                    expected: document.querySelector(`#output-${i}-${j}-${k}`).value, 
+                    status: currentTc.dataset.tcStatus 
+                };
+                for (let l = 0; l < currentTc.dataset.numOfArgs; l++) {
+                    tcObject.arguments.push(document.querySelector(`#input-${i}-${j}-${k}-${l}`).value);
+                }
+                fileObject.functions[j].testCases.push(tcObject);
             }
-            fileObject.functions[i].testCases.push(tcObject);
+            submitData.files.push(fileObject);
         }
-        submitData.files.push(fileObject);
     }
     console.log(submitData);
 
-    const submitResponse = await fetch("http://localhost:3000/testing", {
+    await fetch(window.location.href, {
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -46,15 +49,4 @@ async function submitTests() {
         },
         body: JSON.stringify(submitData)
     })
-
-    // const submitResponse = await fetch("https://f8e2-130-225-198-165.ngrok.io/generate-tests", {
-    //     headers: {
-    //         "Accept": "application/json",
-    //         "Content-Type": "application/json"
-    //     },
-    //     method: "POST",
-    //     body: JSON.stringify(submitData)
-    // })
-
-    console.log(submitResponse.json());
 }
