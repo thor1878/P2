@@ -23,10 +23,11 @@ router.get('/repos', async (req, res) => {
 
         repos.push({
             full_name: item.full_name,
+            language: item.language,
             pullRequests: pullsObject, 
         });
     }
-    
+
     res.render('repos', {repos: repos});
 })
 
