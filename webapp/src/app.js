@@ -12,7 +12,7 @@ const PORT = 3000;
 const app = express();
 
 // Array of matchers
-const matchers = ["toBe", "toEqual"];
+const matchers = ["toBe", "toEqual", "toBeCloseTo", "toContain"];
 
 app.set('view engine', 'pug');
 app.set('views', 'src/public/views');

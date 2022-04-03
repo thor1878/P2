@@ -9,8 +9,8 @@ for (const card of repoCards) {
     //Add click event to all subcards
     for (const subCard of repoSubCards) {
         if (subCard.id === selectedSubCard) {
-            subCard.classList.add("active");   
-            let daddy = subCard.parentElement; 
+            subCard.classList.add("active");
+            let daddy = subCard.parentElement;
             let grandDaddy = daddy.parentElement.querySelector(".card");
             grandDaddy.classList.add('active');
             activateDropdown(grandDaddy, "add");
