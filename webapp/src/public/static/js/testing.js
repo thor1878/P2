@@ -1,3 +1,7 @@
+window.onbeforeunload = function () {
+    return "";
+}
+
 async function submitTests(event) {
     event.preventDefault();
     const submitData = { files: [] };

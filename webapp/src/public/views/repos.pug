@@ -14,7 +14,10 @@ block content
             <ul>
                 each repo, index in repos
                     <div class="card-wrapper">
-                        <div id="#{index}" class="card">#{repo.full_name}</div>
+                        <div id="#{index}" class="card">#{repo.fullName}
+                        if repo.language != "not supported"
+                            <img src="#{repo.language}"></img>
+                        </div>
                         
                         if repo.pullRequests.length === 0
                             <div class="content">
@@ -23,11 +26,12 @@ block content
                         else
                             each pull, pulldex in repo.pullRequests
                                 <div class="content">
-                                    <div id="#{index}-#{pulldex}" class="sub-card" onclick="location.href='/#{repo.full_name}/#{pull.branch}/#{pull.number}/testing'">#{pull.title} (##{pull.number})</div>
+                                    <div id="#{index}-#{pulldex}" class="sub-card" onclick="location.href='/#{repo.fullName}/#{pull.branch}/#{pull.number}/testing'">#{pull.title} (##{pull.number})</div>
                                 </div>
                     </div>
             </ul>
         </div>
+        
     </main>
     
 block script

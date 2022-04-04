@@ -71,7 +71,7 @@ function removeTestCase(tcDiv) {
 
     // Logic to make sure users don't delete the last test case.
     if (numTestCases === 1) {
-        confirm("Don't delete the last test case");
+        alert("The last test case to a function cannot be deleted");
     } else {
         tcDiv.classList.add("closed");
         setTimeout( () => {
