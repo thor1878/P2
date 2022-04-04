@@ -22,7 +22,7 @@ router.get('/repos', async (req, res) => {
         }
 
         repos.push({
-            full_name: item.full_name,
+            fullName: item.full_name,
             language: config.languages[item.language] ? config.languages[item.language] : "not supported",
             pullRequests: pullsObject, 
         });
