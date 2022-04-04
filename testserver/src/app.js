@@ -105,23 +105,19 @@ app.post('/check-status', (req, res) => {
         action.userTestInfo = req.body.userTestInfo;
 
         res.sendStatus(200);
-    }
-    else if (obj = activeActions.find(o => o.id === id)) {
+    } else if (obj = activeActions.find(o => o.id === id)) {
 
         if (obj.ready) {
             // Send userTestInfo to GA ...
             res.send(obj.userTestInfo);
             activeActions.splice(activeActions.indexOf(obj), 1);
-
         } else {
             res.sendStatus(404);
         }
-    }
-    else {
+    } else {
         activeActions.push({
             id: id,
             ready: false
-
         })
         res.sendStatus(404);
     }
