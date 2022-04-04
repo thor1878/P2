@@ -24,11 +24,11 @@ block content
         <p id="log-p">Test log: </p>
 
         <form onsubmit="submitTests(event)">
-            each file, filedex in files 
+            each file in files 
                 <div class="file-div">
                     <h2 id="#{file.path}" class="file-path">#{file.path}</h2>
                 
-                    each func, funcdex in file.functions
+                    each func in file.functions
                         <div class="func-div" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-func-status="#{func.status}">
                             if func.status !== 1
                                 <button class="btn-exclude" onclick="excludeFunction(this.parentElement)">Exclude #{func.name}</button>
