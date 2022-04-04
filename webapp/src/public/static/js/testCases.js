@@ -1,6 +1,3 @@
-// const testInfo = require("..\..\..\src\dummy\filesData.json");
-// console.log(testInfo);
-
 function addNewTestCase(functionName, filedex, funcdex) {
     // const stdTcStatus = false;
 
@@ -29,53 +26,59 @@ function addNewTestCase(functionName, filedex, funcdex) {
             </div>
         </section>
     `;
+
     newTestCaseDiv.innerHTML += `
-        <section class="tc-arguments">`;
+    <section class="tc-arguments"></section>`;
+
+    newTestCaseDiv.innerHTML += `
+    <section class="tc-matcher">
+        <div class="input-fields">
+            <label for="chooseMatcher-${filedex}-${funcdex}-${newTcIndex}">Choose matcher</label>
+            <select id="chooseMatcher-${filedex}-${funcdex}-${newTcIndex}">
+                <option value="toBe">toBe</option>
+                <option value="toEqual">toEqual</option>
+                <option value="toBeCloseTo">toBeCloseTo</option>
+                <option value="toContain">toContain</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="tc-output">
+        <div class="input-fields">
+            <label for="output-${filedex}-${funcdex}-${newTcIndex}">Expected output</label>
+            <input type="text" class="output" id="output-${filedex}-${funcdex}-${newTcIndex}" placeholder="Enter expected output">
+        </div>
+    </section>
+    
+    <button id="btn-del-${filedex}-${funcdex}-${newTcIndex}" class="btn-del" onclick="removeTestCase(${filedex}, ${funcdex}, ${newTcIndex})">Delete test case ${newTcIndex + 1}</button>
+    `;
+    
     // For-loop to generate input fields for the arguments
+    const tcArgSection = newTestCaseDiv.querySelector(".tc-arguments");
     for (let i = 0; i < numOfArgs; i++) {
-        newTestCaseDiv.innerHTML += `    
-            <div class="input-fields">
-                <label for="input-${filedex}-${funcdex}-${newTcIndex}-${i}">Argument ${i + 1}</label>
-                <input type="text" class="input" id="input-${filedex}-${funcdex}-${newTcIndex}-${i}" value="Enter value">
-            </div>
+        tcArgSection.innerHTML += `    
+        <div class="input-fields">
+            <label for="input-${filedex}-${funcdex}-${newTcIndex}-${i}">Argument ${i + 1}</label>
+            <input type="text" class="input arg" id="input-${filedex}-${funcdex}-${newTcIndex}-${i}" placeholder="Enter value">
+        </div>
         `;
     }
-
-    // PROBLEM (PROBABLY SOME ASYNC SHIT)
-    newTestCaseDiv.innerHTML += `
-        </section>`;
     
-    newTestCaseDiv.innerHTML += `
-        <section class="tc-matcher">
-            <div class="input-fields">
-                <label for="chooseMatcher-${filedex}-${funcdex}-${newTcIndex}">Choose matcher</label>
-                <select id="chooseMatcher-${filedex}-${funcdex}-${newTcIndex}">
-                    <option value="toBe">toBe</option>
-                    <option value="toEqual">toEqual</option>
-                    <option value="toBeCloseTo">toBeCloseTo</option>
-                    <option value="toContain">toContain</option>
-                </select>
-            </div>
-        </section>
-
-        <section class="tc-output">
-            <div class="input-fields">
-                <label for="output-${filedex}-${funcdex}-${newTcIndex}">Expected output</label>
-                <input type="text" class="output" id="output-${filedex}-${funcdex}-${newTcIndex}" placeholder="Enter expected output">
-            </div>
-        </section>
-        
-        <button id="btn-del-${filedex}-${funcdex}-${newTcIndex}" class="btn-del" onclick="removeTestCase(${filedex}, ${funcdex}, ${newTcIndex})">Delete test case ${newTcIndex + 1}</button>
-    `;
-    // funcDiv.append(newTestCaseDiv);
-
+    // Insert before the 'add new test case' button.
     funcDiv.insertBefore(newTestCaseDiv, btnAdd);
 }
 
 function removeTestCase(filedex, funcdex, tcdex) {
     const testCaseDiv = document.querySelector(`#tc-${filedex}-${funcdex}-${tcdex}`);
-    testCaseDiv.classList.add("closed");
-    setTimeout( () => {
-        testCaseDiv.remove();
-    }, 200);
+    const numTestCases = testCaseDiv.parentElement.querySelectorAll(".tc-div").length;
+
+    // Logic to make sure users don't delete the last test case.
+    if (numTestCases === 1) {
+        confirm("Don't delete the last test case");
+    } else {
+        testCaseDiv.classList.add("closed");
+        setTimeout( () => {
+            testCaseDiv.remove();
+        }, 600);
+    }
 }
