@@ -23,8 +23,8 @@
                                 {"x": 3, "y": 4}
                             ],
                             "passed": false,
-                            "expected": "expected",
-                            "matcher": "matcher"
+                            "expected": "",
+                            "matcher": ""
                         },
                         {
                             "description": "description af test",
@@ -34,8 +34,8 @@
                                 {"x": 3, "y": 4}
                             ],
                             "passed": false,
-                            "expected": "expected",
-                            "matcher": "matcher"
+                            "expected": "",
+                            "matcher": ""
                         }
                     ]
                 },
@@ -48,7 +48,7 @@
                     ],
                     "async": true,
                     "status": 1,
-                    "comment": "Write your comment here",
+                    "comment": "",
                     "functionString": "...",
                     "testCases": [
                         {
@@ -59,8 +59,8 @@
                                 {"x": 3, "y": 4}
                             ],
                             "passed": false,
-                            "expected": "expected",
-                            "matcher": "matcher"
+                            "expected": "",
+                            "matcher": ""
                         }
                     ]
                 }
@@ -78,7 +78,7 @@
                     ],
                     "async": true,
                     "status": -1,
-                    "comment": "Write your comment here",
+                    "comment": "",
                     "functionString": "...",
                     "testCases": [
                         {
