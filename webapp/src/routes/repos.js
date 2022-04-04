@@ -6,7 +6,7 @@ const { getGitHub } = require('../utils/GitHub');
 const router = express.Router();
 
 router.get('/repos', async (req, res) => {
-    const content = await getGitHub(config.user + "thor1878" + config.userOptions);
+    const content = await getGitHub(config.user + req.user.username + config.userOptions);
     const repos = [];
     
     for (const item of content) {
@@ -22,7 +22,7 @@ router.get('/repos', async (req, res) => {
         }
 
         repos.push({
-            full_name: item.full_name,
+            fullName: item.full_name,
             language: config.languages[item.language] ? config.languages[item.language] : "not supported",
             pullRequests: pullsObject, 
         });

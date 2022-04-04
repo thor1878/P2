@@ -17,12 +17,16 @@
     <header> 
         <nav id="navbar">
             <ul>
-                <li name="/" class="navlink"><a href="/">Home</a></li> 
-                <li name="/repos" class="navlink"><a href="/repos">Choose repository</a></li> 
-                <li name="/testing" class="navlink"><a href="/testing">Testing</a></li> 
-                <li name="/logs" class="navlink"><a href="/logs">Logs</a></li> 
+                <li name="/" class="navlink"><a href="/">Home</a></li>
+                if user
+                    <li name="/repos" class="navlink"><a href="/repos">Choose repository</a></li> 
+                    <li name="/testing" class="navlink"><a href="/testing">Testing</a></li> 
+                    <li name="/logs" class="navlink"><a href="/logs">Logs</a></li> 
             </ul>
-            <button id="btnLogin">Login with GitHub</button>
+            if user
+                <button id="btnLogout" class="auth-btn" onclick="window.open('/logout', '_blank')">Logout</button>
+            else
+                <button id="btnLogin" class="auth-btn" onclick="window.location.href='/login'">Login with GitHub</button>
         </nav>
     </header> 
 

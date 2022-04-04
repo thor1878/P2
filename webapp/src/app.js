@@ -1,23 +1,39 @@
 require('dotenv').config();
 const express = require('express');
+const passport = require('passport');
+const session = require('express-session');
 const fetch = require('node-fetch');
 const dummyData = require('./dummy/filesData.json');
 const repos = require('./routes/repos.js');
+const auth = require('./routes/auth');
 const config = require('../config.json');
 const urls = require('../../config.json');
 const { getGitHub } = require('./utils/GitHub');
-const {contactTS} = require('./utils/TestServer');
-const PORT = 3000;
+const { contactTS } = require('./utils/TestServer');
 
 const app = express();
+const PORT = 3000;
 
 // Array of matchers
 const matchers = ["toBe", "toEqual", "toBeCloseTo", "toContain"];
 
 app.set('view engine', 'pug');
 app.set('views', 'src/public/views');
+
+// Session middleware
+app.use(session({
+    secret: 'asdfatsi6tFTASDfgfKJAaGasdKfAS',
+    resave: false,
+    saveUninitialized: false,
+}));
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.json());
 app.use('/static', express.static('src/public/static'));
+
+app.use(auth);
 app.use(repos);
 
 app.get('/', (req, res) => {
@@ -30,12 +46,12 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
         res.send("404 - Not Found");
     }
     else {
-        // const data = await contactTS(urls['test-server-url'], "GET", {
-        //     repoName: req.params.repoOwner + "/" + req.params.repoName,
-        //     pullRequest: req.params.pullrequest
-        // })
-        // res.render('testing', {files: data.files, matcherOptions: matchers});
-        res.render('testing', {files: dummyData.files, matcherOptions: matchers});
+        const data = await contactTS('/test-info', "GET", {
+            repository: req.params.repoOwner + "/" + req.params.repoName,
+            branch: req.params.branch
+        })
+        res.render('testing', {files: data.files, matcherOptions: matchers});
+        // res.render('testing', {files: dummyData.files, matcherOptions: matchers});
     }
 })
 
@@ -44,14 +60,13 @@ app.get('/testing', (req, res) => {
 })
 
 app.post('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
-    console.log(req.body);
-    //const data = await contactTS(urls['test-server-url'], 'POST', {
-    //    repo: req.params.repoOwner + "/" + req.params.repoName,
-    //    branch: req.params.branch,
-    //    userTestInfo: req.body
-    //})
+    const data = await contactTS('/generate-tests', 'POST', {
+        repo: req.params.repoOwner + "/" + req.params.repoName,
+        branch: req.params.branch,
+        userTestInfo: req.body
+    })
 
-    //res.send(data);
+    res.send(data);
 })
 
 app.get('/logs', (req, res) => {
