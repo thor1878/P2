@@ -26,6 +26,7 @@ router.get('/repos', async (req, res) => {
             language: config.languages[item.language] ? config.languages[item.language] : "not supported",
             pullRequests: pullsObject, 
         });
+        
     }
 
     res.render('repos', {repos: repos});
