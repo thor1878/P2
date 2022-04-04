@@ -1,20 +1,22 @@
-function addNewTestCase(functionName, funcDiv) {
+function addNewTestCase(functionName, funcDiv, newTcindex) {
     // Initial setup - Select elements and calculate index for the new test case and the number of args
     const btnAdd = funcDiv.querySelector(".btn-add");
     const tcDivs = funcDiv.querySelectorAll(".tc-div");
-    const newTcNumber = Number(tcDivs[tcDivs.length - 1].dataset.tcIndex) + 2;
-    const numOfArgs = tcDivs[tcDivs.length - 1].querySelectorAll(".arg").length;
+    const newTcNumber = Number(newTcindex) + 1;
+    // const numOfArgs = tcDivs[tcDivs.length - 1].querySelectorAll(".arg").length;
+    const numOfArgs = funcDiv.dataset.funcParams.split(",").length;
     
     // Create a a div for the new test case and add id, dataset and so on.
     const newTcDiv = document.createElement("div");
     newTcDiv.classList.add("tc-div");
-    newTcDiv.dataset.tcIndex = newTcNumber - 1;
-    newTcDiv.dataset.tcPassed = false;
+    newTcDiv.dataset.tcIndex = newTcindex;
+    // newTcDiv.dataset.tcIndex = newTcNumber - 1;
+    // newTcDiv.dataset.tcPassed = false;
 
     // Add content to the new test case div
     newTcDiv.innerHTML = `
         <h4>Test case ${newTcNumber} (${functionName})</h4>
-        <p>Passed: ${newTcDiv.dataset.tcPassed}</p>
+        <p>Passed: <a class="tc-pass">false</a></p>
 
         <section class="tc-description">
             <div class="input-fields">
@@ -64,6 +66,7 @@ function addNewTestCase(functionName, funcDiv) {
     
     // Insert before the 'add new test case' button.
     funcDiv.insertBefore(newTcDiv, btnAdd);
+    btnAdd.setAttribute("onclick", `addNewTestCase('${functionName}', this.parentElement, ${newTcNumber})`);
 }
 
 function removeTestCase(tcDiv) {
@@ -78,4 +81,99 @@ function removeTestCase(tcDiv) {
             tcDiv.remove();
         }, 600);
     }
+}
+
+function toggleFunction(funcName, funcDiv) {
+    const btn = funcDiv.querySelector(".btn-include") ||  funcDiv.querySelector(".btn-exclude");
+    const funcStatusField = funcDiv.querySelector(".func-status");
+    let statusExplainer = funcStatusField.parentElement.nextElementSibling;
+    const commentDiv = funcDiv.querySelector(".input-fields");
+    const tcDivs = funcDiv.querySelectorAll(".tc-div");
+    const inputFields = funcDiv.querySelectorAll("input");
+    const selectFields = funcDiv.querySelectorAll("select")
+    const btnAdd = funcDiv.querySelector(".btn-add");
+
+    if (btn.classList.contains("btn-exclude")) {
+        const commentLabel = document.createElement("label");
+        const commentField = document.createElement("input");
+        
+        btn.textContent = `Include ${funcName}`;
+        btn.classList.remove("btn-exclude");
+        btn.classList.add("btn-include");
+        
+        funcDiv.dataset.prevFuncStatus = funcDiv.dataset.funcStatus;
+        funcDiv.dataset.funcStatus = 1;
+        funcStatusField.textContent = funcDiv.dataset.funcStatus;
+
+        statusExplainer.textContent = `Assessed: ${funcName} will NOT be tested.`;
+        commentLabel.textContent = "Comment";
+        commentDiv.append(commentLabel);
+        commentField.classList.add("comment");
+        commentField.placeholder = "Write comment here";
+        commentField.setAttribute("required", "");
+        commentDiv.append(commentField);
+        
+        for (const tcDiv of tcDivs) {
+            tcDiv.setAttribute("hidden","");
+        }
+        
+        for (const inputField of inputFields) {
+            inputField.removeAttribute("required", "");
+        }
+
+        for (const selectField of selectFields) {
+            selectField.removeAttribute("required", "");
+        }
+
+        btnAdd.setAttribute("hidden","");
+    }
+    else {
+        btn.textContent = `Exclude ${funcName}`;
+        btn.classList.remove("btn-include");
+        btn.classList.add("btn-exclude");
+        if (funcDiv.dataset.prevFuncStatus === undefined) {
+            funcDiv.dataset.funcStatus = 0;
+            addNewTestCase(funcName, funcDiv, 0);
+        }
+        else {
+            funcDiv.dataset.funcStatus = funcDiv.dataset.prevFuncStatus;
+
+            for (const tcDiv of tcDivs) {
+                tcDiv.removeAttribute("hidden", "");
+            }
+    
+            for (const inputField of inputFields) {
+                inputField.setAttribute("required", "");
+            }
+    
+            for (const selectField of selectFields) {
+                selectField.setAttribute("required", "");
+            }
+        }
+        funcStatusField.textContent = funcDiv.dataset.funcStatus;
+        funcDiv.dataset.prevFuncStatus = 1;
+
+        switch (Number(funcDiv.dataset.funcStatus)) {
+            case -1:
+                statusExplainer.textContent = `At least one test case failed.`;
+                break;
+            case 0:
+                statusExplainer.textContent = `Not assessed: Choose to either include or exclude ${funcName} from test`;
+                break;
+            case 2:
+                statusExplainer.textContent = `Partially passed: All test cases passed, but not 100% code-coverage of ${funcName}.`;
+                break;
+            case 3:
+                statusExplainer.textContent = `All tests passed: 100% code-coverage of ${funcName}.`;
+                break;
+            default:
+                break;
+        }
+        funcDiv.querySelector(".comment").previousElementSibling.remove();
+        funcDiv.querySelector(".comment").remove();
+        
+        btnAdd.removeAttribute("hidden", "");
+    }
+
+   
 }

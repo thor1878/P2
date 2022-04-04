@@ -29,7 +29,7 @@ async function submitTests(event) {
                     arguments: [],
                     matcher: tcDiv.querySelector(".selected-matcher").value, 
                     expected: tcDiv.querySelector(".output").value, 
-                    passed: tcDiv.dataset.tcPassed === "true"
+                    passed: tcDiv.querySelector(".tc-pass").textContent === "true"
                 };
 
                 const args = tcDiv.querySelectorAll(".arg");

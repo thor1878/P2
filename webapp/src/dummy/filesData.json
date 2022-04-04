@@ -73,25 +73,14 @@
                     "name": "functionhaha",
                     "params": [
                         "param1",
-                        "param2",
-                        "param3"
+                        "param2"
                     ],
                     "async": true,
                     "status": -1,
                     "comment": "",
                     "functionString": "...",
                     "testCases": [
-                        {
-                            "description": "description af fak",
-                            "arguments": [
-                                "testset",
-                                "123456",
-                                {"k": 3, "o": 4}
-                            ],
-                            "passed": true,
-                            "expected": 34,
-                            "matcher": "toBe"
-                        }
+
                     ]
                 }
             ]

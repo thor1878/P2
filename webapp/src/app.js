@@ -46,12 +46,12 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
         res.send("404 - Not Found");
     }
     else {
-        const data = await contactTS('/test-info', "GET", {
-            repository: req.params.repoOwner + "/" + req.params.repoName,
-            branch: req.params.branch
-        })
-        res.render('testing', {files: data.files, matcherOptions: matchers});
-        // res.render('testing', {files: dummyData.files, matcherOptions: matchers});
+        // const data = await contactTS('/test-info', "GET", {
+        //     repository: req.params.repoOwner + "/" + req.params.repoName,
+        //     branch: req.params.branch
+        // })
+        // res.render('testing', {files: data.files, matcherOptions: matchers});
+        res.render('testing', {files: dummyData.files, matcherOptions: matchers});
     }
 })
 
@@ -60,13 +60,15 @@ app.get('/testing', (req, res) => {
 })
 
 app.post('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
-    const data = await contactTS('/generate-tests', 'POST', {
-        repo: req.params.repoOwner + "/" + req.params.repoName,
-        branch: req.params.branch,
-        userTestInfo: req.body
-    })
+    // const data = await contactTS('/generate-tests', 'POST', {
+    //     repo: req.params.repoOwner + "/" + req.params.repoName,
+    //     branch: req.params.branch,
+    //     userTestInfo: req.body
+    // })
 
-    res.send(data);
+    // res.send(data);
+
+    console.log(req.body);
 })
 
 app.get('/logs', (req, res) => {
