@@ -24,12 +24,12 @@ block content
         <p id="log-p">Test log: </p>
 
 
-        <a id="numberOfFiles" hidden>#{files.length}</a>
+        <a id="number-of-files" hidden>#{files.length}</a>
 
         each file, filedex in files 
-            <h2 id="#{file.path}" class="filepath-#{filedex}">#{file.path}</h2>
+            <h2 id="#{file.path}" class="file-path-#{filedex}">#{file.path}</h2>
         
-            <a id="numberOfFunctions" hidden>#{file.functions.length}</a>
+            <a id="num-of-func-#{filedex}" hidden>#{file.functions.length}</a>
 
             each func, funcdex in file.functions
                 <div class="func-div" id="func-#{filedex}-#{funcdex}" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-num-of-tc="#{func.testCases.length}" data-func-status="#{func.status}">
@@ -86,8 +86,8 @@ block content
                                 
                                 <section class="tc-matcher">
                                     <div class="input-fields">
-                                        <label for="chooseMatcher-#{filedex}-#{funcdex}-#{tcdex}">Choose matcher</label>
-                                        <select id="chooseMatcher-#{filedex}-#{funcdex}-#{tcdex}">
+                                        <label for="choose-matcher-#{filedex}-#{funcdex}-#{tcdex}">Choose matcher</label>
+                                        <select id="choose-matcher-#{filedex}-#{funcdex}-#{tcdex}">
                                             each matcher in matcherOptions 
                                                 if matcher === tc.matcher 
                                                     <option value="#{matcher}" selected>#{matcher}</option>

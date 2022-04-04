@@ -1,13 +1,11 @@
 async function submitTests() {
     const submitData = { files: [] };
-    const numOfFiles = document.querySelector("#numberOfFiles").textContent;
-    let numOfTc = document.querySelector(`#func-0-0`).dataset.numOfTc;
-    
+    const numOfFiles = document.querySelector("#number-of-files").textContent;    
     
     for (let i = 0; i < numOfFiles; i++) {
-        const filePath = document.querySelector(`.filepath-${i}`).textContent;
+        const filePath = document.querySelector(`.file-path-${i}`).textContent;
         const fileObject = { path: filePath, functions: [] };
-        const numOfFunc = document.querySelector("#numberOfFunctions").textContent;
+        const numOfFunc = document.querySelector(`#num-of-func-${i}`).textContent;
         for (let j = 0; j < numOfFunc; j++) {
             const func = document.querySelector(`#func-${i}-${j}`);
             
@@ -20,19 +18,19 @@ async function submitTests() {
                 testCases: []
             });
     
-            numOfTc = func.dataset.numOfTc;
+            const numOfTc = func.querySelectorAll('.tc-div').length;
     
             for (let k = 0; k < numOfTc; k++) {
                 const currentTc = document.querySelector(`#tc-${i}-${j}-${k}`);
                 const tcObject = {
-                    description: document.querySelector(`#description-${i}-${j}-${k}`).value,
+                    description: document.querySelector(`#description-${i}-${j}-${k}`).textContent,
                     arguments: [], 
-                    matcher: document.querySelector(`#chooseMatcher-${i}-${j}-${k}`).value, 
-                    expected: document.querySelector(`#output-${i}-${j}-${k}`).value, 
+                    matcher: document.querySelector(`#choose-matcher-${i}-${j}-${k}`).value, 
+                    expected: document.querySelector(`#output-${i}-${j}-${k}`).textContent, 
                     status: currentTc.dataset.tcStatus 
                 };
                 for (let l = 0; l < currentTc.dataset.numOfArgs; l++) {
-                    tcObject.arguments.push(document.querySelector(`#input-${i}-${j}-${k}-${l}`).value);
+                    tcObject.arguments.push(document.querySelector(`#input-${i}-${j}-${k}-${l}`).textContent);
                 }
                 fileObject.functions[j].testCases.push(tcObject);
             }
