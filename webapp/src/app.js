@@ -44,13 +44,14 @@ app.get('/testing', (req, res) => {
 })
 
 app.post('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
-    const data = await contactTS(urls['test-server-url'], 'POST', {
-        repo: req.params.repoOwner + "/" + req.params.repoName,
-        branch: req.params.branch,
-        userTestInfo: req.body
-    })
+    console.log(req.body);
+    //const data = await contactTS(urls['test-server-url'], 'POST', {
+    //    repo: req.params.repoOwner + "/" + req.params.repoName,
+    //    branch: req.params.branch,
+    //    userTestInfo: req.body
+    //})
 
-    res.send(data);
+    //res.send(data);
 })
 
 app.get('/logs', (req, res) => {
