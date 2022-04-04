@@ -17,7 +17,7 @@
     --repo-card-bg-color-hover: var(--navbar-bg-color);
     --repo-card-bg-color-active: #007000ba;
     --repo-sub-card-bg-color-active: #007000;
-    --input-fields-bg-color: #dadada7d;
+    --input-fields-bg-color: #f5f5f5;
 }
 
 * {
