@@ -8,9 +8,3 @@ for (const link of navlinks) {
         link.classList.add("active");
     }
 }
-
-const loginbtn = document.querySelector("#btnLogin");
-
-loginbtn.addEventListener("click", () => {
-    //login with github
-})

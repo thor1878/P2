@@ -90,6 +90,7 @@ function getFunctionStrings(fileString) {
 }
 
 async function getTestInfo(repoData) {
+
     const testInfoFile = repoData.tree.find(file => file.path === 'test/testInfo.json');
 
     const response = await fetch(testInfoFile.url, {
