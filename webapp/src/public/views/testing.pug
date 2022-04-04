@@ -23,92 +23,98 @@ block content
         <p id="pull-p">Open pull request: </p>
         <p id="log-p">Test log: </p>
 
+        <form onsubmit="submitTests(event)">
+            each file in files 
+                <div class="file-div">
+                    <h2 id="#{file.path}" class="file-path">#{file.path}</h2>
+                
+                    each func in file.functions
+                        <div class="func-div" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-func-status="#{func.status}">
+                            if func.status !== 1
+                                <button class="btn-exclude" onclick="excludeFunction(this.parentElement)">Exclude #{func.name}</button>
+                            else 
+                                <button class="btn-include" onclick="includeFunction(this.parentElement)">Include #{func.name}</button>
+                            
+                            <div class="func-name-description">
+                                <section class="func-status">
+                                    <div class="input-fields">    
+                                        <h3>#{func.name}</h3>
+                                        <p>Status: #{func.status}</p>
+                                        case func.status
+                                            when -1: p At least one test case failed.
+                                            when 0: p Not assessed: Choose to either include or exclude #{func.name} from test.
+                                            when 1: p Assessed: #{func.name} will NOT be tested.
+                                            when 2: p Partially passed: All test cases passed, but not 100% code-coverage of #{func.name}.
+                                            when 3: p All tests passed: 100% code-coverage of #{func.name}.
+                                            default: p Look up status code in the guide.
+                                        if func.status === 1
+                                            <label>Comment</label>
+                                            if func.comment === ""
+                                                <input type="text" class="comment" placeholder="Write comment here" required>
+                                            else 
+                                                <input type="text" class="comment" value="#{func.comment}" required>
+                                    </div>
+                                </section>
 
-        <a id="number-of-files" hidden>#{files.length}</a>
-
-        each file, filedex in files 
-            <h2 id="#{file.path}" class="file-path-#{filedex}">#{file.path}</h2>
-        
-            <a id="num-of-func-#{filedex}" hidden>#{file.functions.length}</a>
-
-            each func, funcdex in file.functions
-                <div class="func-div" id="func-#{filedex}-#{funcdex}" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-num-of-tc="#{func.testCases.length}" data-func-status="#{func.status}">
-                    if func.status !== 1 
-                        <button id="btn-exclude-#{filedex}-#{funcdex}" class="btn-exclude">Exclude #{func.name}</button>
-                    //- <button class="btn-exclude" onclick="switchFunctionStatus(#{filedex}-#{funcdex}, 0)">Exclude</button>
-                    else 
-                        <button id="btn-include-#{filedex}-#{funcdex}" class="btn-include">Include #{func.name}</button>
-                    
-                    <div class="func-name-description">
-                        <section class="func-status">
-                            <div class="input-fields">    
-                                <h3>#{func.name}</h3>
-                                <label for="comment-#{filedex}-#{funcdex}">Status: #{func.status}</label>
-                                case func.status
-                                    when -1: p At least one test case failed.
-                                    when 0: p Not assessed: Choose to either include or exclude #{func.name} from test.
-                                    when 1: p Assessed: #{func.name} will NOT be tested.
-                                    when 2: p Partially passed: All test cases passed, but not 100% code-coverage of #{func.name}.
-                                    when 3: p All tests passed: 100% code-coverage of #{func.name}.
-                                    default: p Look up status code in the guide.
-                                if func.status === 1
-                                    if func.comment === ""
-                                        <input type="text" class="comment" id="comment-#{filedex}-#{funcdex}" placeholder="Write comment here">
-                                    else 
-                                        <input type="text" class="comment" id="comment-#{filedex}-#{funcdex}" value="#{func.comment}">
+                                pre #{func.functionString}
                             </div>
-                        </section>
+                            
+                            if func.status !== 1
+                                each tc, tcdex in func.testCases
+                                    <div class="tc-div" data-tc-index="#{tcdex}" data-tc-passed="#{tc.passed}">
+                                        <h4>Test case #{tcdex + 1} (#{func.name})</h4>
+                                        //- <div class="tc-pass #{tc.passed}">Passed: #{tc.passed}</div>
 
-                        pre #{func.functionString}
-                    </div>
-                    
-                    if func.status !== 1
-                        each tc, tcdex in func.testCases
-                            <div class="tc-div" id="tc-#{filedex}-#{funcdex}-#{tcdex}" data-tc-index="#{tcdex}" data-num-of-args="#{tc.arguments.length}" data-tc-status="#{tc.status}">
-                                <h4>Test case #{tcdex + 1} (#{func.name})</h4>
-                                <section class="tc-description">
-                                    <div class="input-fields">
-                                        <label for="description-#{filedex}-#{funcdex}-#{tcdex}">Description</label>
-                                        if tc.description === ""
-                                            <input type="text" class="description" id="description-#{filedex}-#{funcdex}-#{tcdex}" placeholder="Description for test case">
-                                        else
-                                            <input type="text" class="description" id="description-#{filedex}-#{funcdex}-#{tcdex}" value="#{tc.description}">
-                                    </div>
-                                </section>
+                                        <section class="tc-description">
+                                            <div class="input-fields">
+                                                <label>Description</label>
+                                                if tc.description === ""
+                                                    <input type="text" class="description" placeholder="Description for test case" required>
+                                                else
+                                                    <input type="text" class="description" value="#{tc.description}" required>
+                                            </div>
+                                        </section>
 
-                                <section class="tc-arguments">
-                                    each arg, argdex in tc.arguments
-                                        <div class="input-fields">
-                                            <label for="input-#{filedex}-#{funcdex}-#{tcdex}-#{argdex}">Argument #{argdex + 1}</label>
-                                            <input type="text" class="input arg" id="input-#{filedex}-#{funcdex}-#{tcdex}-#{argdex}" value="#{arg}">
-                                        </div>
-                                </section>
-                                
-                                <section class="tc-matcher">
-                                    <div class="input-fields">
-                                        <label for="choose-matcher-#{filedex}-#{funcdex}-#{tcdex}">Choose matcher</label>
-                                        <select id="choose-matcher-#{filedex}-#{funcdex}-#{tcdex}">
-                                            each matcher in matcherOptions 
-                                                if matcher === tc.matcher 
-                                                    <option value="#{matcher}" selected>#{matcher}</option>
-                                                else 
-                                                    <option value="#{matcher}">#{matcher}</option>
-                                        </select>
+                                        <section class="tc-arguments">
+                                            each arg, argdex in tc.arguments
+                                                <div class="input-fields">
+                                                    <label>Argument #{argdex + 1}</label>
+                                                    <input type="text" class="input arg" value="#{arg}" required>
+                                                </div>
+                                        </section>
+                                        
+                                        <section class="tc-matcher">
+                                            <div class="input-fields">
+                                                <label>Choose matcher</label>
+                                                <select class="selected-matcher" required>
+                                                    <option value="">Choose a matcher</option>
+                                                    each matcher in matcherOptions 
+                                                        if tc.matcher === ""
+                                                            <option value="#{matcher}">#{matcher}</option>
+                                                        else
+                                                            if matcher === tc.matcher 
+                                                                <option value="#{matcher}" selected>#{matcher}</option>
+                                                            else 
+                                                                <option value="#{matcher}">#{matcher}</option>
+                                                </select>
+                                            </div>
+                                        </section>
+                                        
+                                        <section class="tc-output">
+                                            <div class="input-fields">
+                                                <label>Expected output</label>
+                                                <input type="text" class="output" value="#{tc.expected}" required>
+                                            </div>
+                                        </section>
+
+                                        <button type="button" class="btn-del" onclick="removeTestCase(this.parentElement)">Delete test case #{tcdex + 1}</button>
                                     </div>
-                                </section>
                                 
-                                <section class="tc-output">
-                                    <div class="input-fields">
-                                        <label for="output-#{filedex}-#{funcdex}-#{tcdex}">Expected output</label>
-                                        <input type="text" class="output" id="output-#{filedex}-#{funcdex}-#{tcdex}" value="#{tc.expected}">
-                                    </div>
-                                </section>
-                                <button id="btn-del-#{filedex}-#{funcdex}-#{tcdex}" class="btn-del" onclick="removeTestCase(#{filedex}, #{funcdex}, #{tcdex})">Delete test case #{tcdex + 1}</button>
-                            </div>
-                        
-                        <button id="btn-add-#{filedex}-#{funcdex}" onclick="addNewTestCase('#{func.name}', #{filedex}, #{funcdex})">+ Add new test case</button>
+                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement)">+ Add new test case</button>
+                        </div>
                 </div>
-        <button type="submit" onclick="submitTests()">Submit</button>
+            <button type="submit">Submit</button>
+        </form>
     </main>
 
 block script
