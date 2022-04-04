@@ -1,11 +1,12 @@
 const fetch = require('node-fetch');
+const config = require('../../../config.json')
 
-async function contactTS(url, method, params) {
+async function contactTS(endpoint, method, params) {
     let fetchURL;
     let fetchOptions;
 
     if (method === 'GET') {
-        fetchURL = url + '?repository=' + params.repository + '&branch=' + params.branch;
+        fetchURL = config["test-server-url"] + endpoint + '?repository=' + params.repository + '&branch=' + params.branch;
         fetchOptions = {
             method: method,
             headers: {
@@ -13,7 +14,7 @@ async function contactTS(url, method, params) {
             }
         }
     } else {
-        fetchURL = url;
+        fetchURL = config["test-server-url"] + endpoint;
         fetchOptions = {
             method: method,
             headers: {

@@ -46,7 +46,7 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
         res.send("404 - Not Found");
     }
     else {
-        const data = await contactTS(urls['test-server-url'] + '/test-info', "GET", {
+        const data = await contactTS('/test-info', "GET", {
             repository: req.params.repoOwner + "/" + req.params.repoName,
             branch: req.params.branch
         })
@@ -60,7 +60,7 @@ app.get('/testing', (req, res) => {
 })
 
 app.post('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
-    const data = await contactTS(urls['test-server-url'] + '/generate-tests', 'POST', {
+    const data = await contactTS('/generate-tests', 'POST', {
         repo: req.params.repoOwner + "/" + req.params.repoName,
         branch: req.params.branch,
         userTestInfo: req.body
