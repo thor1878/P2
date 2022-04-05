@@ -1,60 +1,54 @@
-async function submitTests() {
+window.onbeforeunload = function () {
+    return "";
+}
+
+async function submitTests(event) {
+    event.preventDefault();
     const submitData = { files: [] };
-    const numOfFunc = document.querySelector("#numberOfFunctions").textContent;
-    let numOfTc = document.querySelector(`#func-0`).dataset.numOfTc;
-    const filePath = document.querySelector(`#selected-file`).textContent;
+    const fileDivs = document.querySelectorAll(".file-div");
+
+    for (const fileDiv of fileDivs) {
+        const filePath = fileDiv.querySelector(".file-path").textContent;
+        const fileObject = { path: filePath, functions: [] };
+
+        const funcDivs = fileDiv.querySelectorAll(".func-div");
+        for (const [i, funcDiv] of funcDivs.entries()) {
+            fileObject.functions.push({
+                name: funcDiv.dataset.funcName,
+                params: funcDiv.dataset.funcParams,
+                async: funcDiv.dataset.funcAsync,
+                status: funcDiv.dataset.funcStatus,
+                functionString: funcDiv.dataset.funcString,
+                testCases: []
+            });
     
-    const fileObject = { path: filePath, functions: [] };
+            const tcDivs = funcDiv.querySelectorAll(".tc-div");
+            for (const tcDiv of tcDivs) {
+                const tcObject = {
+                    description: tcDiv.querySelector(".description").value,
+                    arguments: [],
+                    matcher: tcDiv.querySelector(".selected-matcher").value, 
+                    expected: tcDiv.querySelector(".output").value, 
+                    passed: tcDiv.dataset.tcPassed === "true"
+                };
 
-    for (let i = 0; i < numOfFunc; i++) {
-        const func = document.querySelector(`#func-${i}`);
-        
-        fileObject.functions.push({
-            name: func.dataset.funcName,
-            params: func.dataset.funcParams,
-            async: func.dataset.funcAsync,
-            status: func.dataset.funcStatus,
-            functionString: func.dataset.funcString,
-            testCases: []
-        });
-
-        numOfTc = func.dataset.numOfTc;
-
-        for (let j = 0; j < numOfTc; j++) {
-            const currentTc = document.querySelector(`#tc-${i}-${j}`);
-            const testObject = {
-                description: document.querySelector(`#description-${i}-${j}`).value,
-                arguments: [], 
-                matcher: document.querySelector(`#chooseMatcher-${i}-${j}`).value, 
-                expected: document.querySelector(`#output-${i}-${j}`).value, 
-                status: currentTc.dataset.tcStatus 
-            };
-            for (let k = 0; k < currentTc.dataset.numOfArgs; k++) {
-                testObject.arguments.push(document.querySelector(`#input-${i}-${j}-${k}`).value);
+                const args = tcDiv.querySelectorAll(".arg");
+                for (const arg of args) {
+                    tcObject.arguments.push(arg.value);
+                }
+                fileObject.functions[i].testCases.push(tcObject);
             }
-            fileObject.functions[i].testCases.push(testObject);
-            submitData.files.push(fileObject);
         }
+        submitData.files.push(fileObject);
     }
     console.log(submitData);
 
-    const submitResponse = await fetch("http://localhost:3000/testing", {
+    await fetch(window.location.href, {
         method: "POST",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
         body: JSON.stringify(submitData)
-    })
-
-    // const submitResponse = await fetch("https://f8e2-130-225-198-165.ngrok.io/generate-tests", {
-    //     headers: {
-    //         "Accept": "application/json",
-    //         "Content-Type": "application/json"
-    //     },
-    //     method: "POST",
-    //     body: JSON.stringify(submitData)
-    // })
-
-    console.log(submitResponse.json());
+    });
 }

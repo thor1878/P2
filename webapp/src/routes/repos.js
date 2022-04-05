@@ -1,30 +1,35 @@
 const fetch = require('node-fetch');
 const express = require('express');
+const config = require('../../config.json');
+const { getGitHub } = require('../utils/GitHub');
 
 const router = express.Router();
 
-async function getRepos(url = 'https://api.github.com/users/thor1878/repos?type=all', data = {}) {
-    const response = await fetch(url, {
-        method: 'GET', 
-        // cache: 'no-cache',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `token ${process.env.GITHUB_TOKEN}`
-        }
-    });
-    return response.json();
-}
-
 router.get('/repos', async (req, res) => {
-    const content = await getRepos();
+    const content = await getGitHub(config.user + req.user.username + config.userOptions);
     const repos = [];
     
     for (const item of content) {
-        if (item.language === "JavaScript") {
-            repos.push(item.name);
+        const pullsObject = [];
+        const pulls = await getGitHub(config.repo + item.full_name + config.repoPulls + config.repoState);
+        for (const pullRequest of pulls) {
+            pullsObject.push({
+                url: pullRequest.url,
+                number: pullRequest.number,
+                title: pullRequest.title,
+                branch: pullRequest.head.ref
+            });
         }
+
+        repos.push({
+            fullName: item.full_name,
+            language: config.languages[item.language] ? config.languages[item.language] : "not supported",
+            pullRequests: pullsObject, 
+        });
+        
     }
-    res.render('repos', {repoNames: repos});
+
+    res.render('repos', {repos: repos});
 })
 
 module.exports = router;

@@ -4,13 +4,7 @@ let navlinks = document.querySelectorAll("#navbar li");
 for (const link of navlinks) {
     link.classList.remove("active");
     //console.log(link.getAttribute("name"));
-    if(path === link.getAttribute("name")){
+    if (path === link.getAttribute("name")) {
         link.classList.add("active");
     }
 }
-
-const loginbtn = document.querySelector("#btnLogin");
-
-loginbtn.addEventListener("click", () => {
-    //login with github
-})

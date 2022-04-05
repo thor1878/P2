@@ -1,0 +1,14 @@
+{
+    "user": "https://api.github.com/users/",
+    "userOptions": "/repos?type=all",
+    "repo": "https://api.github.com/repos/",
+    "repoPulls": "/pulls",
+    "repoState": "?state=open",
+    "languages": {
+            "JavaScript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+            "HTML": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+            "CSS": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+            "Python": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+            "C":"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"
+    }
+}

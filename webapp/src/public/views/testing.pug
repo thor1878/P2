@@ -1,90 +1,163 @@
 extends base.pug
 
 block style 
-    <link rel="stylesheet" href="../static/css/testing.css">
+    <link rel="stylesheet" href="/static/css/testing.css">
 
 block title
-    <title>Testing</title>
+    <title>Modify test cases</title>
 
 block content 
-
     <aside id="sidebar">
         <h2>Files</h2>
         <ul>
+            <li><a href="#top">-- Go to top</a></li>
             each file in files
-                if file.path === path
-                    <li><a href="/testing/#{file.path}" id="selected-file">#{file.path}</a></li>
-                else
-                    <li><a href="/testing/#{file.path}">#{file.path}</a></li>
+                <li><a href="##{file.path}">#{file.path}</a></li>
         </ul>
     </aside>
 
     <main>
-        <h1>Testing</h1>
-        <p>Repository: </p>
-        <p>File: #{path}</p>
-        
-        //- <form id="functions" action="">
-        //-     <fieldset>
+        <h1 id="top">Modify test cases</h1>
+        <p id="user-p">User: <p>
+        <p id="repo-p">Repository: </p>
+        <p id="pull-p">Open pull request: </p>
+        <p id="log-p">Test log: </p>
+
+        <form onsubmit="submitTests(event)">
+            each file in files 
+                <div class="file-div">
+                    <h2 id="#{file.path}" class="file-path">#{file.path}</h2>
                 
-        //-     </fieldset>
-        //- </form>
+                    each func in file.functions
+                        <div class="func-div" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-func-status="#{func.status}" >
+                            if func.status !== 1
+                                <button class="btn-exclude" onclick="excludeFunction(this.parentElement)">Exclude #{func.name}</button>
+                            else 
+                                <button class="btn-include" onclick="includeFunction(this.parentElement)">Include #{func.name}</button>
+                            
+                            <div class="func-name-description">
+                                <section class="func-status">
+                                    <div class="input-fields">    
+                                        <h3>#{func.name}</h3>
+                                        <p>Status: #{func.status}</p>
+                                        case func.status
+                                            when -1: p At least one test case failed.
+                                            when 0: p Not assessed: Choose to either include or exclude #{func.name} from test.
+                                            when 1: p Assessed: #{func.name} will NOT be tested.
+                                            when 2: p Partially passed: All test cases passed, but not 100% code-coverage of #{func.name}.
+                                            when 3: p All tests passed: 100% code-coverage of #{func.name}.
+                                            default: p Look up status code in the guide.
+                                        if func.status === 1
+                                            <label>Comment</label>
+                                            if func.comment === ""
+                                                <input type="text" class="comment" placeholder="Write comment here" required>
+                                            else 
+                                                <input type="text" class="comment" value="#{func.comment}" required>
+                                    </div>
+                                </section>
 
-
-        <p>Showing <a id="numberOfFunctions">#{functions.length}</a> functions</p>
-
-        each func, index in functions
-            <p>Showing <a id="func-#{index}" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-num-of-tc="#{func.testCases.length}" data-func-status="#{func.status}">#{func.testCases.length}</a> testcases</p>
-            
-            each tc, tdex in func.testCases
-                <div id="tc-#{index}-#{tdex}" class="func-div" data-num-of-args="#{tc.arguments.length}" data-tc-status="#{tc.status}">
-                    <section class="func-name-description">
-                        <div class="input-div">    
-                            h3= func.name
-                            <label for="description-#{index}-#{tdex}">Description</label>
-                            <input type="text" class="description" id="description-#{index}-#{tdex}" value="#{tc.description}">
-                        </div>
-                    </section>
-
-                    <pre>
-                    | function multiply(a, b) {
-                    |     return a * b;
-                    | }
-                    |
-                    | module.exports = multiply;
-                    </pre>
-
-                    <section class="func-arguments">
-                        each arg, argdex in tc.arguments
-                            <div class="input-div">
-                                <label for="input-#{index}-#{tdex}-#{argdex}">Argument #{argdex+1}</label>
-                                <input type="text" class="input" id="input-#{index}-#{tdex}-#{argdex}" value="#{arg}">
+                                pre #{func.functionString}
                             </div>
-                    </section>
-                    
-                    <section class="func-matcher">
-                        <div class="input-div">
-                            <label for="chooseMatcher-#{index}-#{tdex}">Choose matcher</label>
-                            <select id="chooseMatcher-#{index}-#{tdex}">
-                                each matcher in matcherOptions 
-                                    if matcher === tc.matcher 
-                                        <option value="#{matcher}" selected>#{matcher}</option>
-                                    else 
-                                        <option value="#{matcher}">#{matcher}</option>
-                            </select>
-                        </div>
-                    </section>
-                    
-                    <section>
-                        <div class="input-div">
-                            <label for="output-#{index}">Expected output</label>
-                            <input type="text" class="output" id="output-#{index}-#{tdex}" value="#{tc.expected}">
-                        </div>
-                    </section>
-                </div>
+                            
+                            if func.status !== 1
+                                if func.testCases.length === 0
+                                    <div class="tc-div" data-tc-index="0" data-tc-passed="false">
+                                        <h4>Test case 1 (#{func.name})</h4>
+                                        <p>Passed: false</p>
+                                        <section class="tc-description">
+                                            <div class="input-fields">
+                                                <label>Description</label>
+                                                <input type="text" class="description" placeholder="Description for test case" required>
+                                            </div>
+                                        </section>
 
-        <button type="submit" onclick="submitTests()">Submit</button>
+                                        <section class="tc-arguments">
+                                            each arg, argdex in func.params
+                                                <div class="input-fields">
+                                                    <label>Argument #{argdex + 1}</label>
+                                                    <input type="text" class="input arg" placeholder="Enter value" required>
+                                                </div>
+                                        </section>
+                                        
+                                        <section class="tc-matcher">
+                                            <div class="input-fields">
+                                                <label>Choose matcher</label>
+                                                <select class="selected-matcher" required>
+                                                    <option value="">Choose a matcher</option>
+                                                    each matcher in matcherOptions 
+                                                        <option value="#{matcher}">#{matcher}</option>
+                                                </select>
+                                            </div>
+                                        </section>
+                                        
+                                        <section class="tc-output">
+                                            <div class="input-fields">
+                                                <label>Expected output</label>
+                                                <input type="text" class="output" placeholder="Enter expected output" required>
+                                            </div>
+                                        </section>
+
+                                        <button type="button" class="btn-del" onclick="removeTestCase(this.parentElement)">Delete test case 1</button>
+                                    </div>
+                                else
+                                    each tc, tcdex in func.testCases
+                                        <div class="tc-div" data-tc-index="#{tcdex}" data-tc-passed="#{tc.passed}">
+                                            <h4>Test case #{tcdex + 1} (#{func.name})</h4>
+                                            <p>Passed: #{tc.passed}</p>
+                                            //- <div class="tc-pass #{tc.passed}">Passed: #{tc.passed}</div>
+
+                                            <section class="tc-description">
+                                                <div class="input-fields">
+                                                    <label>Description</label>
+                                                    if tc.description === ""
+                                                        <input type="text" class="description" placeholder="Description for test case" required>
+                                                    else
+                                                        <input type="text" class="description" value="#{tc.description}" required>
+                                                </div>
+                                            </section>
+
+                                            <section class="tc-arguments">
+                                                each arg, argdex in tc.arguments
+                                                    <div class="input-fields">
+                                                        <label>Argument #{argdex + 1}</label>
+                                                        <input type="text" class="input arg" value="#{arg}" required>
+                                                    </div>
+                                            </section>
+                                            
+                                            <section class="tc-matcher">
+                                                <div class="input-fields">
+                                                    <label>Choose matcher</label>
+                                                    <select class="selected-matcher" required>
+                                                        <option value="">Choose a matcher</option>
+                                                        each matcher in matcherOptions 
+                                                            if tc.matcher === ""
+                                                                <option value="#{matcher}">#{matcher}</option>
+                                                            else
+                                                                if matcher === tc.matcher 
+                                                                    <option value="#{matcher}" selected>#{matcher}</option>
+                                                                else 
+                                                                    <option value="#{matcher}">#{matcher}</option>
+                                                    </select>
+                                                </div>
+                                            </section>
+                                            
+                                            <section class="tc-output">
+                                                <div class="input-fields">
+                                                    <label>Expected output</label>
+                                                    <input type="text" class="output" value="#{tc.expected}" required>
+                                                </div>
+                                            </section>
+
+                                            <button type="button" class="btn-del" onclick="removeTestCase(this.parentElement)">Delete test case #{tcdex + 1}</button>
+                                        </div>
+                                
+                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement)">+ Add new test case</button>
+                        </div>
+                </div>
+            <button type="submit">Submit</button>
+        </form>
     </main>
 
 block script
-    <script src="../static/js/testing.js"></script>
+    <script src="/static/js/testing.js"></script>
+    <script src="/static/js/testCases.js"></script>

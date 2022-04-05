@@ -9,32 +9,46 @@
     --navbar-button-color-hover: var(--navbar-bg-color-hover);
     --sidebar-bg-color: #dadada;
     --sidebar-text-color: #202020;
-    --sidebar-a-color-hover: #0840a7;
+    --sidebar-a-color: var(--navbar-bg-color);
+    --sidebar-a-color-hover: var(--navbar-bg-color-hover);
+    --repo-card-text-color: var(--body-text-color);
+    --repo-card-text-color-active: #ffffff;
     --repo-card-bg-color: #ffffff;
-    --repo-card-bg-color-active: #5cdb5c;
+    --repo-card-bg-color-hover: var(--navbar-bg-color);
+    --repo-card-bg-color-active: #007000ba;
+    --repo-sub-card-bg-color-active: #007000;
+    --input-fields-bg-color: #f5f5f5;
 }
 
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: "raleway", sans-serif;
+    font-family: "Montserrat", sans-serif;
+    scroll-margin: 20px;
+    scroll-behavior: smooth;
 }
 
 body {
+    width: 100vw;
     color: var(--body-text-color);
     background-color: var(--body-bg-color);
     display: flex;
     overflow: overlay;
 }
 
-body h1, h2, h3 {
+body h1, h2, h3, h4 {
     margin-bottom: 10px;
 }
 
 main {
     margin-top: 70px;
-    padding: 10px;
+    padding: 20px;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 #navbar {
@@ -50,7 +64,7 @@ main {
     list-style-type: none;
 }
 
-#navbar ul{
+#navbar ul {
     list-style-type: none;
     display: flex;
     align-items: center;
@@ -79,20 +93,37 @@ main {
     background-color: var(--navbar-bg-color-hover);
 }
 
-#btnLogin {
+button {
+    color: white;
+    font-weight: 500;
+    padding: 10px 15px;
+    border: 2px solid var(--navbar-bg-color);
+    background-color: var(--navbar-bg-color);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+button:hover {
+    border: 2px solid var(--navbar-button-color);
+    background-color: var(--navbar-button-color);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-btn {
     background-color: var(--navbar-button-color);
     border-radius: 25px;
     text-decoration: none;
-    border: none;
+    border: 2px solid transparent;
     padding: 15px;
     margin: 10px;
     color: var(--navbar-text-color);
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: 0.2s;
 }
 
-#btnLogin:hover {
+.auth-btn:hover {
     background-color: var(--navbar-button-color-hover);
-    transform: scale(1.05);
+    /* transform: scale(1.02); */
 }

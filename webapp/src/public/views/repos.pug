@@ -1,7 +1,7 @@
 extends base.pug
 
 block style
-    <link rel="stylesheet" href="../static/css/repos.css">
+    <link rel="stylesheet" href="/static/css/repos.css">
 
 block title
     <title>Choose repository</title>
@@ -12,11 +12,27 @@ block content
 
         <div class="card-list">
             <ul>
-                each repo, index in repoNames
-                    <button id="#{index}" class="card">#{repo}</button>
+                each repo, index in repos
+                    <div class="card-wrapper">
+                        <div id="#{index}" class="card">#{repo.fullName}
+                        if repo.language != "not supported"
+                            <img src="#{repo.language}"></img>
+                        </div>
+                        
+                        if repo.pullRequests.length === 0
+                            <div class="content">
+                                <div id="#{index}" class="sub-card-disabled">No open pull requests found</div>
+                            </div>
+                        else
+                            each pull, pulldex in repo.pullRequests
+                                <div class="content">
+                                    <div id="#{index}-#{pulldex}" class="sub-card" onclick="location.href='/#{repo.fullName}/#{pull.branch}/#{pull.number}/testing'">#{pull.title} (##{pull.number})</div>
+                                </div>
+                    </div>
             </ul>
         </div>
+        
     </main>
     
 block script
-    <script src="../static/js/choose_repo.js"></script>
+    <script src="/static/js/repos.js"></script>
