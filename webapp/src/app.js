@@ -50,18 +50,18 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
     }
     else {
         const userRepos = await getGitHub(config.user + req.user.username + config.userOptions);
-        const collaborator = userRepos.find(repo => repo.full_name === req.params.repoOwner + "/" + req.params.repoName);
+        const collaborator = userRepos.find(repo => repo.full_name === req.params.repoOwner + "/" + req.params.repoName) === undefined ? false : true;
 
-        if (collaborator === undefined) {
-            res.send("404 - You are not a collaborator on this repository")
-        }
-        else {
+        if (collaborator === true) {
             // const data = await contactTS('/test-info', "GET", {
-            //     repository: req.params.repoOwner + "/" + req.params.repoName,
-            //     branch: req.params.branch
+                //     repository: req.params.repoOwner + "/" + req.params.repoName,
+                //     branch: req.params.branch
             // })
             // res.render('testing', {files: data.files, matcherOptions: matchers});
             res.render('testing', {files: dummyData.files, matcherOptions: matchers});
+        }
+        else {
+            res.send("404 - You are not a collaborator on this repository")
         }
     }
 })
