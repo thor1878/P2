@@ -42,16 +42,27 @@ app.get('/', (req, res) => {
 
 app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
     const content = await getGitHub(config.repo + req.params.repoOwner + "/" + req.params.repoName + config.repoPulls + "/" + req.params.pullrequest);
+    // if (content.message === "Not Found" || content.head.ref !== req.params.branch || content.state === "closed") {
+    //     res.send("404 - Not Found");
+    // }
     if (content.message === "Not Found" || content.head.ref !== req.params.branch) {
         res.send("404 - Not Found");
     }
     else {
-        // const data = await contactTS('/test-info', "GET", {
-        //     repository: req.params.repoOwner + "/" + req.params.repoName,
-        //     branch: req.params.branch
-        // })
-        // res.render('testing', {files: data.files, matcherOptions: matchers});
-        res.render('testing', {files: dummyData.files, matcherOptions: matchers});
+        const userRepos = await getGitHub(config.user + req.user.username + config.userOptions);
+        const collaborator = userRepos.find(repo => repo.full_name === req.params.repoOwner + "/" + req.params.repoName);
+
+        if (collaborator === undefined) {
+            res.send("404 - You are not a collaborator on this repository")
+        }
+        else {
+            // const data = await contactTS('/test-info', "GET", {
+            //     repository: req.params.repoOwner + "/" + req.params.repoName,
+            //     branch: req.params.branch
+            // })
+            // res.render('testing', {files: data.files, matcherOptions: matchers});
+            res.render('testing', {files: dummyData.files, matcherOptions: matchers});
+        }
     }
 })
 
