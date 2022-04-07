@@ -22,6 +22,10 @@ for (const file of userTestInfo.files) {
 
     // Loop through all functions in the file to determine wich functions have passed (code 2) or failed (code -1)
     for (const func of file.functions) {
+
+        // If the user has excluded the function from testing
+        if (func.status === functionStatuses.assessed) continue;
+
         // Loop through all test cases in function
         for (const tc of func.testCases) {
 
