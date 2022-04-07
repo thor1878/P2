@@ -62,6 +62,7 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
             // const data = await contactTS('/test-info', "GET", {
                 //     repository: req.params.repoOwner + "/" + req.params.repoName,
                 //     branch: req.params.branch
+                //     token: req.user.token
             // })
             // res.render('testing', {files: data.files, matcherOptions: matchers});
             res.render('testing', {files: dummyData.files, matcherOptions: matchers});
@@ -81,6 +82,7 @@ app.post('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) 
     //     repo: req.params.repoOwner + "/" + req.params.repoName,
     //     branch: req.params.branch,
     //     userTestInfo: req.body
+    //     token: req.user.token
     // })
 
     // res.send(data);
