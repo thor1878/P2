@@ -118,11 +118,11 @@ function toggleFunction(funcName, funcDiv) {
         }
         
         for (const inputField of inputFields) {
-            inputField.removeAttribute("required", "");
+            inputField.removeAttribute("required");
         }
 
         for (const selectField of selectFields) {
-            selectField.removeAttribute("required", "");
+            selectField.removeAttribute("required");
         }
 
         btnAdd.setAttribute("hidden","");
@@ -139,7 +139,7 @@ function toggleFunction(funcName, funcDiv) {
             funcDiv.dataset.funcStatus = funcDiv.dataset.prevFuncStatus;
 
             for (const tcDiv of tcDivs) {
-                tcDiv.removeAttribute("hidden", "");
+                tcDiv.removeAttribute("hidden");
             }
     
             for (const inputField of inputFields) {
@@ -169,6 +169,6 @@ function toggleFunction(funcName, funcDiv) {
         funcDiv.querySelector(".comment").previousElementSibling.remove();
         funcDiv.querySelector(".comment").remove();
         
-        btnAdd.removeAttribute("hidden", "");
+        btnAdd.removeAttribute("hidden");
     }   
 }
