@@ -47,7 +47,6 @@ async function submitTests(event) {
         }
         submitData.files.push(fileObject);
     }
-    console.log(submitData);
 
     await fetch(window.location.href, {
         method: "POST",
@@ -55,8 +54,6 @@ async function submitTests(event) {
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-            userTestInfo: submitData
-        })
+        body: JSON.stringify(submitData)
     });
 }
