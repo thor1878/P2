@@ -1,17 +1,13 @@
 function addNewTestCase(functionName, funcDiv, newTcindex) {
     // Initial setup - Select elements and calculate index for the new test case and the number of args
     const btnAdd = funcDiv.querySelector(".btn-add");
-    const tcDivs = funcDiv.querySelectorAll(".tc-div");
     const newTcNumber = Number(newTcindex) + 1;
-    // const numOfArgs = tcDivs[tcDivs.length - 1].querySelectorAll(".arg").length;
     const numOfArgs = funcDiv.dataset.funcParams.split(",").length;
     
     // Create a a div for the new test case and add id, dataset and so on.
     const newTcDiv = document.createElement("div");
     newTcDiv.classList.add("tc-div");
     newTcDiv.dataset.tcIndex = newTcindex;
-    // newTcDiv.dataset.tcIndex = newTcNumber - 1;
-    // newTcDiv.dataset.tcPassed = false;
 
     // Add content to the new test case div
     newTcDiv.innerHTML = `
@@ -26,9 +22,11 @@ function addNewTestCase(functionName, funcDiv, newTcindex) {
         </section>
     `;
 
+    // Section for arguments
     newTcDiv.innerHTML += `
     <section class="tc-arguments"></section>`;
 
+    // Section for matchers
     newTcDiv.innerHTML += `
     <section class="tc-matcher">
         <div class="input-fields">
@@ -49,7 +47,7 @@ function addNewTestCase(functionName, funcDiv, newTcindex) {
             <input type="text" class="output" placeholder="Enter expected output" required>
         </div>
     </section>
-    
+
     <button type="button" class="btn-del" onclick="removeTestCase(this.parentElement)">Delete test case ${newTcNumber}</button>
     `;
     
@@ -66,7 +64,9 @@ function addNewTestCase(functionName, funcDiv, newTcindex) {
     
     // Insert before the 'add new test case' button.
     funcDiv.insertBefore(newTcDiv, btnAdd);
-    btnAdd.setAttribute("onclick", `addNewTestCase('${functionName}', this.parentElement, ${newTcNumber})`);
+
+    // If btnAdd exists, add onclick attribute
+    btnAdd?.setAttribute("onclick", `addNewTestCase('${functionName}', this.parentElement, ${newTcNumber})`);
 }
 
 function removeTestCase(tcDiv) {
@@ -161,9 +161,6 @@ function toggleFunction(funcName, funcDiv) {
                 statusExplainer.textContent = `Not assessed: Choose to either include or exclude ${funcName} from test`;
                 break;
             case 2:
-                statusExplainer.textContent = `Partially passed: All test cases passed, but not 100% code-coverage of ${funcName}.`;
-                break;
-            case 3:
                 statusExplainer.textContent = `All tests passed: 100% code-coverage of ${funcName}.`;
                 break;
             default:
@@ -173,7 +170,5 @@ function toggleFunction(funcName, funcDiv) {
         funcDiv.querySelector(".comment").remove();
         
         btnAdd.removeAttribute("hidden", "");
-    }
-
-   
+    }   
 }

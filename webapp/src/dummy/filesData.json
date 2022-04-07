@@ -22,7 +22,7 @@
                                 "Hej",
                                 {"x": 3, "y": 4}
                             ],
-                            "passed": false,
+                            "passed": true,
                             "expected": "",
                             "matcher": ""
                         },
@@ -47,7 +47,7 @@
                         "param3"
                     ],
                     "async": true,
-                    "status": 1,
+                    "status": 0,
                     "comment": "",
                     "functionString": "...",
                     "testCases": [
@@ -58,7 +58,7 @@
                                 "Hej",
                                 {"x": 3, "y": 4}
                             ],
-                            "passed": false,
+                            "passed": true,
                             "expected": "",
                             "matcher": ""
                         }

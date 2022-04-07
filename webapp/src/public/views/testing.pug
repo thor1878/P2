@@ -44,8 +44,7 @@ block content
                                             when -1: p At least one test case failed.
                                             when 0: p Not assessed: Choose to either include or exclude #{func.name} from test.
                                             when 1: p Assessed: #{func.name} will NOT be tested.
-                                            when 2: p Partially passed: All test cases passed, but not 100% code-coverage of #{func.name}.
-                                            when 3: p All tests passed: 100% code-coverage of #{func.name}.
+                                            when 2: p All tests passed: 100% code-coverage of #{func.name}.
                                             default: p Look up status code in the guide.
                                         if func.status === 1
                                             <label>Comment</label>
@@ -60,49 +59,14 @@ block content
                             </div>
                             
                             if func.status !== 1
-                                //- if func.testCases.length === 0
-                                //-     <div class="tc-div" data-tc-index="0" data-tc-passed="false">
-                                //-         <h4>Test case 1 (#{func.name})</h4>
-                                //-         <p>Passed: <a class="tc-pass">#{tc.passed}</a></p>
-                                        
-                                //-         <section class="tc-description">
-                                //-             <div class="input-fields">
-                                //-                 <label>Description</label>
-                                //-                 <input type="text" class="description" placeholder="Description for test case" required>
-                                //-             </div>
-                                //-         </section>
-
-                                //-         <section class="tc-arguments">
-                                //-             each arg, argdex in func.params
-                                //-                 <div class="input-fields">
-                                //-                     <label>Argument #{argdex + 1}</label>
-                                //-                     <input type="text" class="input arg" placeholder="Enter value" required>
-                                //-                 </div>
-                                //-         </section>
-                                        
-                                //-         <section class="tc-matcher">
-                                //-             <div class="input-fields">
-                                //-                 <label>Choose matcher</label>
-                                //-                 <select class="selected-matcher" required>
-                                //-                     <option value="">Choose a matcher</option>
-                                //-                     each matcher in matcherOptions 
-                                //-                         <option value="#{matcher}">#{matcher}</option>
-                                //-                 </select>
-                                //-             </div>
-                                //-         </section>
-                                        
-                                //-         <section class="tc-output">
-                                //-             <div class="input-fields">
-                                //-                 <label>Expected output</label>
-                                //-                 <input type="text" class="output" placeholder="Enter expected output" required>
-                                //-             </div>
-                                //-         </section>
-
-                                //-         <button type="button" class="btn-del" onclick="removeTestCase(this.parentElement)">Delete test case 1</button>
-                                //-     </div>
-                                //- else
-                                each tc, tcdex in func.testCases
-                                    <div class="tc-div" data-tc-index="#{tcdex}" data-tc-passed="#{tc.passed}">
+                                if func.testCases.length === 0
+                                    <script src="/static/js/testCases.js" onload="addNewTestCase('#{func.name}', this.parentElement, 0)"></script>
+                                else
+                                    each tc, tcdex in func.testCases
+                                        if tc.passed === "true" || tc.passed === true
+                                            <div class="tc-div passed" data-tc-index="#{tcdex}" data-tc-passed="#{tc.passed}">
+                                        else
+                                            <div class="tc-div" data-tc-index="#{tcdex}" data-tc-passed="#{tc.passed}">
                                         <h4>Test case #{tcdex + 1} (#{func.name})</h4>
                                         <p>Passed: <a class="tc-pass">#{tc.passed}</a></p>
 
@@ -149,9 +113,12 @@ block content
                                         </section>
 
                                         <button type="button" class="btn-del" onclick="removeTestCase(this.parentElement)">Delete test case #{tcdex + 1}</button>
-                                    </div>
+                                        </div>
+
                             if func.status === 1
                                 <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length})" hidden>+ Add new test case</button>
+                            else if func.testCases.length === 0
+                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, 1)">+ Add new test case</button>
                             else
                                 <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length})">+ Add new test case</button>
                         </div>
