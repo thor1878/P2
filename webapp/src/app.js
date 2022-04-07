@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
-    const content = await getGitHub(config.repo + req.params.repoOwner + "/" + req.params.repoName + config.repoPulls + "/" + req.params.pullrequest);
+    const content = await getGitHub(config.repo + req.params.repoOwner + "/" + req.params.repoName + config.repoPulls + "/" + req.params.pullrequest, req.user.token);
     // if (content.message === "Not Found" || content.head.ref !== req.params.branch || content.state === "closed") {
     //     res.send("404 - Not Found");
     // }
@@ -49,10 +49,16 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
         res.send("404 - Not Found");
     }
     else {
-        const userRepos = await getGitHub(config.user + req.user.username + config.userOptions);
-        const collaborator = userRepos.find(repo => repo.full_name === req.params.repoOwner + "/" + req.params.repoName) === undefined ? false : true;
-
-        if (collaborator === true) {
+        const collaborator = await fetch(config.repo + req.params.repoOwner + "/" + req.params.repoName + "/collaborators/" + req.user.profile.username, {
+            method: 'GET', 
+            // cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'token ' + req.user.token
+            }
+        });
+        
+        if (collaborator.status === 204) {
             // const data = await contactTS('/test-info', "GET", {
                 //     repository: req.params.repoOwner + "/" + req.params.repoName,
                 //     branch: req.params.branch
@@ -61,7 +67,7 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
             res.render('testing', {files: dummyData.files, matcherOptions: matchers});
         }
         else {
-            res.send("404 - You are not a collaborator on this repository")
+            res.send("404 - Not Found");
         }
     }
 })

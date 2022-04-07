@@ -6,12 +6,12 @@ const { getGitHub } = require('../utils/GitHub');
 const router = express.Router();
 
 router.get('/repos', async (req, res) => {
-    const content = await getGitHub(config.user + req.user.username + config.userOptions);
+    const content = await getGitHub(config.user, req.user.token);
     const repos = [];
     
     for (const item of content) {
         const pullsObject = [];
-        const pulls = await getGitHub(config.repo + item.full_name + config.repoPulls + config.repoState);
+        const pulls = await getGitHub(config.repo + item.full_name + config.repoPulls + config.repoState, req.user.token);
         for (const pullRequest of pulls) {
             pullsObject.push({
                 url: pullRequest.url,

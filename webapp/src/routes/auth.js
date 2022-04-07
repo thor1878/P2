@@ -6,7 +6,7 @@ require('../passport/passport')
 const router = new express.Router();
 
 
-router.get('/login', passport.authenticate('github', { scope: ['user:email'] }))
+router.get('/login', passport.authenticate('github', { scope: ['user:email', 'read:org', 'repo'] }))
 
 router.get('/auth/github/callback', passport.authenticate('github', {
     failureRedirect: '/',
