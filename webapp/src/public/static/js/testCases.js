@@ -131,9 +131,13 @@ function toggleFunction(funcName, funcDiv) {
         btn.textContent = `Exclude ${funcName}`;
         btn.classList.remove("btn-include");
         btn.classList.add("btn-exclude");
-        if (funcDiv.dataset.prevFuncStatus === undefined) {
+
+        if (funcDiv.dataset.prevFuncStatus === undefined && funcDiv.dataset.numTc === "0") {
             funcDiv.dataset.funcStatus = 0;
             addNewTestCase(funcName, funcDiv, 0);
+        } 
+        else if (funcDiv.dataset.prevFuncStatus === undefined && funcDiv.dataset.numTc !== "0") {
+            funcDiv.dataset.funcStatus = 0;
         }
         else {
             funcDiv.dataset.funcStatus = funcDiv.dataset.prevFuncStatus;

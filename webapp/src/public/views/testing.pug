@@ -29,7 +29,7 @@ block content
                     <h2 id="#{file.path}" class="file-path">#{file.path}</h2>
                 
                     each func in file.functions
-                        <div class="func-div" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-func-status="#{func.status}">
+                        <div class="func-div" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-func-status="#{func.status}" data-num-tc="#{func.testCases.length}">
                             if func.status !== 1
                                 <button type="button" class="btn-exclude" onclick="toggleFunction('#{func.name}', this.parentElement)">Exclude #{func.name}</button>
                             else 
