@@ -24,19 +24,25 @@ async function submitTests(event) {
     
             const tcDivs = funcDiv.querySelectorAll(".tc-div");
             for (const tcDiv of tcDivs) {
+
                 const tcObject = {
                     description: tcDiv.querySelector(".description").value,
                     arguments: [],
                     matcher: tcDiv.querySelector(".selected-matcher").value, 
                     expected: tcDiv.querySelector(".output").value, 
-                    passed: tcDiv.dataset.tcPassed === "true"
+                    passed: tcDiv.querySelector(".tc-pass").textContent === "true"
                 };
 
                 const args = tcDiv.querySelectorAll(".arg");
                 for (const arg of args) {
-                    tcObject.arguments.push(arg.value);
+                    if (arg.value !== "") {
+                        tcObject.arguments.push(arg.value);
+                    }
                 }
-                fileObject.functions[i].testCases.push(tcObject);
+
+                if (tcObject.description !== "" && tcObject.matcher !== "" && tcObject.expected !== ""  && tcObject.arguments.length === funcDiv.dataset.funcParams.split(",").length) {                
+                    fileObject.functions[i].testCases.push(tcObject);
+                }
             }
         }
         submitData.files.push(fileObject);
