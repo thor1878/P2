@@ -1,6 +1,5 @@
 {
-    "user": "https://api.github.com/users/",
-    "userOptions": "/repos?type=all",
+    "user": "https://api.github.com/user/repos?visibility=all",
     "repo": "https://api.github.com/repos/",
     "repoPulls": "/pulls",
     "repoState": "?state=open",
