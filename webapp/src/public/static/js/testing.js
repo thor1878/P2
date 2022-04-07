@@ -49,9 +49,6 @@ async function submitTests(event) {
     }
     console.log(submitData);
 
-    const repository = window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2];
-    const branch = window.location.pathname.split('/')[3]
-
     await fetch(window.location.href, {
         method: "POST",
         headers: {
@@ -59,9 +56,7 @@ async function submitTests(event) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            userTestInfo: submitData,
-            repository: repository,
-            branch: branch
+            userTestInfo: submitData
         })
     });
 }

@@ -16,7 +16,7 @@ async function initSetup(repository, gh_token) {
     
     // Create new tree based on userTestInfo
     const newTreeSHA = await createTree(repository, baseTreeSHA, setupTree, gh_token);
-    console.log(newTreeSHA);
+
     // Commit tree
     const newCommitSHA = await commitTree(repository, latestCommitSHA, newTreeSHA, gh_token);
 

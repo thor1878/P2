@@ -12,7 +12,7 @@ jobs:
       user-test-info: ${{ steps.wait-response.outputs.user-test-info }}
 
     steps:
-    - name: Checkout
+    - name: Checkout #??????
       uses: actions/checkout@v3.0.0
 
     - name: Setup Node.js environment
@@ -87,5 +87,5 @@ jobs:
         git config user.name '${{ github.actor }}'
         git config user.email 'no-email'
         git add .
-        git commit -m 'test'
+        git commit -m 'test' #???????
         git push
