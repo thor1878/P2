@@ -45,9 +45,9 @@ async function getStatus() {
     })
 
     const status = response.status;
-    const data = await response.json();
-
+    
     if (status === 200) {
+        const data = await response.json();
         core.setOutput("user-test-info", data);
         return true;
     } else {

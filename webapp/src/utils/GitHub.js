@@ -10,7 +10,7 @@ async function getGitHub(url, token) {
             'Authorization': `token ${token}`
         }
     });
-    return response.json();
+    return await response.json();
 }
 
 async function getCollaborators(endpoint, token) {
@@ -23,7 +23,7 @@ async function getCollaborators(endpoint, token) {
         }
     });
 
-    return response;
+    return response.status;
 }
 
 module.exports = { getGitHub, getCollaborators };

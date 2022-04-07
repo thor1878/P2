@@ -2,12 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
-const fetch = require('node-fetch');
 const dummyData = require('./dummy/filesData.json');
 const repos = require('./routes/repos.js');
 const auth = require('./routes/auth');
 const config = require('../config.json');
-const urls = require('../../config.json');
 const { getGitHub, getCollaborators } = require('./utils/GitHub');
 const { contactTS } = require('./utils/TestServer');
 
@@ -49,13 +47,13 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
     //     res.send("404 - Not Found");
     // }
     else {
-        const collaborator = await getCollaborators(req.params.repoOwner + "/" + req.params.repoName + "/collaborators/" + req.user.profile.username, req.user.token);
+        const status = await getCollaborators(req.params.repoOwner + "/" + req.params.repoName + "/collaborators/" + req.user.profile.username, req.user.token);
         
-        if (collaborator.status === 204) {
+        if (status === 204) {
             const data = await contactTS('/test-info', "GET", {
-                    repository: req.params.repoOwner + "/" + req.params.repoName,
-                    branch: req.params.branch,
-                    token: req.user.token
+                repository: req.params.repoOwner + "/" + req.params.repoName,
+                branch: req.params.branch,
+                token: req.user.token
             })
             res.render('testing', {files: data.files, matcherOptions: matchers});
             // res.render('testing', {files: dummyData.files, matcherOptions: matchers});
@@ -71,16 +69,14 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
 // })
 
 app.post('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
-    const data = await contactTS('/generate-tests', 'POST', {
+    const status = await contactTS('/generate-tests', 'POST', {
         repository: req.params.repoOwner + "/" + req.params.repoName,
         branch: req.params.branch,
         userTestInfo: req.body,
         token: req.user.token
     })
 
-    res.send(data);
-
-    // console.log(req.body);
+    res.sendStatus(status);
 })
 
 app.get('/logs', (req, res) => {

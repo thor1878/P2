@@ -14,6 +14,8 @@ async function contactTS(endpoint, method, params) {
                 "Content-Type": "application/json"
             }
         }
+        const response = await fetch(fetchURL, fetchOptions);
+        return await response.json();
     } else {
         fetchURL = config.tsURL + endpoint;
         fetchOptions = {
@@ -23,10 +25,9 @@ async function contactTS(endpoint, method, params) {
             },
             body: JSON.stringify(params)
         }
+        const response = await fetch(fetchURL, fetchOptions);
+        return response.status;
     }
-    const response = await fetch(fetchURL, fetchOptions);
-    const data = await response.json();
-    return data;
 }
 
 module.exports = {contactTS}

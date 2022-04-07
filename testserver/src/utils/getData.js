@@ -46,7 +46,7 @@ async function getFilesData(filteredData, gh_token) {
 // Return the function strings from a file string - including additional info about each file string
 function getFunctionStrings(fileString) {
     let functionStrings = [];
-    let functionSignatures = fileString.match(/([^\r\n]*?\=\s*)?(async\s*)?function\s*\w*\s*\(.*?\)\s*\{/g);
+    let functionSignatures = fileString.match(/([^\r\n]*?\=[ ]*)?(async[ ]*)?function[ ]*\w*[ ]*\(.*?\)\s*\{/g);
 
     if (!functionSignatures) return '';
 
@@ -91,7 +91,7 @@ function getFunctionStrings(fileString) {
 
 async function getTestInfo(repoData, gh_token) {
 
-    const testInfoFile = repoData.tree.find(file => file.path === 'test/testInfo.json');
+    const testInfoFile = repoData.tree.find(file => file.path === '.test/test-info.json');
 
     const response = await fetch(testInfoFile.url, {
         method: 'GET',
