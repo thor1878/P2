@@ -44,7 +44,7 @@ block content
                                             when -1: p At least one test case failed.
                                             when 0: p Not assessed: Choose to either include or exclude #{func.name} from test.
                                             when 1: p Assessed: #{func.name} will NOT be tested.
-                                            when 2: p All tests passed: 100% code-coverage of #{func.name}.
+                                            when 2: p All test cases in #{func.name} have passed.
                                             default: p Look up status code in the guide.
                                         if func.status === 1
                                             <label>Comment</label>
@@ -63,7 +63,7 @@ block content
                                     <script src="/static/js/testCases.js" onload="addNewTestCase('#{func.name}', this.parentElement, 0)"></script>
                                 else
                                     each tc, tcdex in func.testCases
-                                        if tc.passed === "true" || tc.passed === true
+                                        if tc.passed
                                             <div class="tc-div passed" data-tc-index="#{tcdex}" data-tc-passed="#{tc.passed}">
                                         else
                                             <div class="tc-div" data-tc-index="#{tcdex}" data-tc-passed="#{tc.passed}">
@@ -95,13 +95,10 @@ block content
                                                 <select class="selected-matcher" required>
                                                     <option value="">Choose a matcher</option>
                                                     each matcher in matcherOptions 
-                                                        if tc.matcher === ""
+                                                        if matcher === tc.matcher 
+                                                            <option value="#{matcher}" selected>#{matcher}</option>
+                                                        else 
                                                             <option value="#{matcher}">#{matcher}</option>
-                                                        else
-                                                            if matcher === tc.matcher 
-                                                                <option value="#{matcher}" selected>#{matcher}</option>
-                                                            else 
-                                                                <option value="#{matcher}">#{matcher}</option>
                                                 </select>
                                             </div>
                                         </section>
