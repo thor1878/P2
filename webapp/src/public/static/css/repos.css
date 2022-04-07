@@ -9,7 +9,7 @@
     color: var(--repo-card-text-color);
     background-color: var(--repo-card-bg-color);
     width: 100%;
-    padding: 10px;
+    padding: 10px 20px 10px 20px;
     height: 40px;
     display: flex;
     justify-content: space-between;
@@ -25,6 +25,9 @@
     /* transform: scale(1.01); */
     color: var(--repo-card-text-color-active);
     background-color: var(--repo-card-bg-color-hover);
+}
+.card.active img {
+    transform: scale(1.8);
 }
 
 .card.active {
@@ -79,7 +82,7 @@
     height: 0;
     overflow: hidden;
     transition: 0.2s;
-    margin: 5px;
+    margin: 0px;
 }
 
 .content.show {
@@ -89,5 +92,10 @@
 
 .card-wrapper {
     width: 100%;
-    margin: 2px;
+    margin: 5px;
+}
+.card img {
+    width: 15px;
+    transition: 0.2s;
+    border-radius: 25%;
 }

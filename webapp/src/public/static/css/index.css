@@ -1,0 +1,92 @@
+.hero {
+    height: calc(100vh - 80px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-style: border-box;
+    padding: 0px;
+}
+
+.firstview-div {
+    display: flex;
+    justify-content: space-between;
+    padding: 65px 100px 50px 100px;
+}
+
+.textbox {
+    padding-right: 80px;
+}
+
+.animation {
+    padding: 155px;
+    margin-top: 130;
+    margin-bottom: 100;
+    margin-right: 110;
+    margin-left: 100;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px;
+    /* rgba(0, 0, 0, 0.22) 0px 10px 10px; */
+    margin: 20px;
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#getStart {
+    margin-top: 30px;
+    padding: 10px 30px;
+    color: white;
+    background-color: var(--navbar-bg-color);
+    border-radius: 15px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.step-div {
+    background-color: white;
+    padding: 20px;
+    margin-top: 65px;
+    margin-bottom: 30px;
+    border: 2px solid var(--sidebar-bg-color);
+    border-radius: 15px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.content-display {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content-text {
+    padding-right: 45px;
+}
+
+.content-display img {
+    border-radius: 15px;
+}
+
+.step-number {
+    background-color: white;
+    /* color: white; */
+    padding: 10px 20px;
+    width: fit-content;
+    margin-top: -40px;
+    margin-bottom: 10px;
+    border: 2px solid var(--sidebar-bg-color);
+    border-radius: 20px;
+}
+
+footer {
+    color: white;
+    background-color: var(--navbar-bg-color);
+    padding: 10px 30px;
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 15px;
+    margin-bottom: 0px;
+}
