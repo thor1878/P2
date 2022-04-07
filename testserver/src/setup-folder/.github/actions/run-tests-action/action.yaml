@@ -1,0 +1,8 @@
+name: 'Run Tests'
+description: 'Run tests with Jest'
+outputs:
+  results:
+    description: 'Results of Jest test'
+runs:
+  using: 'node16'
+  main: 'index.js'

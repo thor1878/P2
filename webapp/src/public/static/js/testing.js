@@ -47,7 +47,6 @@ async function submitTests(event) {
         }
         submitData.files.push(fileObject);
     }
-    console.log(submitData);
 
     await fetch(window.location.href, {
         method: "POST",

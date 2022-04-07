@@ -72,7 +72,7 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
 
 app.post('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
     const data = await contactTS('/generate-tests', 'POST', {
-        repo: req.params.repoOwner + "/" + req.params.repoName,
+        repository: req.params.repoOwner + "/" + req.params.repoName,
         branch: req.params.branch,
         userTestInfo: req.body,
         token: req.user.token

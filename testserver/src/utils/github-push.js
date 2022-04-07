@@ -1,10 +1,13 @@
 const fetch = require('node-fetch');
+require('dotenv').config();
 
-async function getLatestCommitSHA(branch) {
-    const response = await fetch('https://api.github.com/repos/thor1878/GitHub-Actions-test/git/refs/heads/' + branch, {
+
+
+async function getLatestCommitSHA(repository, branch, gh_token) {
+    const response = await fetch(`https://api.github.com/repos/${repository}/git/refs/heads/${branch}`, {
         method: 'GET',
         headers: {
-            'Authorization': 'token ' + process.env.GITHUB_TOKEN,
+            'Authorization': `token ${gh_token}`,
             'Accept': 'application/vnd.github.v3+json',
         }
     })
@@ -13,11 +16,11 @@ async function getLatestCommitSHA(branch) {
     return data.object.sha;
 }
 
-async function getBaseTreeSHA(latestCommitSHA) {
-    const response = await fetch('https://api.github.com/repos/thor1878/GitHub-Actions-test/git/commits/' + latestCommitSHA, {
+async function getBaseTreeSHA(repository, latestCommitSHA, gh_token) {
+    const response = await fetch(`https://api.github.com/repos/${repository}/git/commits/${latestCommitSHA}`, {
         method: 'GET',
         headers: {
-            'Authorization': 'token ' + process.env.GITHUB_TOKEN,
+            'Authorization': `token ${gh_token}`,
             'Accept': 'application/vnd.github.v3+json',
         }
     })
@@ -26,28 +29,31 @@ async function getBaseTreeSHA(latestCommitSHA) {
     return data.tree.sha;
 }
 
-async function createTree(baseTreeSHA, userTestInfo) {
-    const response = await fetch('https://api.github.com/repos/thor1878/GitHub-Actions-test/git/trees', {
+async function createTree(repository, baseTreeSHA, fileTree, gh_token) {
+    console.log(fileTree);
+    const response = await fetch(`https://api.github.com/repos/${repository}/git/trees`, {
         method: 'POST',
         headers: {
-            'Authorization': 'token ' + process.env.GITHUB_TOKEN,
+            'Authorization': `token ${gh_token}`,
             'Accept': 'application/vnd.github.v3+json',
         },
         body: JSON.stringify({
-            tree: generateTestTree(userTestInfo),
+            tree: fileTree,
             base_tree: baseTreeSHA
         })
     })
+
     const data = await response.json();
+
 
     return data.sha;
 }
 
-async function commitTree(latestCommitSHA, newTreeSHA) {
-    const response = await fetch('https://api.github.com/repos/thor1878/GitHub-Actions-test/git/commits', {
+async function commitTree(repository, latestCommitSHA, newTreeSHA, gh_token) {
+    const response = await fetch(`https://api.github.com/repos/${repository}/git/commits`, {
         method: 'POST',
         headers: {
-            'Authorization': 'token ' + process.env.GITHUB_TOKEN,
+            'Authorization': `token ${gh_token}`,
             'Accept': 'application/vnd.github.v3+json',
         },
         body: JSON.stringify({
@@ -63,11 +69,11 @@ async function commitTree(latestCommitSHA, newTreeSHA) {
     return data.sha
 }
 
-async function updateRef(newCommitSHA, branch) {
-    const response = await fetch('https://api.github.com/repos/thor1878/GitHub-Actions-test/git/refs/heads/' + branch, {
+async function updateRef(repository, newCommitSHA, branch, gh_token) {
+    const response = await fetch(`https://api.github.com/repos/${repository}/git/refs/heads/${branch}`, {
         method: 'POST',
         headers: {
-            'Authorization': 'token ' + process.env.GITHUB_TOKEN,
+            'Authorization': `token ${gh_token}`,
             'Accept': 'application/vnd.github.v3+json',
         },
         body: JSON.stringify({
@@ -81,7 +87,6 @@ async function updateRef(newCommitSHA, branch) {
 
 function generateTestTree(userTestInfo) {
 
-    
     const files = userTestInfo.files;
 
     let tree = [];
@@ -120,7 +125,7 @@ function generateTestTree(userTestInfo) {
         }
 
         tree.push({
-            path: 'test/' + file.path.replace(/\.js$/, '.test.js'),
+            path: '.test/' + file.path.replace(/\.js$/, '.test.js'),
             mode: '100644',
             type: 'blob',
             content: testString
@@ -131,4 +136,4 @@ function generateTestTree(userTestInfo) {
 }
 
 
-module.exports = { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef };
+module.exports = { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree };
