@@ -4,6 +4,7 @@ const config = require('../../config.json');
 
 const repo = core.getInput('repo');
 const branch = core.getInput('branch');
+const pollInterval = 5000;
 
 console.log(repo);
 console.log(branch);
@@ -18,7 +19,7 @@ async function poll() {
 
     while(!ready) {
         ready = await getStatus();
-        await wait(1000);
+        await wait(pollInterval);
     }
 }
 
