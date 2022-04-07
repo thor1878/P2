@@ -14,7 +14,10 @@ block content
             <ul>
                 each repo, index in repos
                     <div class="card-wrapper">
-                        <div id="#{index}" class="card">#{repo.fullName}</div>
+                        <div id="#{index}" class="card">#{repo.fullName}
+                        if repo.language != "not supported"
+                            <img src="#{repo.language}"></img>
+                        </div>
                         
                         if repo.pullRequests.length === 0
                             <div class="content">
@@ -28,6 +31,7 @@ block content
                     </div>
             </ul>
         </div>
+        
     </main>
     
 block script
