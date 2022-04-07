@@ -6,7 +6,7 @@ async function contactTS(endpoint, method, params) {
     let fetchOptions;
 
     if (method === 'GET') {
-        fetchURL = config["test-server-url"] + endpoint + '?repository=' + params.repository + '&branch=' + params.branch + '&access_token=' + params.token;
+        fetchURL = config["test-server-url"] + endpoint + '?repository=' + params.repository + '&branch=' + params.branch + '&token=' + params.token;
         fetchOptions = {
             method: method,
             headers: {

@@ -8,7 +8,7 @@ const repos = require('./routes/repos.js');
 const auth = require('./routes/auth');
 const config = require('../config.json');
 const urls = require('../../config.json');
-const { getGitHub } = require('./utils/GitHub');
+const { getGitHub, getCollaborators } = require('./utils/GitHub');
 const { contactTS } = require('./utils/TestServer');
 
 const app = express();
@@ -37,35 +37,28 @@ app.use(auth);
 app.use(repos);
 
 app.get('/', (req, res) => {
-    res.render('index', {functions: dummyData.functions});
+    res.render('index');
 })
 
 app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
     const content = await getGitHub(config.repo + req.params.repoOwner + "/" + req.params.repoName + config.repoPulls + "/" + req.params.pullrequest, req.user.token);
-    // if (content.message === "Not Found" || content.head.ref !== req.params.branch || content.state === "closed") {
-    //     res.send("404 - Not Found");
-    // }
-    if (content.message === "Not Found" || content.head.ref !== req.params.branch) {
+    if (content.message === "Not Found" || content.head.ref !== req.params.branch || content.state === "closed") {
         res.send("404 - Not Found");
     }
+    // if (content.message === "Not Found" || content.head.ref !== req.params.branch) {
+    //     res.send("404 - Not Found");
+    // }
     else {
-        const collaborator = await fetch(config.repo + req.params.repoOwner + "/" + req.params.repoName + "/collaborators/" + req.user.profile.username, {
-            method: 'GET', 
-            // cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'token ' + req.user.token
-            }
-        });
+        const collaborator = await getCollaborators(req.params.repoOwner + "/" + req.params.repoName + "/collaborators/" + req.user.profile.username, req.user.token);
         
         if (collaborator.status === 204) {
-            // const data = await contactTS('/test-info', "GET", {
-                //     repository: req.params.repoOwner + "/" + req.params.repoName,
-                //     branch: req.params.branch
-                //     token: req.user.token
-            // })
-            // res.render('testing', {files: data.files, matcherOptions: matchers});
-            res.render('testing', {files: dummyData.files, matcherOptions: matchers});
+            const data = await contactTS('/test-info', "GET", {
+                    repository: req.params.repoOwner + "/" + req.params.repoName,
+                    branch: req.params.branch,
+                    token: req.user.token
+            })
+            res.render('testing', {files: data.files, matcherOptions: matchers});
+            // res.render('testing', {files: dummyData.files, matcherOptions: matchers});
         }
         else {
             res.send("404 - Not Found");
@@ -73,21 +66,21 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
     }
 })
 
-app.get('/testing', (req, res) => {
-    res.redirect('/thor1878/GitHub-Actions-Test/Test2/5/testing');
-})
+// app.get('/testing', (req, res) => {
+//     res.redirect('/thor1878/GitHub-Actions-Test/Test2/5/testing');
+// })
 
 app.post('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
-    // const data = await contactTS('/generate-tests', 'POST', {
-    //     repo: req.params.repoOwner + "/" + req.params.repoName,
-    //     branch: req.params.branch,
-    //     userTestInfo: req.body
-    //     token: req.user.token
-    // })
+    const data = await contactTS('/generate-tests', 'POST', {
+        repo: req.params.repoOwner + "/" + req.params.repoName,
+        branch: req.params.branch,
+        userTestInfo: req.body,
+        token: req.user.token
+    })
 
-    // res.send(data);
+    res.send(data);
 
-    console.log(req.body);
+    // console.log(req.body);
 })
 
 app.get('/logs', (req, res) => {
