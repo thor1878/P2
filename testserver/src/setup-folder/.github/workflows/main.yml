@@ -3,6 +3,7 @@ name: Test
 on:
   pull_request:
     branches: [ main, master ]
+    types: [opened, reopened]
     
 jobs:
   wait_for_response:

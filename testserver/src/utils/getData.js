@@ -15,8 +15,11 @@ async function getRepoData(repository, branch, gh_token) {
 
 
 // Return an array containing only the objects with a path having the '.js' extension (not including '.test.js')
+// and exclude the .js files in the .github folder
 function filterRepoData(repoData) {
-    return repoData.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-8) !== '.test.js');
+    // Match anything not starting with '.github/'
+    // Then match anything ending with '.js' if '.test' has not preceded it
+    return repoData.tree.filter(file => file.path.match(/^(?!.github\/).*?(?<!\.test)(\.js)$/));
 }
 
 async function getFilesData(filteredData, gh_token) {
@@ -52,6 +55,10 @@ function getFunctionStrings(fileString) {
 
     // Loop through all function definitions to find their corresponding body
     for (let func of functionSignatures) {
+        // Don't register anonymous functions (functions without a name)
+        let name = (func.match(/[^\r\n]*?\s+(\w+)\s*\=\s*(async\s*)?function/) || func.match(/function\s*(\w*)\s*\(.*?\)/))[1];
+        if (!name) continue;
+
         let start = fileString.indexOf(func);
         let fileIndex = start + func.length;
 
@@ -75,7 +82,6 @@ function getFunctionStrings(fileString) {
         // Extract info about the current function string
         let functionString = fileString.slice(start, end);
         let params = functionString.match(/function\s*\w*\s*\((.*?)\)/)[1].split(/\s*,\s*/);
-        let name = (func.match(/[^\r\n]*?\s+(\w+)\s*\=\s*(async\s*)?function/) || func.match(/function\s*(\w*)\s*\(.*?\)/))[1];
         let async = func.match(/async\s*function/) ? true : false;
 
         functionStrings.push({

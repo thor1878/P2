@@ -105,7 +105,7 @@ function generateTestTree(userTestInfo) {
             filePath += file.path;
 
 
-            testString += `const ${func.name} = require('${filePath}');\n\n`
+            testString += `const { ${func.name} } = require('${filePath}');\n\n`
         }
 
 

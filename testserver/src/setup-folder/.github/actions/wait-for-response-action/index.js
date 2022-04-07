@@ -39,7 +39,7 @@ async function getStatus() {
         },
         body: JSON.stringify({
             origin: "GA",
-            repo: repo,
+            repository: repo,
             branch: branch
         })
     })
