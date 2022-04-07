@@ -1,0 +1,16 @@
+name: 'Wait for response'
+description: 'Pause workflow until a specific response is received'
+
+inputs:
+  repo:
+    required: true
+  branch:
+    required: true
+  
+outputs:
+  user-test-info:
+    description: 'Test info from user'
+
+runs:
+  using: 'node16'
+  main: 'index.js'

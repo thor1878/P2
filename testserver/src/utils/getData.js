@@ -1,11 +1,11 @@
 const fetch = require('node-fetch');
 
-async function getRepoData(repository, branch) {
+async function getRepoData(repository, branch, gh_token) {
     const url = `http://api.github.com/repos/${repository}/git/trees/${branch}?recursive=1`;
 
     const response = await fetch(url, {
         headers: {
-            'Authorization': `token ${process.env.GITHUB_TOKEN}`
+            'Authorization': `token ${gh_token}`
         }
     });
     const data = await response.json();
@@ -19,13 +19,13 @@ function filterRepoData(repoData) {
     return repoData.tree.filter(file => file.path.slice(-3) === '.js' && file.path.slice(-8) !== '.test.js');
 }
 
-async function getFilesData(filteredData) {
+async function getFilesData(filteredData, gh_token) {
     let filesData = [];
     for (let file of filteredData) {
 
         let response = await fetch(file.url, {
             headers: {
-                'Authorization': `token ${process.env.GITHUB_TOKEN}`
+                'Authorization': `token ${gh_token}`
             }
         });
         let data = await response.json();
@@ -89,14 +89,14 @@ function getFunctionStrings(fileString) {
     return functionStrings;
 }
 
-async function getTestInfo(repoData) {
+async function getTestInfo(repoData, gh_token) {
 
     const testInfoFile = repoData.tree.find(file => file.path === 'test/testInfo.json');
 
     const response = await fetch(testInfoFile.url, {
         method: 'GET',
         headers: {
-            'Authorization': 'token ' + process.env.GITHUB_TOKEN,
+            'Authorization': `token ${gh_token}`,
             'Accept': 'application/vnd.github.v3+json',
         },
     });

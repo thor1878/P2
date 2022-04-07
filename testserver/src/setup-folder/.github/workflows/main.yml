@@ -1,0 +1,91 @@
+name: Test
+
+on:
+  pull_request:
+    branches: [ main, master ]
+    
+jobs:
+  wait_for_response:
+    runs-on: ubuntu-latest
+
+    outputs:
+      user-test-info: ${{ steps.wait-response.outputs.user-test-info }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3.0.0
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.0.0
+      
+    - name: Install dependencies
+      run: |
+        npm i @actions/core
+        npm i node-fetch
+
+    - name: Wait for response
+      id: wait-response
+      uses: ./.github/actions/wait-for-response-action
+      with: 
+        repo: ${{ github.repository }}
+        branch: ${{ github.head_ref }}
+    
+  run_tests:
+    needs: wait_for_response
+    runs-on: ubuntu-latest
+      
+    outputs:
+      test-results: ${{ steps.test-results.outputs.results }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3.0.0
+      with:
+        ref: ${{ github.head_ref }}
+      
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.0.0
+      
+    - name: Install dependencies
+      run: |
+        npm i jest
+        npm i @actions/core
+        npm i
+      
+    - name: Run tests
+      id: test-results
+      uses: ./.github/actions/run-tests-action
+    
+  update_info:
+    needs: [wait_for_response, run_tests]
+    runs-on: ubuntu-latest
+      
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3.0.0
+      with:
+        ref: ${{ github.head_ref }}
+      
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.0.0
+      
+    - name: Install dependencies
+      run: |
+        npm i @actions/core
+        npm i
+
+    - name: Update info
+      id: update-info
+      uses: ./.github/actions/update-test-info-action
+      with: 
+        test-results: ${{ needs.run_tests.outputs.test-results }}
+        user-test-info: ${{ needs.wait_for_response.outputs.user-test-info }}
+        github-workspace: ${{ github.workspace }}
+
+    - name: Push to GitHub
+      run: |
+        git config user.name '${{ github.actor }}'
+        git config user.email 'no-email'
+        git add .
+        git commit -m 'test'
+        git push

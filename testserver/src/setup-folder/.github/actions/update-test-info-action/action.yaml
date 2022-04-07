@@ -1,0 +1,18 @@
+name: 'Update info'
+description: 'Update info file'
+
+inputs:
+  test-results:
+    required: true
+  user-test-info:
+    required: true
+  github-workspace:
+    required: true
+
+outputs:
+  results:
+    description: 'Updated info file'
+
+runs:
+  using: 'node16'
+  main: 'index.js'

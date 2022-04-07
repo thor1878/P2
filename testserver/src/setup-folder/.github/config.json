@@ -1,0 +1,9 @@
+{
+    "functionStatuses": {
+        "failed": -1,
+        "notAssessed": 0,
+        "assessed": 1,
+        "passed": 2
+    },
+    "tsURL": "https://c63b-192-38-10-18.ngrok.io/check-status"
+}
