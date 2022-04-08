@@ -2,6 +2,7 @@ extends base.pug
 
 block style 
     <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="../static/css/animation.css ">
 
 block title
     <title id>ATC-Flow</title>
@@ -18,7 +19,9 @@ block content
                     <img src="../static/img/ATC-logos_transparent.png" alt="logo" height="150px" width="150px">
                 </div>
                 <div class="animation">
-                    <p></p>
+                    <div class="loading">
+                        <p class="animation-text"></p>
+                    </div>
                 </div>
             </div>
 
@@ -41,7 +44,7 @@ block content
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid corporis magni quod consectetur placeat, dignissimos tempora autem recusandae provident, itaque obcaecati minus voluptates! Illo voluptas beatae, quod dignissimos dolorum officiis?
                     </p>
                 </div>
-                <img class= "step-img" src="../static/img/test billiede.jpg" alt="step one" width="35%">
+                <img class= "step-img" src="../static/img/step 1.png" alt="step one" width="35%">
             </div>
         </div>
        
@@ -54,7 +57,7 @@ block content
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, cum accusamus saepe dolorum, reprehenderit accusantium dicta laudantium mollitia ducimus cumque, temporibus iusto ex non. Quisquam impedit ut eveniet animi commodi.
                     </p>
                 </div>
-                <img class="step-img" src="../static/img/test billiede.jpg" alt="step one" width="35%">
+                <img class="step-img" src="../static/img/step 2.png" alt="step one" width="35%">
             </div>
         </div>
 
@@ -67,7 +70,7 @@ block content
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, cum accusamus saepe dolorum, reprehenderit accusantium dicta laudantium mollitia ducimus cumque, temporibus iusto ex non. Quisquam impedit ut eveniet animi commodi.
                     </p>
                 </div>
-                <img class="step-img" src="../static/img/test billiede.jpg" alt="step one" width="35%">
+                <img class="step-img" src="../static/img/step 3.png" alt="step one" width="35%">
             </div>
         </div>
 
@@ -114,9 +117,29 @@ block content
             <button onclick="location.href='#';">To top</button>
         </div>
 
+
+
+        
         <footer>
-            Gruppe A306<br>
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley">may harm you</a>
+            <div class="footer-section">
+                <h3>&copy; ATC-Flow.com, (2022)</h3>
+                <img src="../static/img/ATC-logos_transparent.png" alt="ATC-logo" width="120px" height="120px">
+                
+            </div>
+            
+            <div class="footer-section">
+                <h3>About us</h3> 
+                <a target="_blank" href="https://github.com/thor1878/P2">GitHub</a>
+                <a target="_blank" href="https://www.cs.aau.dk/">AAU</a>
+            </div>
+
+            <div class="footer-section"> 
+                <h3>Contact us</h3>
+                <a href="mailto:fs-21-sw-2-a306@student.aau.dk">Mail</a>
+                <a target="_blank" href="https://github.com/thor1878/P2/blob/main/LICENSE">Terms</a> 
+            </div>
         </footer>
     </main>
     
+    block script
+        <script src="../static/js/animation.js" ></script>

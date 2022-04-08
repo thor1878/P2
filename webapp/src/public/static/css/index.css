@@ -1,61 +1,52 @@
 .hero {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 99px);
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-style: border-box;
-    padding: 0px;
 }
 
 .firstview-div {
+    padding: 65px 100px 40px 100px;
     display: flex;
     justify-content: space-between;
-    padding: 65px 100px 50px 100px;
-}
-
-.textbox {
-    padding-right: 80px;
 }
 
 .animation {
-    padding: 155px;
-    margin-top: 130;
-    margin-bottom: 100;
-    margin-right: 110;
-    margin-left: 100;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px;
-    /* rgba(0, 0, 0, 0.22) 0px 10px 10px; */
+    padding: 25px;
     margin: 20px;
+    border-radius: 15px;
+    background-color: rgb(33, 33, 33);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px;
 }
 
 .center-content {
+    padding: 1px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
 }
 
 #getStart {
-    margin-top: 30px;
-    padding: 10px 30px;
     color: white;
-    background-color: var(--navbar-bg-color);
-    border-radius: 15px;
+    margin-top: 30px;
     margin-left: 100px;
     margin-right: 100px;
+    padding: 10px 30px;
+    border-radius: 15px;
+    background-color: var(--navbar-bg-color);
 }
 
 .step-div {
     background-color: white;
     padding: 20px;
+    /* margin: 65px, 100px, 30px, 100px; */
     margin-top: 65px;
     margin-bottom: 30px;
-    border: 2px solid var(--sidebar-bg-color);
-    border-radius: 15px;
     margin-left: 100px;
     margin-right: 100px;
+    border-radius: 15px;
+    border: 2px solid var(--sidebar-bg-color);
 }
 .content-display {
     display: flex;
@@ -72,21 +63,37 @@
 
 .step-number {
     background-color: white;
-    /* color: white; */
     padding: 10px 20px;
-    width: fit-content;
     margin-top: -40px;
     margin-bottom: 10px;
-    border: 2px solid var(--sidebar-bg-color);
     border-radius: 20px;
+    border: 2px solid var(--sidebar-bg-color);
+    width: fit-content;
 }
 
 footer {
     color: white;
+    padding: 40px 120px 40px 120px;
+    margin: 40px -20px -20px -20px;
     background-color: var(--navbar-bg-color);
-    padding: 10px 30px;
-    margin-left: 100px;
-    margin-right: 100px;
-    border-radius: 15px;
-    margin-bottom: 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-section h3 {
+    font-size: 15px;
+    font-weight: 600;
+    font-style: oblique;
+}
+
+.footer-section a {
+    color: white;
+    font-size: 10px;
+    margin-top: 15px;
+    text-decoration: none;
 }

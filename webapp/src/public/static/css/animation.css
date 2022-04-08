@@ -1,0 +1,31 @@
+.loading {
+    font-size: 22px;
+    font-family: monospace;
+}
+
+.animation p::after {
+    content: "|";
+    margin-left: -3px;
+    animation: blink 1s step-start infinite;
+    color: rgb(190, 190, 190);
+}
+
+.animation-text {
+    width: 400px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
