@@ -3,7 +3,15 @@
     font-family: monospace;
 }
 
-.animation p::after {
+.animation-div {
+    padding: 25px;
+    margin: 20px;
+    border-radius: 15px;
+    background-color: rgb(33, 33, 33);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px;
+}
+
+.animation-div p::after {
     content: "|";
     margin-left: -3px;
     animation: blink 1s step-start infinite;

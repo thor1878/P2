@@ -32,15 +32,6 @@ const objects = [
     { key: '});', color: 'rgb(217,217,217)' },
 ]
 
-const hh =
-    `const sum = require('src/sum.js');
-
-test('Sum two numbers', () => {
-    expect(sum(3, 4)).toBe(7);
-})`;
-
-
-
 async function logChar(timeout, char, color) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -65,9 +56,7 @@ async function logStuff() {
             } else {
                 char = letter;
             }
-
-
-
+            
             timeout = Math.random() < 0.8 ? Math.random() / 5 * 700 + 50 : 400;
 
             await logChar(timeout, char, obj.color);
