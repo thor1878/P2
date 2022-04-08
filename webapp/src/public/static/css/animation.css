@@ -1,0 +1,39 @@
+.loading {
+    font-size: 22px;
+    font-family: monospace;
+}
+
+.animation-div {
+    padding: 25px;
+    margin: 20px;
+    border-radius: 15px;
+    background-color: rgb(33, 33, 33);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px;
+}
+
+.animation-div p::after {
+    content: "|";
+    margin-left: -3px;
+    animation: blink 1s step-start infinite;
+    color: rgb(190, 190, 190);
+}
+
+.animation-text {
+    width: 400px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
