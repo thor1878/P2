@@ -14,6 +14,9 @@ const app = express();
 
 const PORT = 3001;
 
+// Array that stores the currently active actions
+const activeActions = [];
+
 // Setup environment variables from .env folder
 require('dotenv').config();
 
@@ -94,7 +97,7 @@ app.post('/generate-tests', async (req, res) => {
     res.sendStatus(200);
 })
 
-const activeActions = [];
+
 
 app.post('/check-status', (req, res) => {
     const origin = req.body.origin;

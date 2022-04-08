@@ -13,7 +13,7 @@ jobs:
       user-test-info: ${{ steps.wait-response.outputs.user-test-info }}
 
     steps:
-    - name: Checkout #??????
+    - name: Checkout
       uses: actions/checkout@v3.0.0
 
     - name: Setup Node.js environment
