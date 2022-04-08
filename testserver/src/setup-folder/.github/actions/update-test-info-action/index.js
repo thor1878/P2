@@ -62,9 +62,9 @@ for (const file of userTestInfo.files) {
 
 
 try {
-    fs.unlinkSync('./.test/testInfo.json')
+    fs.unlinkSync('./.test/test-info.json')
 } catch {
     console.log('Cannot delete non-existing file');
 }
 
-fs.writeFileSync('./.test/testInfo.json', JSON.stringify(userTestInfo, null, 2));
+fs.writeFileSync('./.test/test-info.json', JSON.stringify(userTestInfo, null, 2));

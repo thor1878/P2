@@ -42,13 +42,15 @@ async function generateSetupTree() {
     const setupTree = [];
 
     for (const file of files) {
-        const content = await fs.promises.readFile('src/setup-folder/' + file);
+        const content = await fs.promises.readFile('src/setup-folder/' + file, {
+            encoding: 'utf-8'
+        });
 
         setupTree.push({
             path: file,
             mode: '100644',
             type: 'blob',
-            content: content.toString()
+            content: content
         })
     }
 

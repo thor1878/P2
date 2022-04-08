@@ -12,6 +12,7 @@ router.get('/repos', async (req, res) => {
     for (const item of content) {
         const pullsObject = [];
         const pulls = await getGitHub(config.repo + item.full_name + config.repoPulls + config.repoState, req.user.token);
+        
         for (const pullRequest of pulls) {
             pullsObject.push({
                 url: pullRequest.url,

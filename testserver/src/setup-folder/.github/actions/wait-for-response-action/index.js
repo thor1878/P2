@@ -39,15 +39,15 @@ async function getStatus() {
         },
         body: JSON.stringify({
             origin: "GA",
-            repo: repo,
+            repository: repo,
             branch: branch
         })
     })
 
     const status = response.status;
-    const data = await response.json();
-
+    
     if (status === 200) {
+        const data = await response.json();
         core.setOutput("user-test-info", data);
         return true;
     } else {

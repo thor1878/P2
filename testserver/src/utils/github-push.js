@@ -30,7 +30,6 @@ async function getBaseTreeSHA(repository, latestCommitSHA, gh_token) {
 }
 
 async function createTree(repository, baseTreeSHA, fileTree, gh_token) {
-    console.log(fileTree);
     const response = await fetch(`https://api.github.com/repos/${repository}/git/trees`, {
         method: 'POST',
         headers: {
@@ -106,7 +105,7 @@ function generateTestTree(userTestInfo) {
             filePath += file.path;
 
 
-            testString += `const ${func.name} = require('${filePath}');\n\n`
+            testString += `const { ${func.name} } = require('${filePath}');\n\n`
         }
 
 

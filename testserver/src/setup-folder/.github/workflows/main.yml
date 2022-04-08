@@ -3,6 +3,7 @@ name: Test
 on:
   pull_request:
     branches: [ main, master ]
+    types: [opened, reopened]
     
 jobs:
   wait_for_response:
@@ -12,7 +13,7 @@ jobs:
       user-test-info: ${{ steps.wait-response.outputs.user-test-info }}
 
     steps:
-    - name: Checkout #??????
+    - name: Checkout
       uses: actions/checkout@v3.0.0
 
     - name: Setup Node.js environment
@@ -21,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         npm i @actions/core
-        npm i node-fetch
+        npm i node-fetch@2
 
     - name: Wait for response
       id: wait-response

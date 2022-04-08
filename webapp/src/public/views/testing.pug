@@ -30,7 +30,7 @@ block content
                 
                     each func in file.functions
                         <div class="func-div" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-func-status="#{func.status}" data-num-tc="#{func.testCases.length}">
-                            if func.status !== 1
+                            if func.status !== "1"
                                 <button type="button" class="btn-exclude" onclick="toggleFunction('#{func.name}', this.parentElement)">Exclude #{func.name}</button>
                             else 
                                 <button type="button" class="btn-include" onclick="toggleFunction('#{func.name}', this.parentElement)">Include #{func.name}</button>
@@ -46,7 +46,7 @@ block content
                                             when 1: p Assessed: #{func.name} will NOT be tested.
                                             when 2: p All test cases in #{func.name} have passed.
                                             default: p Look up status code in the guide.
-                                        if func.status === 1
+                                        if func.status === "1"
                                             <label>Comment</label>
                                             if func.comment === ""
                                                 <input type="text" class="comment" placeholder="Write comment here" required>
@@ -58,7 +58,7 @@ block content
                                 pre #{func.functionString}
                             </div>
                             
-                            if func.status !== 1
+                            if func.status !== "1"
                                 if func.testCases.length === 0
                                     <script src="/static/js/testCases.js" onload="addNewTestCase('#{func.name}', this.parentElement, 0)"></script>
                                 else
@@ -113,7 +113,7 @@ block content
                                         <button type="button" class="btn-del" onclick="removeTestCase(this.parentElement)">Delete test case #{tcdex + 1}</button>
                                         </div>
 
-                            if func.status === 1
+                            if func.status === "1"
                                 <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length})" hidden>+ Add new test case</button>
                             else if func.testCases.length === 0
                                 <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, 1)">+ Add new test case</button>

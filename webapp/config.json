@@ -10,7 +10,7 @@
         "Python": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
         "C":"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"
     },
-    "tsURL": "https://c63b-192-38-10-18.ngrok.io",
+    "tsURL": "http://localhost:3001",
     "functionStatuses": {
         "failed": -1,
         "notAssessed": 0,

@@ -8,9 +8,14 @@ const { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, g
 const { updateTestInfo } = require('./utils/updateTestInfo');
 const { initSetup } = require('./utils/initial-setup');
 
+const tsURL = require('../config.json').tsURL;
+
 const app = express();
 
 const PORT = 3001;
+
+// Array that stores the currently active actions
+const activeActions = [];
 
 // Setup environment variables from .env folder
 require('dotenv').config();
@@ -76,28 +81,29 @@ app.post('/generate-tests', async (req, res) => {
     console.log(response);
 
     // send req to /check-status
-    const resp = await fetch('/check-status', {
+    const resp = await fetch(`${tsURL}/check-status`, {
         method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
             userTestInfo: userTestInfo,
             origin: "TS",
-            repo: req.body.repo,
-            branch: req.body.branch
+            repository: repository,
+            branch: branch
         })
     })
-
-    const data = await resp.json();
 
     res.sendStatus(200);
 })
 
-const activeActions = [];
+
 
 app.post('/check-status', (req, res) => {
     const origin = req.body.origin;
-    const repo = req.body.repo;
+    const repository = req.body.repository;
     const branch = req.body.branch;
-    const id = `${repo}-${branch}`
+    const id = `${repository}-${branch}`
 
     let obj;
 
@@ -132,8 +138,6 @@ app.post('/setup-repository', (req, res) => {
 
     const repository = req.body.repository;
     const gh_token = req.body.token;
-
-    console.log(req.body);
 
     try {
         initSetup(repository, gh_token);
