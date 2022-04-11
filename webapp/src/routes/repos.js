@@ -6,25 +6,46 @@ const { getGitHub } = require('../utils/GitHub');
 const router = express.Router();
 
 router.get('/repos', async (req, res) => {
-    const content = await getGitHub(config.user, req.user.token);
+    const userRepos = await getGitHub(config.user, req.user.token);
     const repos = [];
     
-    for (const item of content) {
+    for (const repo of userRepos) {
         const pullsObject = [];
-        const pulls = await getGitHub(config.repo + item.full_name + config.repoPulls + config.repoState, req.user.token);
+        const pulls = await getGitHub(config.repo + repo.full_name + config.repoPulls + config.repoState, req.user.token);
+        const runningActions = await getGitHub('https://api.github.com/repos/thor1878/testhaha/actions/runs?status=in_progress', req.user.token);
+
         
         for (const pullRequest of pulls) {
+            const workflow = runningActions.workflow_runs.find(wr => wr.head_branch === pullRequest.head.ref);
+            let pullStatus;
+
+            if (workflow) {
+                const jobs = await getGitHub(workflow.jobs_url, req.user.token);
+
+                // If job 'wait_for_response' is in progress
+                if (jobs.jobs[0].status === 'in_progress') {
+                    pullStatus = 'waiting'
+                }
+                else {
+                    pullStatus = 'testing'
+                }
+            } else {
+                pullStatus = 'not_active'                
+            }
+
             pullsObject.push({
                 url: pullRequest.url,
                 number: pullRequest.number,
                 title: pullRequest.title,
-                branch: pullRequest.head.ref
+                branch: pullRequest.head.ref,
+                status: pullStatus
             });
         }
+        // console.log(pullsObject);
 
         repos.push({
-            fullName: item.full_name,
-            language: config.languages[item.language] ? config.languages[item.language] : "not supported",
+            fullName: repo.full_name,
+            language: config.languages[repo.language] ? config.languages[repo.language] : "not supported",
             pullRequests: pullsObject, 
         });
         

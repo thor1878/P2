@@ -134,13 +134,13 @@ app.post('/check-status', (req, res) => {
 
 });
 
-app.post('/setup-repository', (req, res) => {
+app.post('/setup-repository', async (req, res) => {
 
     const repository = req.body.repository;
     const gh_token = req.body.token;
 
     try {
-        initSetup(repository, gh_token);
+        await initSetup(repository, gh_token);
         res.status(200).send({ message: 'Initial setup succesfull' });
     } catch (err) {
         res.status(500).send({ message: err });

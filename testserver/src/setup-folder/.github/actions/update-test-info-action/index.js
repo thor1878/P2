@@ -68,3 +68,7 @@ try {
 }
 
 fs.writeFileSync('./.test/test-info.json', JSON.stringify(userTestInfo, null, 2));
+
+if (hasFailed) {
+    core.setFailed('At least one test failed');
+}
