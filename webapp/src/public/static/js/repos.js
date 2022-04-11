@@ -45,7 +45,6 @@ for (const card of repoCards) {
 function activateDropdown(btn, state){
     let parent = btn.parentElement;
     let allContents = parent.querySelectorAll(".content");
-    console.log(allContents);
 
     if (state === "remove") {
         for (const item of allContents) {

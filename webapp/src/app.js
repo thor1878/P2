@@ -79,6 +79,15 @@ app.post('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) 
     res.sendStatus(status);
 })
 
+app.get('/:repoOwner/:repoName/setup', async (req, res) => {
+    const status = await contactTS('/setup-repository', 'POST', {
+        repository: req.params.repoOwner + "/" + req.params.repoName,
+        token: req.user.token
+    })
+
+    res.redirect('/repos');
+})
+
 app.get('/logs', (req, res) => {
     res.render('logs');
 })

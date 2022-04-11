@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 
 const { getRepoData, filterRepoData, getFilesData, getTestInfo } = require('./utils/getData');
-const { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree } = require('./utils/github-push');
+const { deleteTestFolder, getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree } = require('./utils/github-push');
 const { updateTestInfo } = require('./utils/updateTestInfo');
 const { initSetup } = require('./utils/initial-setup');
 
@@ -134,13 +134,13 @@ app.post('/check-status', (req, res) => {
 
 });
 
-app.post('/setup-repository', (req, res) => {
+app.post('/setup-repository', async (req, res) => {
 
     const repository = req.body.repository;
     const gh_token = req.body.token;
 
     try {
-        initSetup(repository, gh_token);
+        await initSetup(repository, gh_token);
         res.status(200).send({ message: 'Initial setup succesfull' });
     } catch (err) {
         res.status(500).send({ message: err });

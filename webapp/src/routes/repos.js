@@ -12,6 +12,7 @@ router.get('/repos', async (req, res) => {
     for (const item of content) {
         const pullsObject = [];
         const pulls = await getGitHub(config.repo + item.full_name + config.repoPulls + config.repoState, req.user.token);
+        const setup = await getGitHub(config.repo + item.full_name + "/contents/.test", req.user.token);
         
         for (const pullRequest of pulls) {
             pullsObject.push({
@@ -26,8 +27,8 @@ router.get('/repos', async (req, res) => {
             fullName: item.full_name,
             language: config.languages[item.language] ? config.languages[item.language] : "not supported",
             pullRequests: pullsObject, 
+            setup: setup.message === "Not Found" ? false : true
         });
-        
     }
 
     res.render('repos', {repos: repos});

@@ -77,7 +77,7 @@ block content
                                                 if tc.description === ""
                                                     <input type="text" class="description" placeholder="Description for test case" required>
                                                 else
-                                                    <input type="text" class="description" value="#{tc.description}" required>
+                                                    <script src="/static/js/testCases.js" onload="addDescription('#{tc.description}', this.parentElement)"></script>
                                             </div>
                                         </section>
 
