@@ -7,7 +7,7 @@ async function deleteTestFolder(repository, branch, gh_token) {
         path: ".test/test-info.json",
         mode: "100644",
         type: "blob",
-        content: "{\n\tfiles: []\n}"
+        content: "{\n\t\"files\": []\n}"
     }]
 
     const latestCommitSHA = await getLatestCommitSHA(repository, branch, gh_token);

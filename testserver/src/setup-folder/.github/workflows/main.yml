@@ -92,5 +92,5 @@ jobs:
         git push
 
     - name: Check if test has failed
-      if: ${{ steps.update-info.outputs.hasFailed }}
+      if: steps.update-info.outputs.hasFailed == 'true'
       run: exit 1
