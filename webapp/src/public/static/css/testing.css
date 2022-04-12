@@ -18,14 +18,24 @@ main h2 {
     color: var(--sidebar-text-color);
     overflow-y: scroll;
 }
+#sidebar ul {
+    width: 100%;
+}
 
 #sidebar li {
     margin-bottom: 10px;
     list-style: none;
     cursor: pointer;
+    width: 100%;
 }
 
 #sidebar a {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: rtl;
+    width: 100%;
     color: var(--sidebar-a-color);
     outline: none;
     text-decoration: none;

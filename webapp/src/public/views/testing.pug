@@ -2,6 +2,7 @@ extends base.pug
 
 block style 
     <link rel="stylesheet" href="/static/css/testing.css">
+    <link rel="stylesheet" href="/static/css/prism.css">
 
 block title
     <title>Modify test cases</title>
@@ -12,7 +13,7 @@ block content
         <ul>
             <li><a href="#top">-- Go to top</a></li>
             each file in files
-                <li><a href="##{file.path}">#{file.path}</a></li>
+                <li><a href="##{file.path}" title="#{file.path}">#{file.path}</a></li>
         </ul>
     </aside>
 
@@ -42,10 +43,10 @@ block content
                                         <h3>#{func.name}</h3>
                                         <p>Status: <a class="func-status">#{func.status}</a></p>
                                         case func.status
-                                            when -1: p At least one test case failed.
-                                            when 0: p Not assessed: Choose to either include or exclude #{func.name} from test.
-                                            when 1: p Assessed: #{func.name} will NOT be tested.
-                                            when 2: p All test cases in #{func.name} have passed.
+                                            when "-1": p At least one test case failed.
+                                            when "0": p Not assessed: Choose to either include or exclude #{func.name} from test.
+                                            when "1": p Assessed: #{func.name} will NOT be tested.
+                                            when "2": p All test cases in #{func.name} have passed.
                                             default: p Look up status code in the guide.
                                         if func.status === "1"
                                             <label>Comment</label>
@@ -56,7 +57,8 @@ block content
                                     </div>
                                 </section>
 
-                                pre #{func.functionString}
+                                pre
+                                    code(class="language-js") #{func.functionString}
                             </div>
                             
                             if func.status !== "1"
@@ -129,3 +131,4 @@ block content
 block script
     <script src="/static/js/testing.js"></script>
     <script src="/static/js/testCases.js"></script>
+    <script src="/static/js/prism.js"></script>
