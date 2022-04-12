@@ -60,6 +60,8 @@ app.post('/generate-tests', async (req, res) => {
     const branch = req.body.branch; 
     const gh_token = req.body.token;
 
+    await deleteTestFolder(repository, branch, gh_token);
+
     // Generate tree of test files
     const testTree = generateTestTree(userTestInfo);
 

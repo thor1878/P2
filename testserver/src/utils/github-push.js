@@ -2,29 +2,27 @@ const fetch = require('node-fetch');
 require('dotenv').config();
 
 // not done
-async function deleteTestFolder(repository, gh_token) {
-    const response = await fetch(`https://api.github.com/repos/${repository}/contents`, {
-        method: "GET",
-        headers: {
-            'Authorization': `token ${gh_token}`,
-            'Accept': 'application/vnd.github.v3+json',
-        },
-    })
+async function deleteTestFolder(repository, branch, gh_token) {
+    const testFolderTree = [{
+        path: ".test/test-info.json",
+        mode: "100644",
+        type: "blob",
+        content: "{\n\tfiles: []\n}"
+    }]
 
-    const data = await response.json();
-    const sha = data.find(obj => obj.path === '.test').sha;
+    const latestCommitSHA = await getLatestCommitSHA(repository, branch, gh_token);
+    
+    // Get SHA of the base tree (root)
+    const baseTreeSHA = await getBaseTreeSHA(repository, latestCommitSHA, gh_token);
+    
+    // Create new tree based on userTestInfo
+    const newTreeSHA = await createTree(repository, baseTreeSHA, testFolderTree, gh_token);
 
-    await fetch(`https://api.github.com/repos/${repository}/contents/.test`, {
-        method: "DELETE",
-        headers: {
-            'Authorization': `token ${gh_token}`,
-            'Accept': 'application/vnd.github.v3+json',
-        },
-        body: JSON.stringify({
-            "sha": sha,
-            "message": "delete"
-        })
-    })
+    // Commit tree
+    const newCommitSHA = await commitTree(repository, latestCommitSHA, newTreeSHA, gh_token);
+
+    // Update branch ref
+    const response = await updateRef(repository, newCommitSHA, branch, gh_token);
 }
 
 async function getLatestCommitSHA(repository, branch, gh_token) {
