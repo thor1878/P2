@@ -10,8 +10,7 @@ inputs:
     required: true
 
 outputs:
-  results:
-    description: 'Updated info file'
+  hasFailed:
 
 runs:
   using: 'node16'
