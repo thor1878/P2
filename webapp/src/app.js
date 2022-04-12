@@ -39,7 +39,10 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) => {
-    const content = await getGitHub(config.repo + req.params.repoOwner + "/" + req.params.repoName + config.repoPulls + "/" + req.params.pullrequest, req.user.token);
+    const repoOwner = req.params.repoOwner;
+    const repoName = req.params.repoName;
+    const pullrequest = req.params.pullrequest;
+    const content = await getGitHub(config.repo + repoOwner + "/" + repoName + config.repoPulls + "/" + pullrequest, req.user.token);
     if (content.message === "Not Found" || content.head.ref !== req.params.branch || content.state === "closed") {
         res.send("404 - Not Found");
     }
@@ -47,15 +50,22 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
     //     res.send("404 - Not Found");
     // }
     else {
-        const status = await getCollaborators(req.params.repoOwner + "/" + req.params.repoName + "/collaborators/" + req.user.profile.username, req.user.token);
+        const status = await getCollaborators(repoOwner + "/" + repoName + "/collaborators/" + req.user.profile.username, req.user.token);
         
         if (status === 204) {
             const data = await contactTS('/test-info', "GET", {
-                repository: req.params.repoOwner + "/" + req.params.repoName,
+                repository: repoOwner + "/" + repoName,
                 branch: req.params.branch,
                 token: req.user.token
             })
-            res.render('testing', {files: data.files, matcherOptions: matchers});
+            res.render('testing', {
+                user: repoOwner, 
+                repo: repoName, 
+                pr: `https://github.com/${repoOwner}/${repoName}/pull/${pullrequest}`, 
+                branch: content.head.ref,
+                files: data.files, 
+                matcherOptions: matchers
+            });
             // res.render('testing', {files: dummyData.files, matcherOptions: matchers});
         }
         else {
