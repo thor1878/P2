@@ -13,7 +13,7 @@ router.get('/repos', async (req, res) => {
         const pullsObject = [];
 
         const pulls = await getGitHub(config.repo + repo.full_name + config.repoPulls + config.repoState, req.user.token);
-        const runningActions = await getGitHub('https://api.github.com/repos/thor1878/testhaha/actions/runs?status=in_progress', req.user.token);
+        const runningActions = await getGitHub(`https://api.github.com/repos/${repo.full_name}/actions/runs?status=in_progress`, req.user.token);
         const setup = await getGitHub(config.repo + item.full_name + "/contents/.test", req.user.token);
 
         
