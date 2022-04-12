@@ -39,6 +39,10 @@ body {
     overflow: overlay;
 }
 
+#loader {
+    display: none;
+}
+
 body h1, h2, h3, h4 {
     margin-bottom: 10px;
 }

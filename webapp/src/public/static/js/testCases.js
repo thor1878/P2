@@ -2,7 +2,8 @@ function addNewTestCase(functionName, funcDiv, newTcindex) {
     // Initial setup - Select elements and calculate index for the new test case and the number of args
     const btnAdd = funcDiv.querySelector(".btn-add");
     const newTcNumber = Number(newTcindex) + 1;
-    const numOfArgs = funcDiv.dataset.funcParams.split(",").length;
+    const params = funcDiv.dataset.funcParams;
+    const numOfArgs = params === "" ? 0 : params.split(",").length;
     
     // Create a a div for the new test case and add id, dataset and so on.
     const newTcDiv = document.createElement("div");
@@ -67,6 +68,13 @@ function addNewTestCase(functionName, funcDiv, newTcindex) {
 
     // If btnAdd exists, add onclick attribute
     btnAdd?.setAttribute("onclick", `addNewTestCase('${functionName}', this.parentElement, ${newTcNumber})`);
+}
+
+function addDescription(description, tcDescription) {
+    const newDescription = description.split(' <')[0];
+    tcDescription.innerHTML += `
+    <input type="text" class="description" value="${newDescription}" required>
+    `
 }
 
 function removeTestCase(tcDiv) {
