@@ -94,6 +94,7 @@
 
 .content {
     height: 0;
+    display: flex;
     overflow: hidden;
     transition: 0.2s;
     margin: 0px;
@@ -102,6 +103,15 @@
 .content.show {
     height: 40px;
     margin: 10px;
+}
+.content a {
+    text-decoration: none;
+    color:rgb(64, 64, 64);
+}
+
+.content a span {
+    margin-left: 20px;
+    font-size: 40px;
 }
 
 .card-wrapper {

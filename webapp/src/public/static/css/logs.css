@@ -1,0 +1,92 @@
+main {
+    width: 100%;
+}
+
+.file-div {
+    background-color: #46639a54;
+    border: 2px solid var(--sidebar-bg-color);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    height: fit-content;
+    width: 100%;
+}
+
+.file-div > p {
+    margin-bottom: 20px;
+}
+
+.func-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.func-wrapper::after {
+    content: '';
+    width: 31%;
+}
+
+.func-wrapper2 {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: black 2px solid;
+}
+
+.func-div {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    height: fit-content;
+    width: 600px;
+}
+
+.status-1 {
+    background-color: rgba(149, 2, 2, 0.347);
+}
+
+.status1 {
+    background-color: rgba(205, 204, 204, 0.682);
+    margin: 20px 2% 0 0;
+    padding: 3px 10px;
+    width: 15%;
+}
+
+.status1:nth-child(6n) {
+    margin-right: 0;
+}
+
+
+
+p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.status2 {
+    background-color: #51b02582;
+}
+
+
+.TC-div {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+    padding: 3px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    height: fit-content;
+    width: 100%;
+}
+
+.TC-passed {
+    background-color: #3a711dac;
+    
+}
+.TC-failed {
+    background-color: rgb(208, 88, 88);
+}

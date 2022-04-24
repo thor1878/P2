@@ -111,8 +111,6 @@ async function getTestInfo(repoData, gh_token) {
 
     const testInfo = new Buffer.from(data.content, 'base64').toString('utf-8');
 
-    console.log(testInfo);
-
     return JSON.parse(testInfo);
 }
 

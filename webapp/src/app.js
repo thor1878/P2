@@ -8,6 +8,7 @@ const auth = require('./routes/auth');
 const config = require('../config.json');
 const { getGitHub, getCollaborators } = require('./utils/GitHub');
 const { contactTS } = require('./utils/TestServer');
+const { default: fetch } = require('node-fetch');
 
 const app = express();
 const PORT = 3000;
@@ -56,7 +57,8 @@ app.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res) =
             const data = await contactTS('/test-info', "GET", {
                 repository: repoOwner + "/" + repoName,
                 branch: req.params.branch,
-                token: req.user.token
+                token: req.user.token,
+                update: true
             })
             res.render('testing', {
                 user: repoOwner, 
@@ -98,8 +100,16 @@ app.get('/:repoOwner/:repoName/setup', async (req, res) => {
     res.redirect('/repos');
 })
 
-app.get('/logs', (req, res) => {
-    res.render('logs');
+app.get('/:repoOwner/:repoName/:branch/logs', async (req, res) => {
+    const testInfo = await contactTS('/test-info', 'GET', {
+        repository: req.params.repoOwner + "/" + req.params.repoName,
+        branch: req.params.branch,
+        token: req.user.token,
+        update: false
+    })
+    res.render('logs', {
+    testInfo: JSON.parse(JSON.stringify(testInfo).replaceAll(/(\"description\"\:[^\r\n]*?)[ ]\<.*?\>/g, '$1'))
+    });
 })
 
 app.listen(PORT, () => {
