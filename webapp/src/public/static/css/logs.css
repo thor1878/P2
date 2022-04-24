@@ -32,7 +32,7 @@ main {
 .func-wrapper2 {
     display: flex;
     flex-wrap: wrap;
-    border-top: black 2px solid;
+    border-top: rgba(0, 0, 0, 0.582) 2px solid;
 }
 
 .func-div {
@@ -83,10 +83,28 @@ p {
     width: 100%;
 }
 
-.TC-passed {
-    background-color: #3a711dac;
-    
+.TC-div p {
+    display: flex;
+    align-items: center;
 }
-.TC-failed {
-    background-color: rgb(208, 88, 88);
+
+.TC-passed, .TC-failed {
+    background-color: #cfcfcf7c;
 }
+
+.TC-passed span {
+    color: green;
+    font-weight: 900;
+    border: 2px solid green;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.TC-failed span {
+    color: rgb(192, 0, 0);
+    font-weight: 900;
+    border: 2px solid rgb(192, 0, 0);
+    border-radius: 50%;
+    margin: 0 5px;
+}
+

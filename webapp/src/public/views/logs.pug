@@ -29,11 +29,11 @@ block content
                                 each TC, index in func.testCases
                                     if TC.passed
                                         <div class="TC-div TC-passed">
-                                            <p>TC #{TC.description} has passed</p>
+                                            <p><span class="material-icons">check</span>#{TC.description}</p>
                                         </div>
                                     else 
                                         <div class="TC-div TC-failed">
-                                            <p>TC #{TC.description} has failed</p>
+                                            <p><span class="material-icons">clear</span>#{TC.description}</p>
                                         </div>
                             </div> 
                 </div>
