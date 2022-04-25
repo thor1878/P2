@@ -129,15 +129,13 @@ p {
     align-items: center;
 }
 
-.TC-passed, .TC-failed {
-    background-color: #ffffff71;
-}
-
 .TC-passed {
+    background-color: #CDE9C1;
     border: var(--green-btn-bg-color) 2px solid;
 }
 
 .TC-failed {
+    background-color: #FFC0C0;
     border: var(--red-btn-bg-color) 2px solid;
 }
 
