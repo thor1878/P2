@@ -107,8 +107,9 @@ app.get('/:repoOwner/:repoName/:branch/logs', async (req, res) => {
         token: req.user.token,
         update: false
     })
+    console.log(testInfo);
     res.render('logs', {
-    testInfo: JSON.parse(JSON.stringify(testInfo).replaceAll(/(\"description\"\:[^\r\n]*?)[ ]\<.*?\>/g, '$1'))
+        testInfo: JSON.parse(JSON.stringify(testInfo).replace(/(\"description\"\:[^\r\n]*?)[ ]\<.*?\>/g, '$1'))
     });
 })
 
