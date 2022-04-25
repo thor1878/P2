@@ -37,6 +37,7 @@
 
 .sub-card {
     position: relative;
+    color: white;
     background-color: var(--repo-sub-card-bg-color-active);
     width: 80%;
     padding: 10px;
@@ -62,13 +63,15 @@
 }
 
 .sub-card.waiting {
-
+    background-color: #c4c770;
 }
+
 .sub-card.testing {
-    background-color: rgb(196, 199, 112);
+    background-color: #c4c770;
 }
 .sub-card.not-active {
-    background-color: rgb(205, 109, 109);
+    /* background-color: rgb(205, 109, 109); */
+    background-color: var(--status-red-bg-color);
 }
 .sub-card:disabled {
     cursor: default;
@@ -106,7 +109,7 @@
 }
 .content a {
     text-decoration: none;
-    color:rgb(64, 64, 64);
+    color:#404040;
 }
 
 .content a span {

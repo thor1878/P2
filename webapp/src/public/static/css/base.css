@@ -19,6 +19,14 @@
     --repo-sub-card-bg-color-active: #6a9e6a;
     --repo-sub-card-bg-color-disabled: #c28383;
     --input-fields-bg-color: #f5f5f5;
+
+    --green-btn-bg-color: #008000;
+    --green-btn-border-color: #006700;
+    --red-btn-bg-color: #ff0000;
+    --red-btn-border-color: #b20000;
+
+    --status-green-bg-color: #51b02582;
+    --status-red-bg-color: #ff000072;
 }
 
 * {

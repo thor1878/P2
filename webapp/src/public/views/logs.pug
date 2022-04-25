@@ -4,23 +4,24 @@ block style
     <link rel="stylesheet" href="/static/css/logs.css">
 
 block title
-    <title>Logs</title>
+    <title>Test report</title>
 
 block content 
-    //- <aside id="sidebar">
-    //-     <h2>Files</h2>
-    //-     <ul>
-    //-         <li><a href="#top">-- Go to top</a></li>
-    //-         <li><a href=""></a></li>
-    //-     </ul>
-    //- </aside>
+    <aside id="sidebar">
+        <h2>Files</h2>
+        <ul>
+            <li><a href="#top">-- Go to top</a></li>
+            each file in testInfo.files
+                <li><a href="##{file.path}" title="#{file.path}">#{file.path}</a></li>
+        </ul>
+    </aside>
 
     <main>
-        <h1>Logs</h1>
-        
+        <h1 id="top">Test report</h1>
         each file, index in testInfo.files
-            <div class="file-div">
-                <h2>Tested functions (#{file.path})</h2>
+            <div id="#{file.path}" class="file-div">
+                <h2>#{file.path}</h2>
+                <h4>Tested functions</h4>
                 <div class="func-wrapper">
                     each func in file.functions
                         if func.status !== 1
@@ -37,7 +38,7 @@ block content
                                         </div>
                             </div> 
                 </div>
-                <h2>Excluded functions (#{file.path})</h2>
+                <h4>Excluded functions</h4>
                 <div class="func-wrapper2">
                     each func in file.functions
                         if func.status === 1

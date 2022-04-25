@@ -76,11 +76,8 @@ main h2 {
 
 .info-div a:hover::after {
     left: 0;
-    
     width: 100%;
-    
 }
-
 
 .func-div {
     background-color: #ffffff;
@@ -186,7 +183,7 @@ label {
 }
 .btn-include:hover {
     color: #ffffff;
-    border: 2px solid #008000;
+    border: 2px solid #006700;
     background-color: #008000;
 }
 
@@ -199,8 +196,8 @@ label {
 
 .btn-exclude:hover, .btn-del:hover {
     color: #ffffff;
-    border: 2px solid #b20000;
-    background-color: #ff0000;
+    border: 2px solid var(--red-btn-border-color);
+    background-color: var(--red-btn-bg-color);
 }
 
 /* Special options for the delete button */
