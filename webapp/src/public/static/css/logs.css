@@ -22,6 +22,8 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    border-bottom: rgba(0, 0, 0, 0.582) 2px solid;
+    margin-bottom: 20px;
 }
 
 .func-wrapper::after {
@@ -32,7 +34,7 @@ main {
 .func-wrapper2 {
     display: flex;
     flex-wrap: wrap;
-    border-top: rgba(0, 0, 0, 0.582) 2px solid;
+    /* border-top: rgba(0, 0, 0, 0.582) 2px solid; */
 }
 
 .func-div {

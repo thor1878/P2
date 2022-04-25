@@ -20,12 +20,12 @@ block content
         
         each file, index in testInfo.files
             <div class="file-div">
-                <p>File is #{file.path}
+                <h2>Tested functions (#{file.path})</h2>
                 <div class="func-wrapper">
                     each func in file.functions
                         if func.status !== 1
                             <div class="func-div status#{func.status}">
-                                <p>Function is #{func.name}
+                                <h3>#{func.name}</h3>
                                 each TC, index in func.testCases
                                     if TC.passed
                                         <div class="TC-div TC-passed">
@@ -37,6 +37,7 @@ block content
                                         </div>
                             </div> 
                 </div>
+                <h2>Excluded functions (#{file.path})</h2>
                 <div class="func-wrapper2">
                     each func in file.functions
                         if func.status === 1
@@ -44,6 +45,5 @@ block content
                                 <p>#{func.name}
                             </div> 
                 </div>
-
             </div>
     </main>
