@@ -40,12 +40,12 @@ main h2 {
     outline: none;
     text-decoration: none;
     padding: 2px 1px 0;
+    /* transition: 0.2s; */
 }
 
 #sidebar a:hover {
     color: var(--sidebar-a-color-hover);
     border-bottom: 2px solid;
-    transition: 0.1s;
 }
 
 .info-div {
