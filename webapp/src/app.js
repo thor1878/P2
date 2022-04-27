@@ -99,12 +99,11 @@ app.get('/:repoOwner/:repoName/:branch/logs', async (req, res) => {
         token: req.user.token,
         update: false
     })
-    console.log(testInfo);
     res.render('logs', {
         testInfo: JSON.parse(JSON.stringify(testInfo).replace(/(\"description\"\:[^\r\n]*?)[ ]\<.*?\>/g, '$1'))
     });
 })
 
 app.listen(PORT, () => {
-    console.log(`Server running on Port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
