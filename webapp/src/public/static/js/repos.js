@@ -1,50 +1,50 @@
-let repoCards = document.querySelectorAll('.card');
-let repoSubCards = document.querySelectorAll(".sub-card");
+// ----- Logic to control the drop down on 'Choose repository' -----
 
-let selected = localStorage.getItem("activeCard");
-let selectedSubCard = localStorage.getItem("activeSubCard");
+const allCards = document.querySelectorAll('.card');
+const allSubCards = document.querySelectorAll(".sub-card");
 
-//Loop through all cards in html doc with tag .card
-for (const card of repoCards) {
-    //Add click event to all subcards
-    for (const subCard of repoSubCards) {
+const selectedCard = localStorage.getItem("activeCard");
+const selectedSubCard = localStorage.getItem("activeSubCard");
+
+// Loop through all cards in the html with the tag .card
+for (const card of allCards) {
+
+    // Loop through all subCards of card
+    for (const subCard of allSubCards) {
         if (subCard.id === selectedSubCard) {
             subCard.classList.add("active");
-            let daddy = subCard.parentElement;
-            let grandDaddy = daddy.parentElement.querySelector(".card");
-            grandDaddy.classList.add('active');
-            activateDropdown(grandDaddy, "add");
+            const cardParent = subCard.parentElement.parentElement.querySelector(".card");
+            cardParent.classList.add('active');
+            activateDropdown(cardParent, "add");
         }
 
+        // Listen for click events on all subCards
         subCard.addEventListener("click", () => {
-            //Remove all subtag on all subcards
-            for (const sub of repoSubCards) {
+            for (const sub of allSubCards) {
                 sub.classList.remove("active");
             }
 
-            selectedSubCard = subCard.id;
             subCard.classList.add("active");
-            localStorage.setItem("activeSubCard", selectedSubCard);
+            localStorage.setItem("activeSubCard", subCard.id);
         })
     }
 
+    // Listen for click events on all cards
     card.addEventListener("click", () => {
-        for (const card of repoCards) {
+        for (const card of allCards) {
             card.classList.remove('active');
             activateDropdown(card, "remove");      
         }
 
         activateDropdown(card, "add");
         card.classList.add('active');
-        selected = card.id;
-        localStorage.setItem("activeCard", selected);
+        localStorage.setItem("activeCard", card.id);
     });
 }
 
-//Remove or add show class to sub cards
+// Remove or add .show class to sub cards
 function activateDropdown(btn, state){
-    let parent = btn.parentElement;
-    let allContents = parent.querySelectorAll(".content");
+    const allContents = btn.parentElement.querySelectorAll(".content");
 
     if (state === "remove") {
         for (const item of allContents) {
