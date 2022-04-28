@@ -21,7 +21,7 @@ block content
                         
                         if repo.setup === false 
                             <div class="content">
-                                <div id="#{index}" class="sub-card" onclick="document.body.classList.add('loading-animation');location.href='/#{repo.fullName}/setup'">Setup repository</div>
+                                <div id="#{index}" class="sub-card" onclick="setupRepository('#{repo.fullName}')">Setup repository</div>
                             </div>
                         else if repo.pullRequests.length === 0
                             <div class="content">
