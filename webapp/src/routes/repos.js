@@ -43,7 +43,6 @@ router.get('/repos', async (req, res) => {
                 status: pullStatus
             });
         }
-        // console.log(pullsObject);
 
         repos.push({
             fullName: repo.full_name,

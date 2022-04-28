@@ -106,8 +106,6 @@ app.post('/generate-tests', async (req, res) => {
     res.sendStatus(200);
 })
 
-
-
 app.post('/check-status', (req, res) => {
     const origin = req.body.origin;
     const repository = req.body.repository;
@@ -125,7 +123,7 @@ app.post('/check-status', (req, res) => {
     } else if (obj = activeActions.find(o => o.id === id)) {
 
         if (obj.ready) {
-            // Send userTestInfo to GA ...
+            // Send userTestInfo to GA
             res.send(obj.userTestInfo);
             activeActions.splice(activeActions.indexOf(obj), 1);
         } else {
