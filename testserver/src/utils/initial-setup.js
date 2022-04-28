@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, deleteTestFolder } = require('../utils/github-push');
+const { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, resetTestFolder } = require('../utils/github-push');
 
 // Inject content of setup-folder to users repository on main branch
 async function initSetup(repository, gh_token) {

@@ -1,8 +1,7 @@
 const fetch = require('node-fetch');
 require('dotenv').config();
 
-// not done
-async function deleteTestFolder(repository, branch, gh_token) {
+async function resetTestFolder(repository, branch, gh_token) {
     const testFolderTree = [{
         path: ".test/test-info.json",
         mode: "100644",
@@ -10,6 +9,7 @@ async function deleteTestFolder(repository, branch, gh_token) {
         content: "{\n\t\"files\": []\n}"
     }]
 
+    // Get SHA of the latest commit
     const latestCommitSHA = await getLatestCommitSHA(repository, branch, gh_token);
     
     // Get SHA of the base tree (root)
@@ -156,4 +156,4 @@ function generateTestTree(userTestInfo) {
 }
 
 
-module.exports = { deleteTestFolder, getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree };
+module.exports = { resetTestFolder, getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree };
