@@ -115,4 +115,4 @@ async function getTestInfo(repoData, gh_token) {
 }
 
 
-module.exports = { getRepoData, filterRepoData, getFilesData, getTestInfo };
+module.exports = { getRepoData, filterRepoData, getFilesData, getFunctionStrings, getTestInfo };
