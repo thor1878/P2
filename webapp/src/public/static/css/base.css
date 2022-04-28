@@ -15,26 +15,40 @@
     --repo-card-text-color-active: #ffffff;
     --repo-card-bg-color: #ffffff;
     --repo-card-bg-color-hover: var(--navbar-bg-color);
-    --repo-card-bg-color-active: #007000ba;
-    --repo-sub-card-bg-color-active: #007000;
+    --repo-card-bg-color-active: var(--navbar-bg-color);
+    --repo-sub-card-bg-color-active: #6a9e6a;
+    --repo-sub-card-bg-color-disabled: #c28383;
     --input-fields-bg-color: #f5f5f5;
+
+    --green-btn-bg-color: #008000;
+    --green-btn-border-color: #006700;
+    --red-btn-bg-color: #ff0000;
+    --red-btn-border-color: #b20000;
+
+    --status-green-bg-color: #51b02582;
+    --status-red-bg-color: #ff000072;
 }
 
 * {
+    font-family: inherit;
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
     scroll-margin: 20px;
     scroll-behavior: smooth;
 }
 
 body {
+    font-family: "Montserrat", sans-serif;
     width: 100vw;
     color: var(--body-text-color);
     background-color: var(--body-bg-color);
     display: flex;
     overflow: overlay;
+}
+
+#loader {
+    display: none;
 }
 
 body h1, h2, h3, h4 {

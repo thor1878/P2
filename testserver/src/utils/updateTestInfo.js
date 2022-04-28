@@ -28,7 +28,7 @@ function updateTestInfo(testInfo, filesData) {
                         name: func.name,
                         params: func.params,
                         async: func.async,
-                        status: 0,
+                        status: "0",
                         functionString: func.functionString,
                         testCases: []
                     })
@@ -42,7 +42,7 @@ function updateTestInfo(testInfo, filesData) {
                     name: func.name,
                     params: func.params,
                     async: func.async,
-                    status: 0,
+                    status: "0",
                     functionString: func.functionString,
                     testCases: []
                 })

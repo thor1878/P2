@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 
 const { getRepoData, filterRepoData, getFilesData, getTestInfo } = require('./utils/getData');
-const { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree } = require('./utils/github-push');
+const { resetTestFolder, getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree } = require('./utils/github-push');
 const { updateTestInfo } = require('./utils/updateTestInfo');
 const { initSetup } = require('./utils/initial-setup');
 
@@ -31,24 +31,31 @@ app.get('/test-info', async (req, res) => {
     const repository = req.query.repository;
     const branch = req.query.branch;
     const gh_token = req.query.token;
+    const update = req.query.update;
 
     // Get data from GitHub repository branch
     const repoData = await getRepoData(repository, branch, gh_token);
-
-    // Filter data to only include '.js' files (not '.test.js')
-    const filteredData = filterRepoData(repoData);
-
-    // Get data for each file (path, function strings, etc...)
-    const filesData = await getFilesData(filteredData, gh_token);
-
+    
     // Get test info file from branch
     const testInfo = await getTestInfo(repoData, gh_token);
 
-    // Update test info (add all functions that are not in test info. Nothing else should be necessary yet)
-    const updatedTestInfo = updateTestInfo(testInfo, filesData);
-
-    // Send updated test info back to webapp
-    res.send(JSON.stringify(updatedTestInfo));
+    if (update === "true") {
+        // Filter data to only include '.js' files (not '.test.js')
+        const filteredData = filterRepoData(repoData);
+    
+        // Get data for each file (path, function strings, etc...)
+        const filesData = await getFilesData(filteredData, gh_token);
+    
+        // Update test info (add all functions that are not in test info. Nothing else should be necessary yet)
+        const updatedTestInfo = updateTestInfo(testInfo, filesData);
+    
+        // Send updated test info back to webapp
+        res.send(JSON.stringify(updatedTestInfo));
+    }
+    else {
+        // Send the latest test info back to webapp
+        res.send(JSON.stringify(testInfo));
+    }
 })
 
 // Web app posts updated test info that contains the most recent modified test cases.
@@ -59,6 +66,8 @@ app.post('/generate-tests', async (req, res) => {
     const repository = req.body.repository;
     const branch = req.body.branch; 
     const gh_token = req.body.token;
+
+    await resetTestFolder(repository, branch, gh_token);
 
     // Generate tree of test files
     const testTree = generateTestTree(userTestInfo);
@@ -97,8 +106,6 @@ app.post('/generate-tests', async (req, res) => {
     res.sendStatus(200);
 })
 
-
-
 app.post('/check-status', (req, res) => {
     const origin = req.body.origin;
     const repository = req.body.repository;
@@ -116,7 +123,7 @@ app.post('/check-status', (req, res) => {
     } else if (obj = activeActions.find(o => o.id === id)) {
 
         if (obj.ready) {
-            // Send userTestInfo to GA ...
+            // Send userTestInfo to GA
             res.send(obj.userTestInfo);
             activeActions.splice(activeActions.indexOf(obj), 1);
         } else {
@@ -134,13 +141,13 @@ app.post('/check-status', (req, res) => {
 
 });
 
-app.post('/setup-repository', (req, res) => {
+app.post('/setup-repository', async (req, res) => {
 
     const repository = req.body.repository;
     const gh_token = req.body.token;
 
     try {
-        initSetup(repository, gh_token);
+        await initSetup(repository, gh_token);
         res.status(200).send({ message: 'Initial setup succesfull' });
     } catch (err) {
         res.status(500).send({ message: err });

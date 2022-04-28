@@ -18,14 +18,24 @@ main h2 {
     color: var(--sidebar-text-color);
     overflow-y: scroll;
 }
+#sidebar ul {
+    width: 100%;
+}
 
 #sidebar li {
     margin-bottom: 10px;
     list-style: none;
     cursor: pointer;
+    width: 100%;
 }
 
 #sidebar a {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: rtl;
+    width: 100%;
     color: var(--sidebar-a-color);
     outline: none;
     text-decoration: none;
@@ -34,8 +44,38 @@ main h2 {
 
 #sidebar a:hover {
     color: var(--sidebar-a-color-hover);
-    border-bottom: 2px solid;
-    transition: 0.1s;
+    text-decoration: underline;
+}
+
+.info-div {
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    width: fit-content;
+}
+
+.info-div a {
+    position: relative;
+    text-decoration: none;
+    color: var(--navbar-bg-color);
+    font-weight: 500;
+}
+
+.info-div a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1.5px;
+    background-color: var(--navbar-bg-color);
+    left: 50%;
+    bottom: -2px;
+    transition: 0.3s;
+}
+
+.info-div a:hover::after {
+    left: 0;
+    width: 100%;
 }
 
 .func-div {
@@ -142,7 +182,7 @@ label {
 }
 .btn-include:hover {
     color: #ffffff;
-    border: 2px solid #008000;
+    border: 2px solid #006700;
     background-color: #008000;
 }
 
@@ -155,8 +195,8 @@ label {
 
 .btn-exclude:hover, .btn-del:hover {
     color: #ffffff;
-    border: 2px solid #b20000;
-    background-color: #ff0000;
+    border: 2px solid var(--red-btn-border-color);
+    background-color: var(--red-btn-bg-color);
 }
 
 /* Special options for the delete button */
@@ -177,7 +217,6 @@ button[type="submit"] {
     position: fixed;
     bottom: 20px;
     left: 60px;
-    z-index: 1;
 }
 
 button[type="submit"]:hover {

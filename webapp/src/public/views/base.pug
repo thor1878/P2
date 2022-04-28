@@ -8,7 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/spinner.css">
     <link rel="stylesheet" href="/static/css/scrollbar.css">
     
     block style
@@ -21,9 +23,7 @@
             <ul>
                 <li name="/" class="navlink"><a href="/">Home</a></li>
                 if user
-                    <li name="/repos" class="navlink"><a href="/repos">Choose repository</a></li> 
-                    <li name="/testing" class="navlink"><a href="/testing">Testing</a></li> 
-                    <li name="/logs" class="navlink"><a href="/logs">Logs</a></li> 
+                    <li name="/repos" class="navlink" onclick="document.body.classList.add('loading-animation')"><a href="/repos">Choose repository</a></li> 
             </ul>
             if user
                 <button id="btnLogout" class="auth-btn" onclick="window.open('/logout', '_blank')">Logout</button>
@@ -34,6 +34,16 @@
 
     block content
 
+    <div id="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
     <script src="/static/js/base.js"></script>
     block script
 

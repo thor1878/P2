@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const jest = require('jest');
 
 const options = { 
-    root: [__dirname], // ?????
+    root: [__dirname]
 };
 
 jest.runCLI(options, options.root)
