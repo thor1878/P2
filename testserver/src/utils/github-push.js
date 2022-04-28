@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 require('dotenv').config();
 
-async function deleteTestFolder(repository, branch, gh_token) {
+async function resetTestFolder(repository, branch, gh_token) {
     const testFolderTree = [{
         path: ".test/test-info.json",
         mode: "100644",
@@ -156,4 +156,4 @@ function generateTestTree(userTestInfo) {
 }
 
 
-module.exports = { deleteTestFolder, getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree };
+module.exports = { resetTestFolder, getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree };
