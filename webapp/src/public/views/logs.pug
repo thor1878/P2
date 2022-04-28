@@ -18,16 +18,16 @@ block content
 
     <main>
         <h1 id="top">Test report</h1>
-        each file, index in testInfo.files
+        each file in testInfo.files
             <div id="#{file.path}" class="file-div">
                 <h2>#{file.path}</h2>
                 <h4>Tested functions</h4>
                 <div class="func-wrapper">
                     each func in file.functions
-                        if func.status !== 1
+                        if func.status !== '1'
                             <div class="func-div status#{func.status}">
                                 <h3>#{func.name}</h3>
-                                each TC, index in func.testCases
+                                each TC in func.testCases
                                     if TC.passed
                                         <div class="TC-div TC-passed">
                                             <p><span class="material-icons">check</span>#{TC.description}</p>
@@ -41,7 +41,7 @@ block content
                 <h4>Excluded functions</h4>
                 <div class="func-wrapper2">
                     each func in file.functions
-                        if func.status === 1
+                        if func.status === '1'
                             <div class="func-div status#{func.status}">
                                 <p>#{func.name}
                             </div> 

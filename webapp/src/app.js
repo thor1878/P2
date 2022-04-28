@@ -8,7 +8,6 @@ const auth = require('./routes/auth');
 const config = require('../config.json');
 const { getGitHub, getCollaborators } = require('./utils/GitHub');
 const { contactTS } = require('./utils/TestServer');
-const { default: fetch } = require('node-fetch');
 
 const app = express();
 const PORT = 3000;
