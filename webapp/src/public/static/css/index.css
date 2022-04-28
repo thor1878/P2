@@ -25,6 +25,11 @@
 
 .textbox {
     margin-right: 30px;
+    animation: fadein ease-in 1s;
+}
+
+.animation-div{
+    animation: fadeincode ease-in 1s;
 }
 
 .firstview-div {
@@ -38,6 +43,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: fadein ease-in 1s;
 }
 
 #getStart {
@@ -54,7 +60,14 @@
     margin: 65px 100px 30px 100px;
     border-radius: 15px;
     border: 2px solid var(--sidebar-bg-color);
+    opacity: 0;
+    transition: 0.4s ease-in;
 }
+
+.step-div.active{
+opacity: 1;
+}
+
 .content-display {
     display: inline-flex;
     justify-content: space-between;
@@ -104,4 +117,27 @@ footer {
     font-size: 10px;
     margin-top: 15px;
     text-decoration: none;
+}
+
+
+@keyframes fadein {
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes fadeincode {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }
