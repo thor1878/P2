@@ -63,7 +63,7 @@
 }
 
 .sub-card.waiting {
-    background-color: #c4c770;
+    background-color: var(--repo-sub-card-bg-color-active);
 }
 
 .sub-card.testing {
@@ -109,7 +109,7 @@
 }
 .content a {
     text-decoration: none;
-    color:#404040;
+    color: #404040;
 }
 
 .content a span {
