@@ -40,8 +40,7 @@ main {
 
 #sidebar a:hover {
     color: var(--sidebar-a-color-hover);
-    border-bottom: 2px solid;
-    transition: 0.1s;
+    text-decoration: underline;
 }
 
 p {
