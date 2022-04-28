@@ -44,6 +44,12 @@
     justify-content: center;
     align-items: center;
     animation: fadein ease-in 1s;
+    margin-bottom: 70px;
+}
+
+.center-content button{
+    padding: 20px 40px;
+    border-radius: 50px;
 }
 
 #getStart {
@@ -66,6 +72,10 @@
 
 .step-div.active{
 opacity: 1;
+}
+
+.step-div.active .step-number{
+    animation: scalenigga 0.5s ease-out;
 }
 
 .content-display {
@@ -139,5 +149,19 @@ footer {
     100% {
         opacity: 1;
         transform: translateX(0px);
+    }
+}
+
+@keyframes scalenigga {
+    0% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }
