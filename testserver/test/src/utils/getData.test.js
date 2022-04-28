@@ -11,6 +11,7 @@ const fileString =
 }
 
 function divide(a, b) {
+    const = "test"
     return a/b;    
 }`
 
@@ -25,13 +26,31 @@ const functionString1 =
 }`
 
 const functionString2 = 
-`function divide(a, b) {
-    return a/b;    
+`function sum(a, b) {
+    return a+b;    
 }`
 
 
 
-test("Test of simple function", () => {
+test("Test of simple file with multiply and divide", () => {
+    expect(getFunctionStrings(fileString)).toStrictEqual( 
+    [
+        {
+            functionString: functionString1,
+            params: [`a`, `b`],
+            name: `multiply`,
+            async: false
+        },
+        {
+            functionString: functionString2,
+            params: [`a`, `b`],
+            name: `divide`,
+            async: false
+        }
+    ]);
+})
+
+test("Test of file with functions that includes quotes of different kinds", () => {
     expect(getFunctionStrings(fileString)).toStrictEqual( 
     [
         {
