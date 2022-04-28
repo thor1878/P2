@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 
 const { getRepoData, filterRepoData, getFilesData, getTestInfo } = require('./utils/getData');
-const { deleteTestFolder, getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree } = require('./utils/github-push');
+const { resetTestFolder, getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree } = require('./utils/github-push');
 const { updateTestInfo } = require('./utils/updateTestInfo');
 const { initSetup } = require('./utils/initial-setup');
 
@@ -67,7 +67,7 @@ app.post('/generate-tests', async (req, res) => {
     const branch = req.body.branch; 
     const gh_token = req.body.token;
 
-    await deleteTestFolder(repository, branch, gh_token);
+    await resetTestFolder(repository, branch, gh_token);
 
     // Generate tree of test files
     const testTree = generateTestTree(userTestInfo);
