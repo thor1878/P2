@@ -2,6 +2,7 @@ extends base.pug
 
 block style 
     <link rel="stylesheet" href="/static/css/testing.css">
+    <link rel="stylesheet" href="/static/css/prism.css">
 
 block title
     <title>Modify test cases</title>
@@ -12,17 +13,18 @@ block content
         <ul>
             <li><a href="#top">-- Go to top</a></li>
             each file in files
-                <li><a href="##{file.path}">#{file.path}</a></li>
+                <li><a href="##{file.path}" title="#{file.path}">#{file.path}</a></li>
         </ul>
     </aside>
 
     <main>
         <h1 id="top">Modify test cases</h1>
-        <p id="user-p">User: <p>
-        <p id="repo-p">Repository: </p>
-        <p id="pull-p">Open pull request: </p>
-        <p id="log-p">Test log: </p>
-
+        <div class="info-div">
+            <p>main &#10229; #{branch} (<a href="#{pr}" target="_blank">View on GitHub</a>)</p>
+            <p id="user-p">Owner: <a href="https://github.com/#{user}" target="_blank">#{user}</a><p>
+            <p id="repo-p">Repository: <a href="https://github.com/#{user}/#{repo}" target="_blank">#{repo}</a></p>
+        </div>
+        
         <form onsubmit="submitTests(event)">
             each file in files 
                 <div class="file-div">
@@ -41,10 +43,10 @@ block content
                                         <h3>#{func.name}</h3>
                                         <p>Status: <a class="func-status">#{func.status}</a></p>
                                         case func.status
-                                            when -1: p At least one test case failed.
-                                            when 0: p Not assessed: Choose to either include or exclude #{func.name} from test.
-                                            when 1: p Assessed: #{func.name} will NOT be tested.
-                                            when 2: p All test cases in #{func.name} have passed.
+                                            when "-1": p At least one test case failed.
+                                            when "0": p Not assessed: Choose to either include or exclude #{func.name} from test.
+                                            when "1": p Assessed: #{func.name} will NOT be tested.
+                                            when "2": p All test cases in #{func.name} have passed.
                                             default: p Look up status code in the guide.
                                         if func.status === "1"
                                             <label>Comment</label>
@@ -55,7 +57,8 @@ block content
                                     </div>
                                 </section>
 
-                                pre #{func.functionString}
+                                pre
+                                    code(class="language-js") #{func.functionString}
                             </div>
                             
                             if func.status !== "1"
@@ -77,7 +80,7 @@ block content
                                                 if tc.description === ""
                                                     <input type="text" class="description" placeholder="Description for test case" required>
                                                 else
-                                                    <input type="text" class="description" value="#{tc.description}" required>
+                                                    <script src="/static/js/testCases.js" onload="addDescription('#{tc.description}', this.parentElement)"></script>
                                             </div>
                                         </section>
 
@@ -128,3 +131,4 @@ block content
 block script
     <script src="/static/js/testing.js"></script>
     <script src="/static/js/testCases.js"></script>
+    <script src="/static/js/prism.js"></script>

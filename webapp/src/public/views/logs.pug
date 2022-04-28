@@ -2,21 +2,49 @@ extends base.pug
 
 block style 
     <link rel="stylesheet" href="/static/css/logs.css">
-    <link rel="stylesheet" href="/static/css/testing.css">
 
 block title
-    <title>Logs</title>
+    <title>Test report</title>
 
 block content 
     <aside id="sidebar">
         <h2>Files</h2>
         <ul>
             <li><a href="#top">-- Go to top</a></li>
-            <li><a href=""></a></li>
+            each file in testInfo.files
+                <li><a href="##{file.path}" title="#{file.path}">#{file.path}</a></li>
         </ul>
     </aside>
 
     <main>
-        <h1>Logs</h1>
-        <p>Write logs here</p>
+        <h1 id="top">Test report</h1>
+        each file in testInfo.files
+            <div id="#{file.path}" class="file-div">
+                <h2>#{file.path}</h2>
+                <h4>Tested functions</h4>
+                <div class="func-wrapper">
+                    each func in file.functions
+                        if func.status !== '1'
+                            <div class="func-div status#{func.status}">
+                                <h3>#{func.name}</h3>
+                                each TC in func.testCases
+                                    if TC.passed
+                                        <div class="TC-div TC-passed">
+                                            <p><span class="material-icons">check</span>#{TC.description}</p>
+                                        </div>
+                                    else 
+                                        <div class="TC-div TC-failed">
+                                            <p><span class="material-icons">clear</span>#{TC.description}</p>
+                                        </div>
+                            </div> 
+                </div>
+                <h4>Excluded functions</h4>
+                <div class="func-wrapper2">
+                    each func in file.functions
+                        if func.status === '1'
+                            <div class="func-div status#{func.status}">
+                                <p>#{func.name}
+                            </div> 
+                </div>
+            </div>
     </main>

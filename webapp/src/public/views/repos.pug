@@ -16,17 +16,33 @@ block content
                     <div class="card-wrapper">
                         <div id="#{index}" class="card">#{repo.fullName}
                         if repo.language != "not supported"
-                            <img src="#{repo.language}"></img>
+                            <img src="#{repo.language}">
                         </div>
                         
-                        if repo.pullRequests.length === 0
+                        if repo.setup === false 
+                            <div class="content">
+                                <div id="#{index}" class="sub-card" onclick="document.body.classList.add('loading-animation');location.href='/#{repo.fullName}/setup'">Setup repository</div>
+                            </div>
+                        else if repo.pullRequests.length === 0
                             <div class="content">
                                 <div id="#{index}" class="sub-card-disabled">No open pull requests found</div>
                             </div>
                         else
                             each pull, pulldex in repo.pullRequests
                                 <div class="content">
-                                    <div id="#{index}-#{pulldex}" class="sub-card" onclick="location.href='/#{repo.fullName}/#{pull.branch}/#{pull.number}/testing'">#{pull.title} (##{pull.number})</div>
+
+                                    if pull.status === 'waiting'
+                                        <button id="#{index}-#{pulldex}" class="sub-card waiting" onclick="document.body.classList.add('loading-animation');location.href='/#{repo.fullName}/#{pull.branch}/#{pull.number}/testing'">#{pull.title} (##{pull.number})</button>
+                                    else if pull.status === 'testing'
+                                        <button id="#{index}-#{pulldex}" class="sub-card testing" disabled>#{pull.title} (##{pull.number})</button>
+                                    else
+                                        <button id="#{index}-#{pulldex}" class="sub-card not-active" disabled>#{pull.title} (##{pull.number})</button>
+
+                                    <a href="/#{repo.fullName}/#{pull.branch}/logs"><span class="material-icons">fact_check</span></a>
+                                </div>
+                                
+                                <div>
+
                                 </div>
                     </div>
             </ul>

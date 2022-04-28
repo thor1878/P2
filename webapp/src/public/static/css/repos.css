@@ -36,7 +36,9 @@
 }
 
 .sub-card {
-    background-color: var(--repo-card-bg-color);
+    position: relative;
+    color: white;
+    background-color: var(--repo-sub-card-bg-color-active);
     width: 80%;
     padding: 10px;
     height: 100%;
@@ -52,6 +54,7 @@
 .sub-card:hover {
     color: var(--repo-card-text-color-active);
     background-color: var(--repo-card-bg-color-hover);
+    border: none;
 }
 
 .sub-card.active {
@@ -59,6 +62,21 @@
     background-color: var(--repo-sub-card-bg-color-active);
 }
 
+.sub-card.waiting {
+    background-color: var(--repo-sub-card-bg-color-active);
+}
+
+.sub-card.testing {
+    background-color: #c4c770;
+}
+.sub-card.not-active {
+    /* background-color: rgb(205, 109, 109); */
+    background-color: var(--status-red-bg-color);
+}
+.sub-card:disabled {
+    cursor: default;
+}
+/* No open pull requests found */
 .sub-card-disabled {
     background-color: var(--repo-card-bg-color);
     width: 80%;
@@ -72,7 +90,6 @@
     transition: 0.2s;
     cursor: auto;
 }
-
 .sub-card-disabled:hover {
     color: var(--repo-card-text-color);
     background-color: var(--repo-card-bg-color);
@@ -80,6 +97,7 @@
 
 .content {
     height: 0;
+    display: flex;
     overflow: hidden;
     transition: 0.2s;
     margin: 0px;
@@ -88,6 +106,15 @@
 .content.show {
     height: 40px;
     margin: 10px;
+}
+.content a {
+    text-decoration: none;
+    color: #404040;
+}
+
+.content a span {
+    margin-left: 20px;
+    font-size: 40px;
 }
 
 .card-wrapper {

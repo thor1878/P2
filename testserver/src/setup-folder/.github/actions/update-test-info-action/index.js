@@ -9,7 +9,7 @@ const githubWorkspace = core.getInput('github-workspace')
 
 // Variable that stores the overall status of all tests.
 // Is set to true, if one or more tests fail.
-let hasFailed = false;
+let hasFailed = 'false';
 
 // Loop through all files in userTestInfo
 for (const file of userTestInfo.files) {
@@ -38,7 +38,7 @@ for (const file of userTestInfo.files) {
 
                 // Set the overall status of all tests to 'failed'
                 if (!tc.passed) {
-                    hasFailed = true;
+                    hasFailed = 'true';
                 }
 
                 const tcFuncName = tcTestObj.title.match(/\<(.*?)\>$/)[1];
@@ -68,3 +68,5 @@ try {
 }
 
 fs.writeFileSync('./.test/test-info.json', JSON.stringify(userTestInfo, null, 2));
+
+core.setOutput("hasFailed", hasFailed);
