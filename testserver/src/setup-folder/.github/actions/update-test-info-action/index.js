@@ -60,7 +60,6 @@ for (const file of userTestInfo.files) {
     }
 }
 
-
 try {
     fs.unlinkSync('./.test/test-info.json')
 } catch {

@@ -13,7 +13,6 @@ async function getRepoData(repository, branch, gh_token) {
     return data;
 }
 
-
 // Return an array containing only the objects with a path having the '.js' extension (not including '.test.js')
 // and exclude the .js files in the .github folder
 function filterRepoData(repoData) {

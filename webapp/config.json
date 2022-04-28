@@ -1,4 +1,5 @@
 {
+    "matchers": ["toBe", "toEqual", "toBeCloseTo", "toContain"],
     "user": "https://api.github.com/user/repos?visibility=all&per_page=100",
     "repo": "https://api.github.com/repos/",
     "repoPulls": "/pulls",

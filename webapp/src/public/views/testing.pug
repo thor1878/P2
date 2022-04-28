@@ -20,9 +20,10 @@ block content
     <main>
         <h1 id="top">Modify test cases</h1>
         <div class="info-div">
-            <p>main &#10229; #{branch} (<a href="#{pr}" target="_blank">View on GitHub</a>)</p>
-            <p id="user-p">Owner: <a href="https://github.com/#{user}" target="_blank">#{user}</a><p>
-            <p id="repo-p">Repository: <a href="https://github.com/#{user}/#{repo}" target="_blank">#{repo}</a></p>
+            <p>Pull request: main &#10229; #{branch} (<a href="#{pr}" target="_blank">View on GitHub</a>)</p>
+            <p>Owner: <a href="https://github.com/#{user}" target="_blank">#{user}</a><p>
+            <p>Repository: <a href="https://github.com/#{user}/#{repo}" target="_blank">#{repo}</a></p>
+            <p>Logs: <a href="/#{user}/#{repo}/#{branch}/logs">View latest test report</a></p>
         </div>
         
         <form onsubmit="submitTests(event)">

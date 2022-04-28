@@ -1,10 +1,10 @@
-const fetch = require('node-fetch');
 const express = require('express');
 const config = require('../../config.json');
 const { getGitHub } = require('../utils/GitHub');
 
 const router = express.Router();
 
+// Endpoint for choose repository
 router.get('/repos', async (req, res) => {
     const userRepos = await getGitHub(config.user, req.user.token);
     const repos = [];
@@ -55,5 +55,3 @@ router.get('/repos', async (req, res) => {
 })
 
 module.exports = router;
-
-

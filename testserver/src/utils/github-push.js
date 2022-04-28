@@ -63,7 +63,6 @@ async function createTree(repository, baseTreeSHA, fileTree, gh_token) {
             base_tree: baseTreeSHA
         })
     })
-
     const data = await response.json();
 
     return data.sha;
@@ -106,16 +105,13 @@ async function updateRef(repository, newCommitSHA, branch, gh_token) {
 }
 
 function generateTestTree(userTestInfo) {
-
     const files = userTestInfo.files;
-
     let tree = [];
 
     for (const file of files) {
         let testString = '';
 
         for (const func of file.functions) {
-
             let filePathDepth = (file.path.match(/\//g) || []).length;
             let filePath = '';
 
@@ -125,22 +121,18 @@ function generateTestTree(userTestInfo) {
 
             filePath += file.path;
 
-
             testString += `const { ${func.name} } = require('${filePath}');\n\n`
         }
 
-
         for (const func of file.functions) {
             for (const tc of func.testCases) {
-
-                testString += 
-
+                testString +=
+                
 `test('${tc.description}', async () => {
     const result = await ${func.name}(${tc.arguments});
     expect(result).${tc.matcher}(${tc.expected});
 })
 `
-                
             }
         }
 
@@ -154,6 +146,5 @@ function generateTestTree(userTestInfo) {
 
     return tree;
 }
-
 
 module.exports = { resetTestFolder, getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree };
