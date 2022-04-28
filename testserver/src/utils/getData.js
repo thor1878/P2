@@ -16,6 +16,7 @@ async function getRepoData(repository, branch, gh_token) {
 // Return an array containing only the objects with a path having the '.js' extension (not including '.test.js')
 // and exclude the .js files in the .github folder
 function filterRepoData(repoData) {
+    console.log(repoData);
     // Match anything not starting with '.github/'
     // Then match anything ending with '.js' if '.test' has not preceded it
     return repoData.tree.filter(file => file.path.match(/^(?!.github\/).*?(?<!\.test)(\.js)$/));
@@ -112,6 +113,5 @@ async function getTestInfo(repoData, gh_token) {
 
     return JSON.parse(testInfo);
 }
-
 
 module.exports = { getRepoData, filterRepoData, getFilesData, getFunctionStrings, getTestInfo };
