@@ -56,3 +56,10 @@ function activateDropdown(btn, state){
         }
     }
 }
+
+function setupRepository(repo) {
+    if (confirm('Confirm setup of repository')) {
+        document.body.classList.add('loading-animation');
+        location.href = `/${repo}/setup`;
+    }
+}
