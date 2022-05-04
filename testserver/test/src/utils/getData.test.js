@@ -41,6 +41,9 @@ const quoteFileString =
     return finalString;
 }
 
+const string4 = "test3"
+console.log(string4);
+
 function generateString2(input) {
     return a;
 }
@@ -77,7 +80,7 @@ function (a) {
     return a;
 }
 
-function run ({NUM1: "A", NUM2: "b"}) {
+function run (input1, input2, input3) {
     console.log('function');
     return "ano function";
 }
@@ -85,7 +88,7 @@ function run ({NUM1: "A", NUM2: "b"}) {
 let sum = (a, b) => a + b;`
 
 const anoNamesFunctionString1 = 
-`function run (a, b) {
+`function run (input1, input2, input3) {
     console.log('function');
     return "ano function";
 }`
@@ -141,7 +144,7 @@ test("Test of file with functions that includes quotes of different kinds", () =
     [
         {
             functionString: anoNamesFunctionString1,
-            params: ["[a,b]"],
+            params: ["input1", "input2", "input3"],
             name: `run`,
             async: false
         },
