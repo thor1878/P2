@@ -85,10 +85,10 @@ block content
                                         </section>
 
                                         <section class="tc-arguments">
-                                            each arg, argdex in tc.arguments
+                                            each arg, argdex in func.params
                                                 <div class="input-fields">
                                                     <label>Argument #{argdex + 1}</label>
-                                                    <input type="text" class="input arg" value="#{arg}" required>
+                                                    <input type="text" class="input arg" value="#{tc.arguments[argdex]}" required>
                                                 </div>
                                         </section>
                                         
