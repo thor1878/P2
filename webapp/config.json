@@ -11,7 +11,7 @@
         "Python": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
         "C":"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"
     },
-    "tsURL": "http://localhost:3001",
+    "tsURL": "https://testtube420.herokuapp.com",
     "functionStatuses": {
         "failed": -1,
         "notAssessed": 0,

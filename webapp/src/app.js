@@ -10,7 +10,7 @@ const setup = require('./routes/setup');
 const logs = require('./routes/logs');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; 
 
 app.set('view engine', 'pug');
 app.set('views', 'src/public/views');

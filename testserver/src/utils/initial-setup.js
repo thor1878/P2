@@ -57,4 +57,4 @@ async function generateSetupTree() {
     return setupTree;
 }
 
-module.exports = { initSetup };
+module.exports = { initSetup, generateSetupTree };

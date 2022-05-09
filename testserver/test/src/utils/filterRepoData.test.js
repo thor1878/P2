@@ -36,28 +36,12 @@ const dummyRepoDataPaths = {
     ]
 }
 
-test("Filter all .js files in array", () => {
-    expect(filterRepoData(dummyRepoDataPaths)).toStrictEqual(
-        [
-            {path: 'src/app.js'},
-            {path: 'src/lib/sum.js'},
-            {path: 'src/multiply.js'},
-            {path: 'src/square.js'}
-        ]
-    );
-})
-
 const testFiles = [
     {path: '.test/src/app.test.js'},
     {path: '.test/src/lib/sum.test.js'},
     {path: '.test/src/multiply.test.js'},
     {path: '.test/src/square.test.js'}
 ];
-
-test.each(testFiles)("Filter out all .test.js files", () => {
-    expect(filterRepoData(dummyRepoDataPaths)).not.toContain(testFiles);
-}, 0);
-
 
 const githubFiles = [
     {path: '.github'},
@@ -74,6 +58,21 @@ const githubFiles = [
     {path: '.github/workflows'},
     {path: '.github/workflows/main.yml'}
 ];
+
+test("Filter all .js files in array", () => {
+    expect(filterRepoData(dummyRepoDataPaths)).toStrictEqual(
+        [
+            {path: 'src/app.js'},
+            {path: 'src/lib/sum.js'},
+            {path: 'src/multiply.js'},
+            {path: 'src/square.js'}
+        ]
+    );
+})
+
+test.each(testFiles)("Filter out all .test.js files", () => {
+    expect(filterRepoData(dummyRepoDataPaths)).not.toContain(testFiles);
+}, 0);
 
 test.each(githubFiles)("Filter out all files in .github folder", () => {
     expect(filterRepoData(dummyRepoDataPaths)).not.toContain(githubFiles);

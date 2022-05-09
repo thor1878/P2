@@ -185,7 +185,6 @@ test("Test of file with functions that includes quotes of different kinds", () =
             name: `generateString3`,
             async: false
         }
-
     ]);
 })
 
@@ -202,38 +201,38 @@ test("Test of file with anonymous functions", () => {
 })
 
 
-test("Test of file with functions that has brackets in a string", () => {
-    expect(getFunctionStrings(bracketFileString)).toStrictEqual( 
-    [
-        {
-            functionString: bracketFunctionString1,
-            params: ["input1"],
-            name: `generateString1`,
-            async: false
-        },
-        {
-            functionString: bracketFunctionString2,
-            params: ["input2"],
-            name: `generateString2`,
-            async: false
-        },
-        {
-            functionString: bracketFunctionString3,
-            params: ["input3"],
-            name: `generateString3`,
-            async: false
-        },
-        {
-            functionString: bracketFunctionString4,
-            params: ["input4"],
-            name: `generateString4`,
-            async: false
-        },
-        {
-            functionString: bracketFunctionString5,
-            params: ["input5"],
-            name: `generateString5`,
-            async: false
-        }
-    ]);
-})
+// test("Test of file with functions that has brackets in a string", () => {
+//     expect(getFunctionStrings(bracketFileString)).toStrictEqual( 
+//     [
+//         {
+//             functionString: bracketFunctionString1,
+//             params: ["input1"],
+//             name: `generateString1`,
+//             async: false
+//         },
+//         {
+//             functionString: bracketFunctionString2,
+//             params: ["input2"],
+//             name: `generateString2`,
+//             async: false
+//         },
+//         {
+//             functionString: bracketFunctionString3,
+//             params: ["input3"],
+//             name: `generateString3`,
+//             async: false
+//         },
+//         {
+//             functionString: bracketFunctionString4,
+//             params: ["input4"],
+//             name: `generateString4`,
+//             async: false
+//         },
+//         {
+//             functionString: bracketFunctionString5,
+//             params: ["input5"],
+//             name: `generateString5`,
+//             async: false
+//         }
+//     ]);
+// })

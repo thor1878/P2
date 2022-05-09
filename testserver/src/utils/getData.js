@@ -80,7 +80,9 @@ function getFunctionStrings(fileString) {
 
         // Extract info about the current function string
         let functionString = fileString.slice(start, end);
-        let params = functionString.match(/function\s*\w*\s*\((.*?)\)/)[1].split(/\s*,\s*/);
+
+        let params = functionString.match(/function\s*\w*\s*\((.*?)\)/)[1].split(/\s*\,\s*/);
+        
         let async = func.match(/async\s*function/) ? true : false;
 
         functionStrings.push({
