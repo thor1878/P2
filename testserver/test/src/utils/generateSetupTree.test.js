@@ -12,7 +12,7 @@ const files = [
     '.test/test-info.json'
 ];
 
-test('Check length of setup tree', async () => {
+test('Check content of setup tree', async () => {
     const setupTree = await generateSetupTree();
     const setupTreeFiles = setupTree.map(file => file.path);
     expect(setupTreeFiles).toEqual(files);
