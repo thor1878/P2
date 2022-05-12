@@ -51,8 +51,7 @@ function addNewTestCase(functionName, funcDiv, newTcindex, matchers) {
     const matcherSelect = newTcDiv.querySelector(".selected-matcher");
 
     for (const matcher of matchers.split(",")) {
-        matcherSelect.innerHTML += `<option value="${matcher}">${matcher}</option>`;
-                
+        matcherSelect.innerHTML += `<option value="${matcher}">${matcher}</option>`;         
     }
 
     // For-loop to generate input fields for the arguments
