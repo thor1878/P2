@@ -36,7 +36,8 @@ function addNewTestCase(functionName, funcDiv, newTcindex, matchers) {
                 <option value="" selected>Choose a matcher</option>`
     
     for (const matcher of matchers) {
-        newTcDiv.innerHTML += `<option value="${matcher}">${matcher}</option>`
+        newTcDiv.innerHTML += 
+                `<option value="${matcher}">${matcher}</option>`
     }
     
     newTcDiv.innerHTML +=
