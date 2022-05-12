@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, resetTestFolder } = require('../utils/github-push');
+const { getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef } = require('../utils/github-push');
 
 // Inject content of setup-folder to users repository on main branch
 async function initSetup(repository, gh_token) {
@@ -45,7 +45,7 @@ async function generateSetupTree() {
         const content = await fs.promises.readFile('src/setup-folder/' + file, {
             encoding: 'utf-8'
         });
-
+        
         setupTree.push({
             path: file,
             mode: '100644',
