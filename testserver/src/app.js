@@ -12,7 +12,7 @@ const tsURL = require('../config.json').tsURL;
 
 const app = express();
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Array that stores the currently active actions
 const activeActions = [];
