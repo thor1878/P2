@@ -33,15 +33,8 @@ function addNewTestCase(functionName, funcDiv, newTcindex, matchers) {
         <div class="input-fields">
             <label>Choose matcher</label>
             <select class="selected-matcher" required>
-                <option value="" selected>Choose a matcher</option>`
-    
-    for (const matcher of matchers.split(",")) {
-        newTcDiv.innerHTML += 
-                `<option value="${matcher}">${matcher}</option>`
-    }
-    
-    newTcDiv.innerHTML +=
-            `</select>
+                <option value="" selected>Choose a matcher</option>
+            </select>
         </div>
     </section>
 
@@ -55,6 +48,12 @@ function addNewTestCase(functionName, funcDiv, newTcindex, matchers) {
     <button type="button" class="btn-del" onclick="removeTestCase(this.parentElement)">Delete test case ${newTcNumber}</button>
     `;
     
+    const matcherSelect = newTcDiv.querySelector(".selected-matcher");
+
+    for (const matcher of matchers.split(",")) {
+        matcherSelect.innerHTML += `<option value="${matcher}">${matcher}</option>`;         
+    }
+
     // For-loop to generate input fields for the arguments
     const tcArgSection = newTcDiv.querySelector(".tc-arguments");
     for (let i = 0; i < numOfArgs; i++) {
@@ -70,7 +69,7 @@ function addNewTestCase(functionName, funcDiv, newTcindex, matchers) {
     funcDiv.insertBefore(newTcDiv, btnAdd);
 
     // If btnAdd exists, add onclick attribute
-    btnAdd?.setAttribute("onclick", `addNewTestCase('${functionName}', this.parentElement, ${newTcNumber}, ${matchers})`);
+    btnAdd?.setAttribute("onclick", `addNewTestCase('${functionName}', this.parentElement, ${newTcNumber}, '${matchers}')`);
 }
 
 function addDescription(description, tcDescription) {
