@@ -18,7 +18,7 @@ async function getRepoData(repository, branch, gh_token) {
 function filterRepoData(repoData) {
     // Match anything not starting with '.github/'
     // Then match anything ending with '.js' if '.test' has not preceded it
-    return repoData.tree.filter(file => file.path.match(/^(?!.github\/).*?(?<!\.test)(\.js)$/));
+    return repoData.tree.filter(file => file.path.match(/^(?!\.github\/).*?(?<!\.test)(\.js)$/));
 }
 
 async function getFilesData(filteredData, gh_token) {
