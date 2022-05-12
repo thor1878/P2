@@ -1,4 +1,4 @@
-function addNewTestCase(functionName, funcDiv, newTcindex) {
+function addNewTestCase(functionName, funcDiv, newTcindex, matchers) {
     // Initial setup - Select elements and calculate index for the new test case and the number of args
     const btnAdd = funcDiv.querySelector(".btn-add");
     const newTcNumber = Number(newTcindex) + 1;
@@ -33,12 +33,14 @@ function addNewTestCase(functionName, funcDiv, newTcindex) {
         <div class="input-fields">
             <label>Choose matcher</label>
             <select class="selected-matcher" required>
-                <option value="">Choose a matcher</option>
-                <option value="toBe">toBe</option>
-                <option value="toEqual">toEqual</option>
-                <option value="toBeCloseTo">toBeCloseTo</option>
-                <option value="toContain">toContain</option>
-            </select>
+                <option value="" selected>Choose a matcher</option>`
+    
+    for (const matcher of matchers) {
+        newTcDiv.innerHTML += `<option value="${matcher}">${matcher}</option>`
+    }
+    
+    newTcDiv.innerHTML +=
+            `</select>
         </div>
     </section>
 
@@ -67,7 +69,7 @@ function addNewTestCase(functionName, funcDiv, newTcindex) {
     funcDiv.insertBefore(newTcDiv, btnAdd);
 
     // If btnAdd exists, add onclick attribute
-    btnAdd?.setAttribute("onclick", `addNewTestCase('${functionName}', this.parentElement, ${newTcNumber})`);
+    btnAdd?.setAttribute("onclick", `addNewTestCase('${functionName}', this.parentElement, ${newTcNumber}, ${matchers})`);
 }
 
 function addDescription(description, tcDescription) {
@@ -91,7 +93,7 @@ function removeTestCase(tcDiv) {
     }
 }
 
-function toggleFunction(funcName, funcDiv) {
+function toggleFunction(funcName, funcDiv, matchers) {
     const btn = funcDiv.querySelector(".btn-include") ||  funcDiv.querySelector(".btn-exclude");
     const funcStatusField = funcDiv.querySelector(".func-status");
     let statusExplainer = funcStatusField.parentElement.nextElementSibling;
@@ -142,7 +144,7 @@ function toggleFunction(funcName, funcDiv) {
 
         if (funcDiv.dataset.prevFuncStatus === undefined && funcDiv.dataset.numTc === "0") {
             funcDiv.dataset.funcStatus = 0;
-            addNewTestCase(funcName, funcDiv, 0);
+            addNewTestCase(funcName, funcDiv, 0, matchers);
         } 
         else if (funcDiv.dataset.prevFuncStatus === undefined && funcDiv.dataset.numTc !== "0") {
             funcDiv.dataset.funcStatus = 0;

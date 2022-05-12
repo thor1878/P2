@@ -64,7 +64,7 @@ block content
                             
                             if func.status !== "1"
                                 if func.testCases.length === 0
-                                    <script src="/static/js/testCases.js" onload="addNewTestCase('#{func.name}', this.parentElement, 0)"></script>
+                                    <script src="/static/js/testCases.js" onload="addNewTestCase('#{func.name}', this.parentElement, 0, matcherOptions)"></script>
                                 else
                                     each tc, tcdex in func.testCases
                                         if tc.passed
@@ -118,11 +118,11 @@ block content
                                         </div>
 
                             if func.status === "1"
-                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length})" hidden>+ Add new test case</button>
+                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length}, matcherOptions)" hidden>+ Add new test case</button>
                             else if func.testCases.length === 0
-                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, 1)">+ Add new test case</button>
+                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, 1, matcherOptions)">+ Add new test case</button>
                             else
-                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length})">+ Add new test case</button>
+                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length}, matcherOptions)">+ Add new test case</button>
                         </div>
                 </div>
             <button type="submit">Submit</button>
