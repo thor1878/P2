@@ -2,9 +2,7 @@ const express = require('express');
 const passport = require('passport');
 require('../passport/passport')
 
-
-const router = new express.Router();
-
+const router = express.Router();
 
 router.get('/login', passport.authenticate('github', { scope: ['read:org', 'repo', 'workflow'] }))
 

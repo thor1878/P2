@@ -30,4 +30,4 @@ async function contactTS(endpoint, method, params) {
     }
 }
 
-module.exports = {contactTS}
+module.exports = { contactTS }

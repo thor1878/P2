@@ -13,7 +13,6 @@ async function getRepoData(repository, branch, gh_token) {
     return data;
 }
 
-
 // Return an array containing only the objects with a path having the '.js' extension (not including '.test.js')
 // and exclude the .js files in the .github folder
 function filterRepoData(repoData) {
@@ -81,7 +80,9 @@ function getFunctionStrings(fileString) {
 
         // Extract info about the current function string
         let functionString = fileString.slice(start, end);
-        let params = functionString.match(/function\s*\w*\s*\((.*?)\)/)[1].split(/\s*,\s*/);
+
+        let params = functionString.match(/function\s*\w*\s*\((.*?)\)/)[1].split(/\s*\,\s*/);
+        
         let async = func.match(/async\s*function/) ? true : false;
 
         functionStrings.push({
@@ -114,5 +115,4 @@ async function getTestInfo(repoData, gh_token) {
     return JSON.parse(testInfo);
 }
 
-
-module.exports = { getRepoData, filterRepoData, getFilesData, getTestInfo };
+module.exports = { getRepoData, filterRepoData, getFilesData, getFunctionStrings, getTestInfo };
