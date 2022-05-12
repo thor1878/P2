@@ -28,7 +28,7 @@
     animation: fadein ease-in 1s;
 }
 
-.animation-div{
+.animation-div {
     animation: fadeincode ease-in 1s;
 }
 
@@ -47,7 +47,7 @@
     margin-bottom: 70px;
 }
 
-.center-content button{
+.center-content button {
     padding: 20px 40px;
     border-radius: 50px;
 }
@@ -70,12 +70,12 @@
     transition: 0.4s ease-in;
 }
 
-.step-div.active{
-opacity: 1;
+.step-div.active {
+    opacity: 1;
 }
 
-.step-div.active .step-number{
-    animation: scalenigga 0.5s ease-out;
+.step-div.active .step-number {
+    animation: scaleStep 0.5s ease-out;
 }
 
 .content-display {
@@ -152,7 +152,7 @@ footer {
     }
 }
 
-@keyframes scalenigga {
+@keyframes scaleStep {
     0% {
         transform: scale(1);
     }
