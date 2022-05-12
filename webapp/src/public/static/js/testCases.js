@@ -35,7 +35,7 @@ function addNewTestCase(functionName, funcDiv, newTcindex, matchers) {
             <select class="selected-matcher" required>
                 <option value="" selected>Choose a matcher</option>`
     
-    for (const matcher of matchers) {
+    for (const matcher of JSON.parse(matchers)) {
         newTcDiv.innerHTML += 
                 `<option value="${matcher}">${matcher}</option>`
     }
