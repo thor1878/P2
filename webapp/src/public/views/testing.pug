@@ -34,9 +34,9 @@ block content
                     each func in file.functions
                         <div class="func-div" data-func-name="#{func.name}" data-func-params="#{func.params}" data-func-async="#{func.async}" data-func-string="#{func.functionString}" data-func-status="#{func.status}" data-num-tc="#{func.testCases.length}">
                             if func.status !== "1"
-                                <button type="button" class="btn-exclude" onclick="toggleFunction('#{func.name}', this.parentElement, #{matcherOptions})">Exclude #{func.name}</button>
+                                <button type="button" class="btn-exclude" onclick="toggleFunction('#{func.name}', this.parentElement, '#{matcherOptions}'">Exclude #{func.name}</button>
                             else 
-                                <button type="button" class="btn-include" onclick="toggleFunction('#{func.name}', this.parentElement, #{matcherOptions})">Include #{func.name}</button>
+                                <button type="button" class="btn-include" onclick="toggleFunction('#{func.name}', this.parentElement, '#{matcherOptions}'">Include #{func.name}</button>
                             
                             <div class="func-name-description">
                                 <section>
@@ -64,7 +64,7 @@ block content
                             
                             if func.status !== "1"
                                 if func.testCases.length === 0
-                                    <script src="/static/js/testCases.js" onload="addNewTestCase('#{func.name}', this.parentElement, 0, #{matcherOptions})"></script>
+                                    <script src="/static/js/testCases.js" onload="addNewTestCase('#{func.name}', this.parentElement, 0, '#{matcherOptions}')"></script>
                                 else
                                     each tc, tcdex in func.testCases
                                         if tc.passed
@@ -118,11 +118,11 @@ block content
                                         </div>
 
                             if func.status === "1"
-                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length}, #{matcherOptions})" hidden>+ Add new test case</button>
+                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length}, '#{matcherOptions}')" hidden>+ Add new test case</button>
                             else if func.testCases.length === 0
-                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, 1, #{matcherOptions})">+ Add new test case</button>
+                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, 1, '#{matcherOptions}')">+ Add new test case</button>
                             else
-                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length}, #{matcherOptions})">+ Add new test case</button>
+                                <button type="button" class="btn-add" onclick="addNewTestCase('#{func.name}', this.parentElement, #{func.testCases.length}, '#{matcherOptions}')">+ Add new test case</button>
                         </div>
                 </div>
             <button type="submit">Submit</button>
