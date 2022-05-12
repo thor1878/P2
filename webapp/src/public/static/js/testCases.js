@@ -69,7 +69,7 @@ function addNewTestCase(functionName, funcDiv, newTcindex, matchers) {
     funcDiv.insertBefore(newTcDiv, btnAdd);
 
     // If btnAdd exists, add onclick attribute
-    btnAdd?.setAttribute("onclick", `addNewTestCase('${functionName}', this.parentElement, ${newTcNumber}, ${matchers})`);
+    btnAdd?.setAttribute("onclick", `addNewTestCase('${functionName}', this.parentElement, ${newTcNumber}, '${matchers}')`);
 }
 
 function addDescription(description, tcDescription) {
