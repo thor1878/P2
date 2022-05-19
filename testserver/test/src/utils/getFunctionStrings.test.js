@@ -145,6 +145,45 @@ const bracketFunctionString5 =
 }`
 
 
+const asyncFileString = 
+`async function multiply(a, b) {
+    if (a < b) {
+        return a * b;
+    }
+    else {
+        return a / b;
+    }
+}
+
+function divide(a, b) {
+    return a/b;    
+}
+
+async function sum(a, b) {
+    return a+b;    
+}`
+
+const asyncFunctionString1 = 
+`async function multiply(a, b) {
+    if (a < b) {
+        return a * b;
+    }
+    else {
+        return a / b;
+    }
+}`
+
+const asyncFunctionString2 = 
+`function divide(a, b) {
+    return a/b;    
+}`
+
+const asyncFunctionString3 = 
+`async function sum(a, b) {
+    return a+b;    
+}`
+
+
 
 test("Test of simple file with multiply and divide", () => {
     expect(getFunctionStrings(simpleFileString)).toStrictEqual( 
@@ -201,38 +240,63 @@ test("Test of file with anonymous functions", () => {
 })
 
 
-// test("Test of file with functions that has brackets in a string", () => {
-//     expect(getFunctionStrings(bracketFileString)).toStrictEqual( 
-//     [
-//         {
-//             functionString: bracketFunctionString1,
-//             params: ["input1"],
-//             name: `generateString1`,
-//             async: false
-//         },
-//         {
-//             functionString: bracketFunctionString2,
-//             params: ["input2"],
-//             name: `generateString2`,
-//             async: false
-//         },
-//         {
-//             functionString: bracketFunctionString3,
-//             params: ["input3"],
-//             name: `generateString3`,
-//             async: false
-//         },
-//         {
-//             functionString: bracketFunctionString4,
-//             params: ["input4"],
-//             name: `generateString4`,
-//             async: false
-//         },
-//         {
-//             functionString: bracketFunctionString5,
-//             params: ["input5"],
-//             name: `generateString5`,
-//             async: false
-//         }
-//     ]);
-// })
+test("Test of file with functions that has brackets in a string", () => {
+    expect(getFunctionStrings(bracketFileString)).toStrictEqual( 
+    [
+        {
+            functionString: bracketFunctionString1,
+            params: ["input1"],
+            name: `generateString1`,
+            async: false
+        },
+        {
+            functionString: bracketFunctionString2,
+            params: ["input2"],
+            name: `generateString2`,
+            async: false
+        },
+        {
+            functionString: bracketFunctionString3,
+            params: ["input3"],
+            name: `generateString3`,
+            async: false
+        },
+        {
+            functionString: bracketFunctionString4,
+            params: ["input4"],
+            name: `generateString4`,
+            async: false
+        },
+        {
+            functionString: bracketFunctionString5,
+            params: ["input5"],
+            name: `generateString5`,
+            async: false
+        }
+    ]);
+})
+
+
+test("Test of simple file with multiply and divide", () => {
+    expect(getFunctionStrings(asyncFileString)).toStrictEqual( 
+    [
+        {
+            functionString: asyncFunctionString1,
+            params: [`a`, `b`],
+            name: `multiply`,
+            async: true
+        },
+        {
+            functionString: asyncFunctionString2,
+            params: [`a`, `b`],
+            name: `divide`,
+            async: false
+        },
+        {
+            functionString: asyncFunctionString3,
+            params: [`a`, `b`],
+            name: `sum`,
+            async: true
+        }
+    ]);
+})
