@@ -53,7 +53,7 @@
 }
 
 #getStart {
-    color: white;
+    color: var(--navbar-text-color);
     margin: 30px 100px 0px;
     padding: 10px 30px;
     border-radius: 15px;
@@ -61,7 +61,7 @@
 }
 
 .step-div {
-    background-color: white;
+    background-color: var(--repo-card-bg-color);
     padding: 20px;
     margin: 65px 100px 30px 100px;
     border-radius: 15px;
@@ -93,7 +93,7 @@
 }
 
 .step-number {
-    background-color: white;
+    background-color: var(--stepnumcolor);
     padding: 10px 20px;
     margin-top: -40px;
     margin-bottom: 10px;
@@ -103,7 +103,7 @@
 }
 
 footer {
-    color: white;
+    color: var(--navbar-bg-color);
     padding: 40px 120px 40px 120px;
     margin: 40px -20px -20px -20px;
     background-color: var(--navbar-bg-color);

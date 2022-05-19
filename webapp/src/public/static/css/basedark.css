@@ -1,37 +1,4 @@
 :root {
-    --body-bg-color: #f0f0f0;
-    --body-text-color: #000000;
-    --navbar-text-color: #ffffff;
-    --navbar-bg-color: #46639a;
-    --navbar-bg-color-hover: #2d4064;
-    --navbar-bg-color-active: #334a74;
-    --navbar-button-color: var(--navbar-bg-color-active);
-    --navbar-button-color-hover: var(--navbar-bg-color-hover);
-    --sidebar-bg-color: #dadada;
-    --sidebar-text-color: #202020;
-    --sidebar-a-color: var(--navbar-bg-color);
-    --sidebar-a-color-hover: var(--navbar-bg-color-hover);
-    --repo-card-text-color: var(--body-text-color);
-    --repo-card-text-color-active: #ffffff;
-    --repo-card-bg-color: #ffffff;
-    --repo-card-bg-color-hover: var(--navbar-bg-color);
-    --repo-card-bg-color-active: var(--navbar-bg-color);
-    --repo-sub-card-bg-color-active: #6a9e6a;
-    --repo-sub-card-bg-color-disabled: #c28383;
-    --input-fields-bg-color: #f5f5f5;
-
-    --stepnumcolor: #ffffff;
-
-    --green-btn-bg-color: #008000;
-    --green-btn-border-color: #006700;
-    --red-btn-bg-color: #ff0000;
-    --red-btn-border-color: #b20000;
-
-    --status-green-bg-color: #51b02582;
-    --status-red-bg-color: #ff000072;
-}
-
-:root.darktheme {
     --body-bg-color: #292929;
     --body-text-color: #ffffff;
     --navbar-text-color: #ffffff;
@@ -64,7 +31,6 @@
     --status-red-bg-color: #ff000072;
 }
 
-
 * {
     font-family: inherit;
     margin: 0px;
@@ -74,7 +40,7 @@
     scroll-behavior: smooth;
 }
 
-html body {
+body {
     font-family: "Montserrat", sans-serif;
     width: 100vw;
     color: var(--body-text-color);
@@ -119,8 +85,6 @@ p {
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0px;
-    margin: 0px;
 }
 
 .navlink {
@@ -178,40 +142,4 @@ button:hover {
 .auth-btn:hover {
     background-color: var(--navbar-button-color-hover);
     /* transform: scale(1.02); */
-}
-
-/*toggle*/
-
-.toggle.ios{
-    border-radius: 20rem;
-    padding: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px !important;
-    min-height: 0px !important;
-}
-label.btn .material-icons{
-
-    line-height: 27px;
-    color: white;
-}
-
-.toggle .toggle-handle {
-    border-radius: 20rem;
-}
-.toggle .toggle-on{
-    background-color: #334a74;
-}
-    
-.toggle .toggle-on:hover {
-    background-color: #2d4064;
-}
-
-.toggle .toggle-off {
-    background-color: #303030;
-}
-
-.toggle .toggle-off:hover {
-    background-color: #191919;
 }

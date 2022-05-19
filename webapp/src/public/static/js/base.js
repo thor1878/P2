@@ -7,3 +7,11 @@ for (const link of navlinks) {
         link.classList.add("active");
     }
 }
+
+//slider
+function toggleTheme() {
+      let toggle =  document.querySelector("#toggleTheme");
+            document.documentElement.classList.toggle('darktheme');
+       
+   }
+
