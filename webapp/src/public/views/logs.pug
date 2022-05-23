@@ -49,7 +49,8 @@ block content
                     each func in file.functions
                         if func.status === '1'
                             <div class="func-div status#{func.status}">
-                                <p>#{func.name}
+                                <h3>#{func.name}</h3>
+                                <p title="#{func.comment}">#{func.comment}</p>
                             </div> 
                 </div>
             </div>
