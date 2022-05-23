@@ -5,5 +5,5 @@
         "assessed": "1",
         "passed": "2"
     },
-    "tsURL": "https://testtube420.herokuapp.com/check-status"
+    "tsURL": "http://localhost:3001/check-status"
 }
