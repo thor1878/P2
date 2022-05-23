@@ -14,12 +14,18 @@ block content
             <ul>
                 each repo, index in repos
                     <div class="card-wrapper">
-                        <div id="#{index}" class="card">#{repo.fullName}
-                        if repo.setup === true 
-                            <a href="/#{repo.fullName}/main/logs"><span class="material-icons log-icon">fact_check</span></a>
-                        if repo.language != "not supported"
-                            <img src="#{repo.language}">
+                        
+                        <div class="repo-card">
+                            <div id="#{index}" class="card">#{repo.fullName}
+                            if repo.language != "not supported"
+                                <img src="#{repo.language}">
+                            </div>
+                            <div class="log-div">
+                                if repo.setup === true
+                                    <a href="/#{repo.fullName}/main/logs"><span class="material-icons log-icon">fact_check</span></a>  
+                            </div>
                         </div>
+                        
                         
                         if repo.setup === false 
                             <div class="content">

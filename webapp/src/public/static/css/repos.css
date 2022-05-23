@@ -8,7 +8,7 @@
 .card {
     color: var(--repo-card-text-color);
     background-color: var(--repo-card-bg-color);
-    width: 100%;
+    width: 95%;
     padding: 10px 20px 10px 20px;
     height: 40px;
     display: flex;
@@ -110,12 +110,10 @@
 .log-icon {
     text-decoration: none;
     color: #404040;
-}
-
-.content a span {
     margin-left: 20px;
     font-size: 40px;
 }
+
 
 .card-wrapper {
     width: 100%;
@@ -125,4 +123,12 @@
     width: 15px;
     transition: 0.2s;
     border-radius: 25%;
+}
+
+.repo-card {
+    display: flex;
+}
+
+.log-div {
+    width: 5%;
 }
