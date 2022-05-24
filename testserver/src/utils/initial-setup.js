@@ -20,12 +20,11 @@ async function initSetup(repository, gh_token) {
     // Commit tree
     const newCommitSHA = await commitTree(repository, latestCommitSHA, newTreeSHA, gh_token);
 
-    // Update branch ref
-    const response = await updateRef(repository, newCommitSHA, branch, gh_token);
-
-    console.log(response);
+    // Update branch reference
+    await updateRef(repository, newCommitSHA, branch, gh_token);
 }
 
+// Reads files in the setup-folder and generates the setup tree
 async function generateSetupTree() {
     const files = [
         '.github/actions/run-tests-action/index.js',

@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const config = require('../../config.json')
 
+// Contacts the test generation server (GET or POST requests)
 async function contactTS(endpoint, method, params) {
     let fetchURL;
     let fetchOptions;

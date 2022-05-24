@@ -21,8 +21,8 @@ async function resetTestFolder(repository, branch, gh_token) {
     // Commit tree
     const newCommitSHA = await commitTree(repository, latestCommitSHA, newTreeSHA, gh_token);
 
-    // Update branch ref
-    const response = await updateRef(repository, newCommitSHA, branch, gh_token);
+    // Update branch reference
+    await updateRef(repository, newCommitSHA, branch, gh_token);
 }
 
 async function getLatestCommitSHA(repository, branch, gh_token) {
@@ -104,6 +104,7 @@ async function updateRef(repository, newCommitSHA, branch, gh_token) {
     return data;
 }
 
+// Generate the tree of test files to be pushed to GitHub
 function generateTestTree(userTestInfo) {
     const files = userTestInfo.files;
     let tree = [];

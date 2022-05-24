@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser')
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 
 const { getRepoData, filterRepoData, getFilesData, getTestInfo } = require('./utils/getData');
 const { resetTestFolder, getLatestCommitSHA, getBaseTreeSHA, createTree, commitTree, updateRef, generateTestTree } = require('./utils/github-push');
@@ -17,11 +16,8 @@ const PORT = process.env.PORT || 3001;
 // Array that stores the currently active actions
 const activeActions = [];
 
-// Setup environment variables from .env folder
-require('dotenv').config();
-
 // Enable the request object to handle json
-app.use(bodyParser.json())
+app.use(express.json())
 
 app.use(cors());
 
@@ -38,7 +34,7 @@ app.get('/test-info', async (req, res) => {
     
     // Get test info file from branch
     const testInfo = await getTestInfo(repoData, gh_token);
-
+    
     if (update === "true") {
         // Filter data to only include '.js' files (not '.test.js')
         const filteredData = filterRepoData(repoData);
@@ -46,7 +42,7 @@ app.get('/test-info', async (req, res) => {
         // Get data for each file (path, function strings, etc...)
         const filesData = await getFilesData(filteredData, gh_token);
     
-        // Update test info (add all functions that are not in test info. Nothing else should be necessary yet)
+        // Update test info (add all functions that are not in test info)
         const updatedTestInfo = updateTestInfo(testInfo, filesData);
     
         // Send updated test info back to webapp
@@ -61,12 +57,12 @@ app.get('/test-info', async (req, res) => {
 // Web app posts updated test info that contains the most recent modified test cases.
 // This test info is used to generate the actual test cases, which are then tested.
 app.post('/generate-tests', async (req, res) => {
-
     const userTestInfo = req.body.userTestInfo;
     const repository = req.body.repository;
     const branch = req.body.branch; 
     const gh_token = req.body.token;
 
+    // Delete the '.test' folder and create a new '.test' folder with 'test-info.json' that contains an empty files array
     await resetTestFolder(repository, branch, gh_token);
 
     // Generate tree of test files
@@ -84,13 +80,11 @@ app.post('/generate-tests', async (req, res) => {
     // Commit tree
     const newCommitSHA = await commitTree(repository, latestCommitSHA, newTreeSHA, gh_token);
 
-    // Update branch ref
-    const response = await updateRef(repository, newCommitSHA, branch, gh_token);
+    // Update branch reference
+    await updateRef(repository, newCommitSHA, branch, gh_token);
 
-    console.log(response);
-
-    // send req to /check-status
-    const resp = await fetch(`${tsURL}/check-status`, {
+    // Send request to /check-status
+    await fetch(`${tsURL}/check-status`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -106,12 +100,12 @@ app.post('/generate-tests', async (req, res) => {
     res.sendStatus(200);
 })
 
+// Endpoint for POST request to /check-status
 app.post('/check-status', (req, res) => {
     const origin = req.body.origin;
     const repository = req.body.repository;
     const branch = req.body.branch;
     const id = `${repository}-${branch}`
-
     let obj;
 
     if (origin === "TS") {
@@ -121,7 +115,6 @@ app.post('/check-status', (req, res) => {
 
         res.sendStatus(200);
     } else if (obj = activeActions.find(o => o.id === id)) {
-
         if (obj.ready) {
             // Send userTestInfo to GA
             res.send(obj.userTestInfo);
@@ -133,16 +126,13 @@ app.post('/check-status', (req, res) => {
         activeActions.push({
             id: id,
             ready: false
-        })
+        });
         res.sendStatus(404);
     }
-
-    console.log(activeActions);
-
 });
 
+// Endpoint for POST request to /setup-repository
 app.post('/setup-repository', async (req, res) => {
-
     const repository = req.body.repository;
     const gh_token = req.body.token;
 
@@ -152,7 +142,7 @@ app.post('/setup-repository', async (req, res) => {
     } catch (err) {
         res.status(500).send({ message: err });
     }
+});
 
-})
-
+// Start the test generation server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

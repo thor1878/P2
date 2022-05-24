@@ -61,11 +61,14 @@ for (const file of userTestInfo.files) {
 }
 
 try {
-    fs.unlinkSync('./.test/test-info.json')
+    // Delete 'test-info.json'
+    fs.unlinkSync('./.test/test-info.json');
 } catch {
     console.log('Cannot delete non-existing file');
 }
 
+// Write the user test info with a tab space of 2 to 'test-info.json'
 fs.writeFileSync('./.test/test-info.json', JSON.stringify(userTestInfo, null, 2));
 
+// Set the output 'hasFailed' of the action to either true or false
 core.setOutput("hasFailed", hasFailed);
