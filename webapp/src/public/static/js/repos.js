@@ -44,7 +44,7 @@ for (const card of allCards) {
 
 // Remove or add .show class to sub cards
 function activateDropdown(btn, state){
-    const allContents = btn.parentElement.querySelectorAll(".content");
+    const allContents = btn.parentElement.parentElement.querySelectorAll(".content");
 
     if (state === "remove") {
         for (const item of allContents) {
