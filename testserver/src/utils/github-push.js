@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-require('dotenv').config();
 
 async function resetTestFolder(repository, branch, gh_token) {
     const testFolderTree = [{

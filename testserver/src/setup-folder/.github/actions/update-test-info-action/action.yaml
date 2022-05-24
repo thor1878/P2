@@ -2,8 +2,6 @@ name: 'Update info'
 description: 'Update info file'
 
 inputs:
-  repository:
-    required: true
   test-results:
     required: true
   user-test-info:
