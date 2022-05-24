@@ -72,13 +72,15 @@ jobs:
       
     - name: Install dependencies
       run: |
+        npm i node-fetch@2
         npm i @actions/core
         npm i
 
     - name: Update info
       id: update-info
       uses: ./.github/actions/update-test-info-action
-      with: 
+      with:
+        repository: ${{ github.repository }}
         test-results: ${{ needs.run_tests.outputs.test-results }}
         user-test-info: ${{ needs.wait_for_response.outputs.user-test-info }}
         github-workspace: ${{ github.workspace }}
@@ -90,6 +92,20 @@ jobs:
         git add .
         git commit -m 'Commit from TestTube'
         git push
+        
+    - name: Rebase
+      run: | 
+        git pull
+        git rebase origin/main
+      continue-on-error: true
+        
+    - name: Push
+      run: |
+        git checkout --theirs .test/**
+        git add .test/**
+        git commit -m 'Merge conflict resolved'
+        git rebase --continue
+        git push --force
 
     - name: Check if test has failed
       if: steps.update-info.outputs.hasFailed == 'true'
