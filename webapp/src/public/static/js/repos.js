@@ -1,5 +1,4 @@
 // ----- Logic to control the drop down on 'Choose repository' -----
-
 const allCards = document.querySelectorAll('.card');
 const allSubCards = document.querySelectorAll(".sub-card");
 
@@ -18,7 +17,7 @@ for (const card of allCards) {
             activateDropdown(cardParent, "add");
         }
 
-        // Listen for click events on all subCards
+        // Listen for click events on all subCards, add "active" class and store in localStorage
         subCard.addEventListener("click", () => {
             for (const sub of allSubCards) {
                 sub.classList.remove("active");
@@ -29,7 +28,7 @@ for (const card of allCards) {
         })
     }
 
-    // Listen for click events on all cards
+    // Listen for click events on all cards, add "active" class and store in localStorage
     card.addEventListener("click", () => {
         for (const card of allCards) {
             card.classList.remove('active');
@@ -42,7 +41,7 @@ for (const card of allCards) {
     });
 }
 
-// Remove or add .show class to sub cards
+// Remove or add "show" class to subCards
 function activateDropdown(btn, state){
     const allContents = btn.parentElement.parentElement.querySelectorAll(".content");
 
@@ -57,6 +56,7 @@ function activateDropdown(btn, state){
     }
 }
 
+// Confirm prompt when pressing "Setup repository" - redirect to `/${repo}/setup`
 function setupRepository(repo) {
     if (confirm('Confirm setup of repository')) {
         document.body.classList.add('loading-animation');
