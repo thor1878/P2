@@ -75,18 +75,21 @@ getMainTestInfo()
         }
     }
     
-    // Delete current test info file in branch
     try {
+        // Delete current test info file in branch
         fs.unlinkSync('./.test/test-info.json')
     } catch {
         console.log('Cannot delete non-existing file');
     }
     
+    // Write the user test info with a tab space of 2 to 'test-info.json'
     fs.writeFileSync('./.test/test-info.json', JSON.stringify(mainTestInfo, null, 2));
     
+    // Set the output 'hasFailed' of the action to either true or false
     core.setOutput("hasFailed", hasFailed);
 })
 
+// Get test info from main branch
 async function getMainTestInfo() {
     const response = await fetch(`https://api.github.com/repos/${repository}/contents/.test/test-info.json`);
     const data = await response.json();

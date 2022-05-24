@@ -1,3 +1,4 @@
+// Animation on homepage - keys and colors defined.
 let text = document.querySelector(".animation-text");
 const objects = [
     { key: 'const ', color: 'rgb(101,166,221)' },
@@ -32,6 +33,7 @@ const objects = [
     { key: '});', color: 'rgb(217,217,217)' },
 ]
 
+// Prints the next key (in animation)
 async function logChar(timeout, char, color) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -44,6 +46,7 @@ async function logChar(timeout, char, color) {
     })
 }
 
+// Prints the whole test case animation with a random timeout
 async function logStuff() {
     for (const obj of objects) {
         for (const letter of obj.key) {
@@ -69,6 +72,7 @@ async function logStuff() {
     await logStuff();
 }
 
+// Start the animation on the home page
 logStuff();
 
 // Reveal (animate) step divs on home page

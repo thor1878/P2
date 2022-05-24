@@ -1,3 +1,4 @@
+// Controls active class on navbar elements
 let path = window.location.pathname;
 let navlinks = document.querySelectorAll("#navbar li");
 

@@ -9,6 +9,7 @@ router.get('/:repoOwner/:repoName/:branch/logs', async (req, res) => {
     const repoName = req.params.repoName;
     const branch = req.params.branch;
 
+    // Contact test generation server to GET the test info file (without updating it).
     const testInfo = await contactTS('/test-info', 'GET', {
         repository: repoOwner + "/" + repoName,
         branch: branch,

@@ -1,14 +1,14 @@
+// Updates the test info file based on the filtered '.js' files data in the pull request (branch)
 function updateTestInfo(testInfo, filesData) {
     const updatedTestInfo = { files: [] };
 
     for (const file of filesData) {
-
         const newFile = {
             path: file.path,
             functions: []
         }
 
-        // If file is in testInfo (file exist with same path)
+        // If file is in testInfo (file exist with same path) - overwrite the params, async and functionstring.
         let existingFile;
         if (existingFile = testInfo.files.find(f => f.path === file.path)) {
 
@@ -23,7 +23,7 @@ function updateTestInfo(testInfo, filesData) {
 
                     newFile.functions.push(existingFunction);
 
-                } else {  //if new function in file, push update into newfile
+                } else {  // If there is a new function in the file, push the update into newFile
                     newFile.functions.push({
                         name: func.name,
                         params: func.params,
@@ -35,7 +35,7 @@ function updateTestInfo(testInfo, filesData) {
                 }
             }
         }
-        // If file is NOT in testInfo, (New file)...push/update all func
+        // If file is NOT in testInfo - push all functions in the filesData into the updated test info.
         else {
             for (const func of file.functionStrings) {
                 newFile.functions.push({
@@ -48,7 +48,6 @@ function updateTestInfo(testInfo, filesData) {
                 })
             }
         }
-
         updatedTestInfo.files.push(newFile);
     }
 

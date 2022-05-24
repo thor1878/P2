@@ -1,9 +1,11 @@
+// Prompt users for confirmation when leaving/reloading the 'Testing' page 
 window.onbeforeunload = function () {
     return "";
 }
 
+// Submit tests to back-end
 async function submitTests(event) {
-    event.preventDefault();
+    event.preventDefault(); //Prevent the form from the default submitting of tests
     const submitData = { files: [] };
     const fileDivs = document.querySelectorAll(".file-div");
 
@@ -25,7 +27,6 @@ async function submitTests(event) {
     
             const tcDivs = funcDiv.querySelectorAll(".tc-div");
             for (const tcDiv of tcDivs) {
-
                 const tcObject = {
                     description: tcDiv.querySelector(".description").value + ` <${funcDiv.dataset.funcName}>`,
                     arguments: [],
@@ -44,6 +45,7 @@ async function submitTests(event) {
                 
                 const params = funcDiv.dataset.funcParams;
                 const numOfArgs = params === "" ? 0 : params.split(",").length;
+                // Only push complete test cases to the array
                 if (tcObject.description !== "" && tcObject.matcher !== "" && tcObject.expected !== ""  && tcObject.arguments.length === numOfArgs) {                
                     fileObject.functions[i].testCases.push(tcObject);
                 }
@@ -51,18 +53,22 @@ async function submitTests(event) {
         }
         submitData.files.push(fileObject);
     }
-    
+
+    // Loading animation after pressing submit
     document.body.classList.add("loading-animation");
 
+    // Post stringified JSON data to the URL
     await fetch(window.location.href, {
         method: "POST",
         headers: {
-            "Accept": "application/json",
             "Content-Type": "application/json"
         },
         body: JSON.stringify(submitData)
     });
     
+    // Remove the confirmation prompt when leaving/reloading the 'Testing' page.
     window.onbeforeunload = null;
+
+    // Redirect to 'Choose repository'
     window.location.href = "/repos";
 }

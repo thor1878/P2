@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
+
+// Routes
 const auth = require('./routes/auth');
 const home = require('./routes/home');
 const repos = require('./routes/repos');
@@ -15,18 +17,21 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'pug');
 app.set('views', 'src/public/views');
 
-// Session middleware
+// Use session middleware (for Passport)
 app.use(session({
     secret: 'asdfatsi6tFTASDfgfKJAaGasdKfAS',
     resave: false,
     saveUninitialized: false,
 }));
 
-// Passport middleware
+// Use Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Format the body of all requests to JSON
 app.use(express.json());
+
+// Endpoint for all static files (css, images and client-side js)
 app.use('/static', express.static('src/public/static'));
 
 // Use routes

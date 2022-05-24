@@ -5,7 +5,7 @@ const config = require('../../config.json');
 
 const router = express.Router();
 
-// Array of matchers
+// Array of matchers from config file
 const matchers = config.matchers;
 
 // Endpoint for testing page
@@ -14,19 +14,23 @@ router.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res
     const repoName = req.params.repoName;
     const pullrequest = req.params.pullrequest;
     const content = await getGitHub(config.repo + repoOwner + "/" + repoName + config.repoPulls + "/" + pullrequest, req.user.token);
+    // Check if the pull request (in URL) exists, is in the correct branch, or if it is closed
     if (content.message === "Not Found" || content.head.ref !== req.params.branch || content.state === "closed") {
         res.send("404 - Not Found");
     }
+    // If it is a valid pull request
     else {
+        // Check if the user is a collaborator
         const status = await getCollaborators(repoOwner + "/" + repoName + "/collaborators/" + req.user.profile.username, req.user.token);
         
+        // Render the testing page (with updated test info) if the user is a collaborator
         if (status === 204) {
             const testInfo = await contactTS('/test-info', "GET", {
                 repository: repoOwner + "/" + repoName,
                 branch: req.params.branch,
                 token: req.user.token,
                 update: true
-            })
+            });
             res.render('testing', {
                 user: repoOwner, 
                 repo: repoName, 
@@ -37,7 +41,7 @@ router.get('/:repoOwner/:repoName/:branch/:pullrequest/testing', async (req, res
             });
         }
         else {
-            res.send("404 - Not Found");
+            res.send("404 - Not Found"); //Not a collaborator
         }
     }
 })

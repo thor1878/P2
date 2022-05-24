@@ -6,12 +6,9 @@ const repo = core.getInput('repo');
 const branch = core.getInput('branch');
 const pollInterval = 5000;
 
-console.log(repo);
-console.log(branch);
-
 const url = config.tsURL;
 
-// Keep polling test server until receiving a 200
+// Start polling test server (with a 5 second interval) until receiving a 200
 poll();
 
 async function poll() {
@@ -31,6 +28,7 @@ async function wait(timeout) {
     })
 }
 
+// Request test generation server to check if the tests has been submitted by the user
 async function getStatus() {
     const response = await fetch(url, {
         method: "POST",

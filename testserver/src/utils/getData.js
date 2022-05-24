@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 
+// Get tree data from a specific branch on a repository
 async function getRepoData(repository, branch, gh_token) {
     const url = `http://api.github.com/repos/${repository}/git/trees/${branch}?recursive=1`;
 
@@ -14,13 +15,14 @@ async function getRepoData(repository, branch, gh_token) {
 }
 
 // Return an array containing only the objects with a path having the '.js' extension (not including '.test.js')
-// and exclude the .js files in the .github folder
+// and exclude the '.js' files in the '.github' folder
 function filterRepoData(repoData) {
     // Match anything not starting with '.github/'
     // Then match anything ending with '.js' if '.test' has not preceded it
     return repoData.tree.filter(file => file.path.match(/^(?!\.github\/).*?(?<!\.test)(\.js)$/));
 }
 
+// Get the path and functionStrings-objects for all files (based on filtered data)
 async function getFilesData(filteredData, gh_token) {
     let filesData = [];
     for (let file of filteredData) {
@@ -48,11 +50,12 @@ async function getFilesData(filteredData, gh_token) {
 // Return the function strings from a file string - including additional info about each file string
 function getFunctionStrings(fileString) {
     let functionStrings = [];
+    // Register the signature of functions
     let functionSignatures = fileString.match(/([^\r\n]*?\=[ ]*)?(async[ ]*)?function[ ]*\w*[ ]*\(.*?\)\s*\{/g);
 
     if (!functionSignatures) return '';
 
-    // Loop through all function definitions to find their corresponding body
+    // Loop through all function signatures to find their corresponding body
     for (let func of functionSignatures) {
         // Don't register anonymous functions (functions without a name)
         let name = (func.match(/[^\r\n]*?\s+(\w+)\s*\=\s*(async\s*)?function/) || func.match(/function\s*(\w*)\s*\(.*?\)/))[1];
