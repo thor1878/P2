@@ -36,7 +36,6 @@ async function submitTests(event) {
                 };
 
                 const args = tcDiv.querySelectorAll(".arg");
-                console.log(args);
                 for (const arg of args) {
                     if (arg.value !== "") {
                         tcObject.arguments.push(arg.value);
