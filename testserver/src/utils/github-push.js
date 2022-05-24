@@ -76,7 +76,7 @@ async function commitTree(repository, latestCommitSHA, newTreeSHA, gh_token) {
             'Accept': 'application/vnd.github.v3+json',
         },
         body: JSON.stringify({
-            message: 'testing commit',
+            message: 'Commit by TestTube',
             parents: [
                 latestCommitSHA
             ],
